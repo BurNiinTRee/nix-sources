@@ -5,7 +5,11 @@
 
   outputs = { self, nixpkgs }: {
 
-    legacyPackages.x86_64-linux = import nixpkgs { system = "x86_64-linux"; overlays = import ./overlays.nix; };
+    legacyPackages.x86_64-linux = import nixpkgs {
+      system = "x86_64-linux";
+      overlays = import ./overlays.nix;
+      config = { allowUnfree = true; };
+    };
     inherit (nixpkgs) lib;
 
     nixosConfigurations.larstop2 = self.lib.nixosSystem {
