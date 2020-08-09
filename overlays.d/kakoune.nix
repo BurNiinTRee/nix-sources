@@ -15,7 +15,7 @@ in {
 
     src = sources.kak-lsp;
 
-    cargoSha256 = "0000000000000000000000000000000000000000000000000000";
+    cargoSha256 = "sha256-NZrSyWq9OHyn+lSXvwHzPOPQP8zerM7WjdQLBbgvR9U=";
 
     meta = with self.lib; {
       description = "Kakoune Language Server Protocol Client";
