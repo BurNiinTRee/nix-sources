@@ -5,10 +5,10 @@
         "homepage": null,
         "owner": "ul",
         "repo": "kak-lsp",
-        "rev": "21dba44e00b6b561430a01f99b5df78e3b428be4",
-        "sha256": "1rwbnnfw1ddhv7m1zb8z4hkr3gxwjnxzyvx18l64xkbxfv6hxh98",
+        "rev": "a69bc9599c57cef1ea7fad97e3483f80708e4ba4",
+        "sha256": "0fy7vnlqm60k7d404vji0gcp8qkf2yz85rsa0xrycpvls2bkm6j8",
         "type": "tarball",
-        "url": "https://github.com/ul/kak-lsp/archive/21dba44e00b6b561430a01f99b5df78e3b428be4.tar.gz",
+        "url": "https://github.com/ul/kak-lsp/archive/a69bc9599c57cef1ea7fad97e3483f80708e4ba4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "kakoune": {
