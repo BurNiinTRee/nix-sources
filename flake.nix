@@ -2,8 +2,9 @@
   description = "My Nixos System";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.home-manager.url = "git+file:///home/lars/Sync/home-manager";
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs, home-manager }: {
 
     legacyPackages.x86_64-linux = import nixpkgs {
       system = "x86_64-linux";
@@ -15,7 +16,6 @@
     nixosConfigurations.larstop2 = self.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
         ({ pkgs, ... }: {
           system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
           nix.package = pkgs.nixUnstable;
@@ -23,7 +23,14 @@
             experimental-features = nix-command flakes
           '';
           nix.registry.nixpkgs.flake = self;
+          nixpkgs.overlays = import ./overlays.nix;
+          nixpkgs.config.allowUnfree = true;
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.lars = import ./home.nix;
         })
+        ./configuration.nix
+        home-manager.nixosModules.home-manager
       ];
     };
   };

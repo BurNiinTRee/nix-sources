@@ -1,0 +1,13 @@
+diff --git a/wev.c b/wev.c
+index 8a90917..f757259 100644
+--- a/wev.c
++++ b/wev.c
+@@ -787,7 +787,7 @@ static void registry_global(void *data, struct wl_registry *wl_registry,
+ 		void **ptr;
+ 	} handles[] = {
+ 		{ &wl_compositor_interface, 4, (void **)&state->compositor },
+-		{ &wl_seat_interface, 6, (void **)&state->seat },
++		{ &wl_seat_interface, 5, (void **)&state->seat },
+ 		{ &wl_shm_interface, 1, (void **)&state->shm },
+ 		{ &xdg_wm_base_interface, 2, (void **)&state->wm_base },
+ 		{ &wl_data_device_manager_interface, 3,

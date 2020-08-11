@@ -1,6 +1,38 @@
 {
   "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1597155022,
+        "narHash": "sha256-nPRAOH+tOkng2h+rYpi0kkgOTbOrJV1QtQiCP6tFTvA=",
+        "ref": "bqv-flakes",
+        "rev": "31a639ff0e238267671f92928e1e92cdd0bf61c0",
+        "revCount": 1168,
+        "type": "git",
+        "url": "file:///home/lars/Sync/home-manager"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/lars/Sync/home-manager"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1591748508,
+        "narHash": "sha256-GdYYaYsSBgYUhbDT1JJQ7vEgo8FWeW/AW7/qqJuCvRA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1d8c4410687390f9b8f92dbe6ff39fd8fc2b17c6",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1596966709,
         "narHash": "sha256-GVOSpghDCfjTiLc+H60wzsqO5ravqg8PT/iBe7h2vkc=",
@@ -18,7 +50,8 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

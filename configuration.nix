@@ -4,10 +4,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -32,8 +31,6 @@
       allowDiscards = true;
     };
   };
-
-  
 
   networking.hostName = "larstop2"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -61,9 +58,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget vim kakoune
-  ];
+  environment.systemPackages = with pkgs; [ wget vim kakoune ];
   environment.sessionVariables = {
     LD_LIBRARY_PATH = pkgs.lib.concatStringsSep ":" [
       "${pkgs.pipewire.lib}/lib/pipewire-0.3/jack"
@@ -87,8 +82,14 @@
 
   # Open ports in the firewall.
   # for gsconnect
-  networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
-  networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+  networking.firewall.allowedTCPPortRanges = [{
+    from = 1714;
+    to = 1764;
+  }];
+  networking.firewall.allowedUDPPortRanges = [{
+    from = 1714;
+    to = 1764;
+  }];
   # for syncthing
   networking.firewall.allowedTCPPorts = [ 22000 ];
   networking.firewall.allowedUDPPorts = [ 21027 ];
@@ -102,12 +103,14 @@
   sound.enable = true;
   sound.extraConfig = pkgs.lib.concatStringsSep "\n" [
     ''
-    pcm_type.pipewire {
-      libs.native = ${pkgs.pipewire.lib}/lib/alsa-lib/libasound_module_pcm_pipewire.so;
-    }
+      pcm_type.pipewire {
+        libs.native = ${pkgs.pipewire.lib}/lib/alsa-lib/libasound_module_pcm_pipewire.so;
+      }
     ''
-    (builtins.readFile (pkgs.pipewire + "/share/alsa/alsa.conf.d/50-pipewire.conf"))
-    (builtins.readFile (pkgs.pipewire + "/share/alsa/alsa.conf.d/99-pipewire-default.conf"))
+    (builtins.readFile
+      (pkgs.pipewire + "/share/alsa/alsa.conf.d/50-pipewire.conf"))
+    (builtins.readFile
+      (pkgs.pipewire + "/share/alsa/alsa.conf.d/99-pipewire-default.conf"))
   ];
   # hardware.pulseaudio.enable = false;
   services.pipewire.enable = true;
@@ -129,7 +132,7 @@
     enable = true;
     gtkUsePortal = true;
   };
-    
+
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
 
@@ -142,9 +145,7 @@
     };
   };
   services.xserver.desktopManager.gnome3.enable = true;
-  services.gnome3 = {
-    chrome-gnome-shell.enable = true;
-  };
+  services.gnome3 = { chrome-gnome-shell.enable = true; };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lars = {

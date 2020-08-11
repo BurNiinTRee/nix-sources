@@ -1,5 +1,5 @@
 self: super: {
   wev = super.wev.overrideAttrs (old: {
-    patches = [ ~/packages/wev/wev.patch ];
+    patches = [ ../patches/wev.patch ];
   });
 }
