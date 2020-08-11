@@ -22,7 +22,12 @@
           nix.extraOptions = ''
             experimental-features = nix-command flakes
           '';
-          nix.registry.nixpkgs.flake = self;
+          nix.registry.nixpkgs = {
+            to = {
+              type = "path";
+              path = "/home/lars/Sync/nix-sources";
+            };
+          };
           nixpkgs.overlays = import ./overlays.nix;
           nixpkgs.config.allowUnfree = true;
           home-manager.useGlobalPkgs = true;
