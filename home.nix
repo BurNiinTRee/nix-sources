@@ -3,7 +3,7 @@ let
   firefox = with pkgs;
     (wrapFirefox firefox-bin-unwrapped {
       forceWayland = true;
-      extraNativeMessagingHosts = [ gnomeExtensions.gsconnect ];
+      extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
       browserName = "firefox";
       pname = "firefox-bin";
       desktopName = "Firefox";
