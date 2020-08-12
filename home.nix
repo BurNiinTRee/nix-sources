@@ -1,12 +1,18 @@
 { config, pkgs, ... }:
 let
+  sources = import ./nix/sources.nix;
   firefox = with pkgs;
-    (wrapFirefox firefox-bin-unwrapped {
+    (wrapFirefox ((firefox-bin-unwrapped.override {
+      generated = {
+        inherit (sources.firefox-beta-bin) version;
+        sources = { inherit (sources.firefox-beta-bin) url sha512; };
+      };
+    }).overrideAttrs (old: { src = sources.firefox-beta-bin; })) {
       forceWayland = true;
       extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
       browserName = "firefox";
       pname = "firefox-bin";
-      desktopName = "Firefox";
+      desktopName = "Firefox Beta";
     });
 
   LD_LIBRARY_PATH = "${pkgs.pipewire.lib}/lib/pipewire-0.3/jack";

@@ -1,4 +1,11 @@
 {
+    "firefox-beta-bin": {
+        "sha256": "0r57gj3n12s6la7in22l343hzb47zyxzr6q965kwyz6d9nlnafqi",
+        "type": "file",
+        "url": "https://download.cdn.mozilla.net/pub/firefox/releases/80.0b7/linux-x86_64/en-US/firefox-80.0b7.tar.bz2",
+        "url_template": "https://download.cdn.mozilla.net/pub/firefox/releases/<version>/linux-x86_64/en-US/firefox-<version>.tar.bz2",
+        "version": "80.0b7"
+    },
     "kak-lsp": {
         "branch": "master",
         "description": "Kakoune Language Server Protocol Client",
