@@ -2,7 +2,10 @@
   description = "My Nixos System";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.home-manager.url = "git+file:///home/lars/Sync/home-manager";
+  inputs.home-manager = {
+    url = "git+file:///home/lars/Sync/home-manager";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs = { self, nixpkgs, home-manager }: {
 
@@ -22,7 +25,7 @@
           nix.extraOptions = ''
             experimental-features = nix-command flakes
           '';
-          nix.registry.nixpkgs = {
+          nix.registry.pkgs = {
             to = {
               type = "path";
               path = "/home/lars/Sync/nix-sources";

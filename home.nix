@@ -2,17 +2,12 @@
 let
   sources = import ./nix/sources.nix;
   firefox = with pkgs;
-    (wrapFirefox ((firefox-bin-unwrapped.override {
-      generated = {
-        inherit (sources.firefox-beta-bin) version;
-        sources = { inherit (sources.firefox-beta-bin) url sha512; };
-      };
-    }).overrideAttrs (old: { src = sources.firefox-beta-bin; })) {
+    (wrapFirefox firefox-wayland-pipewire-unwrapped {
       forceWayland = true;
       extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
       browserName = "firefox";
       pname = "firefox-bin";
-      desktopName = "Firefox Beta";
+      desktopName = "Firefox";
     });
 
   LD_LIBRARY_PATH = "${pkgs.pipewire.lib}/lib/pipewire-0.3/jack";
@@ -135,6 +130,10 @@ in {
       pinentryFlavor = "gnome3";
     };
   };
+
+  xdg.configFile."kak-lsp/kak-lsp.toml".text =
+    let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
+    in builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig;
 
   home.file = let
     dirPath = firefox + "/lib/mozilla/native-messaging-hosts/";
