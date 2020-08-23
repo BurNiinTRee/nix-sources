@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1597155022,
-        "narHash": "sha256-nPRAOH+tOkng2h+rYpi0kkgOTbOrJV1QtQiCP6tFTvA=",
+        "lastModified": 1598180481,
+        "narHash": "sha256-mmztqNBHkFrk5g52JizEqchOq3xCRsXgv6f7mtdwMe0=",
         "ref": "bqv-flakes",
-        "rev": "31a639ff0e238267671f92928e1e92cdd0bf61c0",
-        "revCount": 1168,
+        "rev": "43c69ad292aa876e454c1b8ff0512e358c502dcf",
+        "revCount": 1183,
         "type": "git",
         "url": "file:///home/lars/Sync/home-manager"
       },
