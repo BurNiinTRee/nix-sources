@@ -24,10 +24,10 @@
         "homepage": "http://kakoune.org",
         "owner": "mawww",
         "repo": "kakoune",
-        "rev": "4e4a65e9440cdf7164b7a73bdff50b6c641ac2f5",
-        "sha256": "0spawqn4iyq9yk5g8b1yx45fcczhjwpyga50b9kl9263c8p30wqr",
+        "rev": "ca195ffd7be795b85b9429c9b4772debeff4c77d",
+        "sha256": "1sfplxh47pqvls0nrx8mibhzyn7d3svrz3hpf6p6bw0rh6nj5d3g",
         "type": "tarball",
-        "url": "https://github.com/mawww/kakoune/archive/4e4a65e9440cdf7164b7a73bdff50b6c641ac2f5.tar.gz",
+        "url": "https://github.com/mawww/kakoune/archive/ca195ffd7be795b85b9429c9b4772debeff4c77d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
