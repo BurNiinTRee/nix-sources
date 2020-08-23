@@ -10,12 +10,12 @@
         "branch": "master",
         "description": "Kakoune Language Server Protocol Client",
         "homepage": null,
-        "owner": "ul",
+        "owner": "BurNiinTRee",
         "repo": "kak-lsp",
-        "rev": "a69bc9599c57cef1ea7fad97e3483f80708e4ba4",
-        "sha256": "0fy7vnlqm60k7d404vji0gcp8qkf2yz85rsa0xrycpvls2bkm6j8",
+        "rev": "0d34864684707df423d504876efda6e3a3470bad",
+        "sha256": "0yllxf7ihq3pcdx6gqnkc5jl05g6knprz6rq6x3j867j1g2w2y4d",
         "type": "tarball",
-        "url": "https://github.com/ul/kak-lsp/archive/a69bc9599c57cef1ea7fad97e3483f80708e4ba4.tar.gz",
+        "url": "https://github.com/BurNiinTRee/kak-lsp/archive/0d34864684707df423d504876efda6e3a3470bad.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "kakoune": {
@@ -24,10 +24,10 @@
         "homepage": "http://kakoune.org",
         "owner": "mawww",
         "repo": "kakoune",
-        "rev": "2c437cfa02ca568750182209ef6249c6975243a5",
-        "sha256": "1cgkis8bywy5k8k6j4i3prikpmhh1p6zyklliyxbc89mj64kvx4s",
+        "rev": "4e4a65e9440cdf7164b7a73bdff50b6c641ac2f5",
+        "sha256": "0spawqn4iyq9yk5g8b1yx45fcczhjwpyga50b9kl9263c8p30wqr",
         "type": "tarball",
-        "url": "https://github.com/mawww/kakoune/archive/2c437cfa02ca568750182209ef6249c6975243a5.tar.gz",
+        "url": "https://github.com/mawww/kakoune/archive/4e4a65e9440cdf7164b7a73bdff50b6c641ac2f5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
