@@ -81,6 +81,7 @@ in {
 
     kakoune = {
       enable = true;
+      plugins = [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround ];
       config = {
         colorScheme = "gruvbox";
         numberLines = {
@@ -89,13 +90,58 @@ in {
           relative = true;
         };
         ui.statusLine = "top";
-        hooks = [{
-          commands = "lsp-enable-window";
-          name = "WinSetOption";
-          option = "filetype=rust";
-        }];
+        hooks = [
+          {
+            name = "KakBegin";
+            option = ".*";
+            commands = ''set-option global termcmd "gnome-terminal -- sh -c"'';
+          }
+          {
+            name = "WinCreate";
+            option = ".*";
+            commands = "auto-pairs-enable";
+          }
+          {
+            name = "WinSetOption";
+            option = "filetype=rust";
+            commands = "lsp-enable-window";
+          }
+          {
+            name = "WinSetOption";
+            option = "filetype=nix";
+            commands = "set-option window indentwidth 2";
+          }
+        ];
+        keyMappings = [
+          {
+            docstring = "LSP Mode";
+            effect = ": enter-user-mode lsp<ret>";
+            key = "l";
+            mode = "user";
+          }
+          {
+            docstring = "Comment Line";
+            effect = ": comment-line<ret>";
+            key = "/";
+            mode = "user";
+          }
+          {
+            docstring = "surround selection";
+            effect = ": surround<ret>";
+            key = "s";
+            mode = "user";
+          }
+        ];
+        scrollOff.columns = 10;
+        scrollOff.lines = 5;
       };
       extraConfig = ''
+        define-command ide %{
+          rename-client main
+          new rename-client tools
+          set-option global toolsclient tools
+          set-option global jumpclient main
+        }
         eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
       '';
     };
