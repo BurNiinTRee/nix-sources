@@ -21,6 +21,20 @@
     qemuOvmf = true;
   };
 
+  containers.pg.config = { config, pkgs, ... }: {
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "lars" ];
+      ensureUsers = [{
+        name = "lars";
+      }];
+      authentication = ''
+        host all all ::1/128 trust
+      '';
+    };
+    users.users.lars.isNormalUser = true;
+  };
+
   # LUKS setup
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
   boot.initrd.luks.devices = {
