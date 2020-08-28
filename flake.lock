@@ -7,17 +7,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1598180481,
-        "narHash": "sha256-mmztqNBHkFrk5g52JizEqchOq3xCRsXgv6f7mtdwMe0=",
-        "ref": "bqv-flakes",
-        "rev": "43c69ad292aa876e454c1b8ff0512e358c502dcf",
-        "revCount": 1183,
-        "type": "git",
-        "url": "file:///home/lars/Sync/home-manager"
+        "lastModified": 1598478552,
+        "narHash": "sha256-eU8+kpU4dRr+BG47IsQUBot5KtqfZdaLlfCur7pXxhg=",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "6cf6b587b575493e7718bf08b209013d7dcf4d58",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/lars/Sync/home-manager"
+        "owner": "rycee",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "nixpkgs": {

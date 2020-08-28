@@ -3,7 +3,7 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.home-manager = {
-    url = "git+file:///home/lars/Sync/home-manager";
+    url = "github:rycee/home-manager";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
