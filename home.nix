@@ -49,6 +49,7 @@ in {
     helm
     htop
     iftop
+    jupyterlab-rust
     killall
     niv
     nixfmt
