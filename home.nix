@@ -2,7 +2,7 @@
 let
   sources = import ./nix/sources.nix;
   firefox = with pkgs;
-    (wrapFirefox firefox-wayland-pipewire-unwrapped {
+    (wrapFirefox firefox-bin-unwrapped {
       forceWayland = true;
       extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
       browserName = "firefox";
