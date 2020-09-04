@@ -2,7 +2,7 @@ self: super:
 let sources = import ../nix/sources.nix;
 in {
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: rec {
-    version = "2020-08-11";
+    version = "2020-09-04";
     src = sources.kakoune;
     preConfigure = ''
       export version="v${version}"
@@ -11,11 +11,12 @@ in {
 
   kak-lsp = self.rustPlatform.buildRustPackage {
     pname = "kak-lsp";
-    version = "2020-08-11";
+    version = "2020-09-04";
 
     src = sources.kak-lsp;
 
-    cargoSha256 = "sha256-gyWB/Jztr8cL3VzOgZeyHgn3bnhq2n5mVPkQ7KiCy2g=";
+    cargoSha256 = "sha256-tR2fRGFPUHBLwYFdoVhC2pb4CsjEX6u7FcRA5NN+AmE=";
+    # cargoSha256 = self.lib.fakeSha256;
 
     meta = with self.lib; {
       description = "Kakoune Language Server Protocol Client";
