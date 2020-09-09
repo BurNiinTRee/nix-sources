@@ -21,7 +21,7 @@
 
     legacyPackages.x86_64-linux = import nixpkgs {
       system = "x86_64-linux";
-      overlays = import ./overlays.nix;
+      overlays = (import ./overlays.nix) ++ [ (self: super: { inherit kakoune-src kak-lsp-src; }) ];
       config = { allowUnfree = true; };
     };
     inherit (nixpkgs) lib;
