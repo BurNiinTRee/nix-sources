@@ -1,7 +1,7 @@
 self: super:
 {
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: rec {
-    version = "2020-09-04";
+    version = "2020-09-09";
     src = self.kakoune-src;
     preConfigure = ''
       export version="v${version}"
@@ -10,11 +10,11 @@ self: super:
 
   kak-lsp = self.rustPlatform.buildRustPackage {
     pname = "kak-lsp";
-    version = "2020-09-04";
+    version = "2020-09-09";
 
     src = self.kak-lsp-src;
 
-    cargoSha256 = "sha256-tR2fRGFPUHBLwYFdoVhC2pb4CsjEX6u7FcRA5NN+AmE=";
+    cargoSha256 = "sha256-kVT61Z+WrrlMESs9mT2mp2VwlChRwY0H2lKeEBFU1GQ=";
     # cargoSha256 = self.lib.fakeSha256;
 
     meta = with self.lib; {
