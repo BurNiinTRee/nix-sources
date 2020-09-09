@@ -1,13 +1,23 @@
 {
   description = "My Nixos System";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.home-manager = {
-    url = "github:rycee/home-manager";
-    inputs.nixpkgs.follows = "nixpkgs";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:rycee/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    kakoune-src = {
+      url = "github:mawww/kakoune";
+      flake = false;
+    };
+    kak-lsp-src = {
+      url = "github:ul/kak-lsp";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { self, nixpkgs, home-manager, kakoune-src, kak-lsp-src }: {
 
     legacyPackages.x86_64-linux = import nixpkgs {
       system = "x86_64-linux";
@@ -31,7 +41,7 @@
               path = "/home/lars/Sync/nix-sources";
             };
           };
-          nixpkgs.overlays = import ./overlays.nix;
+          nixpkgs.overlays = (import ./overlays.nix) ++ [ (self: super: { inherit kakoune-src kak-lsp-src; }) ];
           nixpkgs.config.allowUnfree = true;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;

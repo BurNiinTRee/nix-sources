@@ -1,9 +1,8 @@
 self: super:
-let sources = import ../nix/sources.nix;
-in {
+{
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: rec {
     version = "2020-09-04";
-    src = sources.kakoune;
+    src = self.kakoune-src;
     preConfigure = ''
       export version="v${version}"
     '';
@@ -13,7 +12,7 @@ in {
     pname = "kak-lsp";
     version = "2020-09-04";
 
-    src = sources.kak-lsp;
+    src = self.kak-lsp-src;
 
     cargoSha256 = "sha256-tR2fRGFPUHBLwYFdoVhC2pb4CsjEX6u7FcRA5NN+AmE=";
     # cargoSha256 = self.lib.fakeSha256;

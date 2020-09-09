@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1599079041,
-        "narHash": "sha256-9YLk3xcnvCJMw7GUcEBtZjs8YYRd5K03lbi5yoRgaWg=",
+        "lastModified": 1599428266,
+        "narHash": "sha256-qrZwxleVK9pcXzv9kvxkUP6jabEiPo4VOX2WEM9CBXU=",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "e6e49ad73c7d8cbd9f6622f0a3330ce7b71c8a86",
+        "rev": "249650a07ee2d949fa599f3177a8c234adbd1bee",
         "type": "github"
       },
       "original": {
@@ -20,13 +20,45 @@
         "type": "github"
       }
     },
+    "kak-lsp-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1598392548,
+        "narHash": "sha256-ErOgdm+fepM+maWBqs7udQ4GEsBAvNSOX/xvJBQjHaQ=",
+        "owner": "ul",
+        "repo": "kak-lsp",
+        "rev": "f325bacc7fb595f971d7b8a9aca3e5b8d3b0a22d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ul",
+        "repo": "kak-lsp",
+        "type": "github"
+      }
+    },
+    "kakoune-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1599649230,
+        "narHash": "sha256-L8TfPE7YPhoOV2OsDS6woE9jR6gTY84rt+9sg+Tb4Uc=",
+        "owner": "mawww",
+        "repo": "kakoune",
+        "rev": "ec3d7c31040afaee65afde15832d9b0ed6b2224d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mawww",
+        "repo": "kakoune",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1597943282,
-        "narHash": "sha256-G/VQBlqO7YeFOSvn29RqdvABZxmQBtiRYVA6kjqWZ6o=",
+        "lastModified": 1599510591,
+        "narHash": "sha256-rx6LLVncYqChBVVNopRY7tn59aP4qPqNjsAxt2X6/L8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c59ea8b8a0e7f927e7291c14ea6cd1bd3a16ff38",
+        "rev": "61525137fd1002f6f2a5eb0ea27d480713362cd5",
         "type": "github"
       },
       "original": {
@@ -39,6 +71,8 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "kak-lsp-src": "kak-lsp-src",
+        "kakoune-src": "kakoune-src",
         "nixpkgs": "nixpkgs"
       }
     }
