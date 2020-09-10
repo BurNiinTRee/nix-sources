@@ -59,7 +59,7 @@ in {
     ripgrep
     rustup
     steam
-    thunderbird-bin
+    thunderbird-bin-78
     virtmanager
     wev
     wl-clipboard
