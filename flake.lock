@@ -23,11 +23,11 @@
     "kak-lsp-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1598392548,
-        "narHash": "sha256-ErOgdm+fepM+maWBqs7udQ4GEsBAvNSOX/xvJBQjHaQ=",
+        "lastModified": 1599777531,
+        "narHash": "sha256-n9zqtkNckI4FNWN86mPyuNjjHMBDTSJ9Lv619DPLXkU=",
         "owner": "ul",
         "repo": "kak-lsp",
-        "rev": "f325bacc7fb595f971d7b8a9aca3e5b8d3b0a22d",
+        "rev": "4aaa97260847f40da4da4407f132fb3dce41e247",
         "type": "github"
       },
       "original": {

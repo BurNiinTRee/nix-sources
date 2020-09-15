@@ -14,7 +14,7 @@ self: super:
 
     src = self.kak-lsp-src;
 
-    cargoSha256 = "sha256-kVT61Z+WrrlMESs9mT2mp2VwlChRwY0H2lKeEBFU1GQ=";
+    cargoSha256 = "sha256-RetuZlUGURiQfUY9+DBNtw4+lFldw8OrfG+GV7lrOOk=";
     # cargoSha256 = self.lib.fakeSha256;
 
     meta = with self.lib; {
