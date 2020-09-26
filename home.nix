@@ -121,6 +121,12 @@ in {
             mode = "user";
           }
           {
+            docstring = "Cargo Mode";
+            effect = ": enter-user-mode cargo<ret>";
+            key = "c";
+            mode = "user";
+          }
+          {
             docstring = "Comment Line";
             effect = ": comment-line<ret>";
             key = "/";
