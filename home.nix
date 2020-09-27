@@ -2,11 +2,11 @@
 let
   sources = import ./nix/sources.nix;
   firefox = with pkgs;
-    (wrapFirefox firefox-bin-unwrapped {
+    (wrapFirefox firefox-unwrapped {
       forceWayland = true;
       extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
       browserName = "firefox";
-      pname = "firefox-bin";
+      pname = "firefox";
       desktopName = "Firefox";
     });
 
