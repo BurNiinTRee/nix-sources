@@ -1,21 +1,35 @@
 self: super:
 {
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: rec {
-    version = "2020-09-26";
+    version = "2020-10-07";
     src = self.kakoune-src;
     preConfigure = ''
       export version="v${version}"
     '';
   });
 
-  kak-lsp = self.rustPlatform.buildRustPackage {
+  kak-lsp = self.stdenv.mkDerivation rec {
     pname = "kak-lsp";
-    version = "2020-09-26";
+    version = "2020-10-07";
 
     src = self.kak-lsp-src;
 
-    cargoSha256 = "sha256-8teJUNaQZ9f1v7EeRufXipn69Gbb1wkpwx3SNizLP28=";
-    # cargoSha256 = self.lib.fakeSha256;
+    buildInputs = [
+      (self.import-cargo.builders.importCargo {
+        lockFile = src + "/Cargo.lock";
+        pkgs = self;
+      }).cargoHome
+
+      self.rustc
+      self.cargo
+    ];
+
+    buildPhase = ''
+      cargo build --offline --release
+    '';
+    installPhase = ''
+      install -Dm775 ./target/release/kak-lsp $out/bin/kak-lsp
+    '';
 
     meta = with self.lib; {
       description = "Kakoune Language Server Protocol Client";

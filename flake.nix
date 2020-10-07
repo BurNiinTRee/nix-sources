@@ -15,9 +15,10 @@
       url = "github:ul/kak-lsp";
       flake = false;
     };
+    import-cargo.url = "github:edolstra/import-cargo";
   };
 
-  outputs = { self, nixpkgs, home-manager, kakoune-src, kak-lsp-src }: {
+  outputs = { self, nixpkgs, home-manager, import-cargo, kakoune-src, kak-lsp-src }: {
 
     legacyPackages.x86_64-linux = import nixpkgs {
       system = "x86_64-linux";
@@ -41,7 +42,7 @@
               path = "/home/lars/Sync/nix-sources";
             };
           };
-          nixpkgs.overlays = (import ./overlays.nix) ++ [ (self: super: { inherit kakoune-src kak-lsp-src; }) ];
+          nixpkgs.overlays = (import ./overlays.nix) ++ [ (self: super: { inherit kakoune-src kak-lsp-src import-cargo; }) ];
           nixpkgs.config.allowUnfree = true;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
