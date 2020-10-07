@@ -80,6 +80,13 @@ in {
       };
     };
 
+    starship = {
+      enable = true;
+      settings = {
+        status.disabled = false;
+      };
+    };
+
     kakoune = {
       enable = true;
       plugins = [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround ];
