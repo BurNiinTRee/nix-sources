@@ -36,7 +36,7 @@ in {
     (wrapDesktopInBash qjackctl "Exec=qjackctl" ''Exec=bash -l -c "qjackctl"''
       "qjackctl.desktop")
     cargo-edit
-    du-dust
+    dua
     fd
     file
     fira-code
