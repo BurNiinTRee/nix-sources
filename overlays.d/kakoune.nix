@@ -1,5 +1,5 @@
 self: super:
-let kak-version = "2020-10-10";
+let kak-version = "2020-10-26";
 in
 {
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: rec {
