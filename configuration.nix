@@ -73,12 +73,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ wget vim kakoune ];
-  environment.sessionVariables = {
-    LD_LIBRARY_PATH = pkgs.lib.concatStringsSep ":" [
-      "${pkgs.pipewire.lib}/lib/pipewire-0.3/jack"
-      # "${pkgs.pipewire.lib}/lib/pipewire-0.3/pulse"
-    ];
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -127,7 +121,15 @@
       (pkgs.pipewire + "/share/alsa/alsa.conf.d/99-pipewire-default.conf"))
   ];
   # hardware.pulseaudio.enable = false;
-  services.pipewire.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    jack.enable = true;
+    pulse.enable = true;
+  };
 
   # Enable GPU
   hardware.opengl = {

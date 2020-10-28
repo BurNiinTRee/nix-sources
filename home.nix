@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 let
-  sources = import ./nix/sources.nix;
   firefox = with pkgs;
     (wrapFirefox firefox-unwrapped {
       forceWayland = true;
@@ -9,18 +8,6 @@ let
       pname = "firefox";
       desktopName = "Firefox";
     });
-
-  LD_LIBRARY_PATH = "${pkgs.pipewire.lib}/lib/pipewire-0.3/jack";
-
-  wrapDesktopInBash = pkg: oldExecLine: execLine: desktopName:
-    pkgs.stdenv.mkDerivation {
-      inherit (pkg) name version meta;
-      phases = [ "buildPhase" ];
-      buildPhase = ''
-        cp -r ${pkg} $out
-        substituteInPlace $out/share/applications/${desktopName} --replace '${oldExecLine}' '${execLine}'
-      '';
-    };
 in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -29,18 +16,14 @@ in {
   systemd.user.sessionVariables = { inherit LD_LIBRARY_PATH; };
 
   home.packages = with pkgs; [
-    (wrapDesktopInBash ardour "Exec=ardour6" ''Exec=bash -l -c "ardour6"''
-      "ardour6.desktop")
-    #(wrapDesktopInBash firefox "Exec=firefox %U" ''Exec=bash -l -c "firefox %U"'' "firefox.desktop")
-    firefox
-    (wrapDesktopInBash qjackctl "Exec=qjackctl" ''Exec=bash -l -c "qjackctl"''
-      "qjackctl.desktop")
+    ardour
     cargo-edit
     dua
     fd
+    ffmpeg
     file
     fira-code
-    ffmpeg
+    firefox
     flatpak-builder
     gcc
     gnome3.gnome-tweaks
@@ -56,6 +39,7 @@ in {
     nixops
     pciutils
     pw-pulse
+    qjackctl
     ripgrep
     rustup
     steam
@@ -71,7 +55,6 @@ in {
       enable = true;
       sessionVariables = {
         EDITOR = "kak";
-        inherit LD_LIBRARY_PATH;
         LV2_PATH = "~/.nix-profile/lib/lv2";
       };
       shellAliases = {
