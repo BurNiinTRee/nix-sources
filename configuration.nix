@@ -120,7 +120,7 @@
     (builtins.readFile
       (pkgs.pipewire + "/share/alsa/alsa.conf.d/99-pipewire-default.conf"))
   ];
-  # hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa = {

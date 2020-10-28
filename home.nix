@@ -37,7 +37,6 @@ in {
     nixfmt
     nixops
     pciutils
-    pw-pulse
     qjackctl
     ripgrep
     rustup
