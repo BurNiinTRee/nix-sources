@@ -36,8 +36,8 @@ in {
     niv
     nixfmt
     nixops
+    patchage
     pciutils
-    qjackctl
     ripgrep
     rustup
     simple-http-server
