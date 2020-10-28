@@ -42,6 +42,7 @@ in {
     qjackctl
     ripgrep
     rustup
+    simple-http-server
     steam
     thunderbird-bin-78
     virtmanager
