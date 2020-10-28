@@ -2,6 +2,8 @@ self: super: {
   simple-http-server = self.rustPlatform.buildRustPackage rec {
     pname = "simple-http-server";
     version = "0.6.1";
+    nativeBuildInputs = [ self.pkgconfig ];
+    buildInputs = [ self.openssl ];
     src = self.fetchFromGitHub {
       owner = "TheWaWar";
       repo = pname;
