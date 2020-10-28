@@ -13,7 +13,6 @@ in {
   programs.home-manager.enable = true;
 
   systemd.user.startServices = true;
-  systemd.user.sessionVariables = { inherit LD_LIBRARY_PATH; };
 
   home.packages = with pkgs; [
     ardour
