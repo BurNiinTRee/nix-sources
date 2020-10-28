@@ -109,17 +109,6 @@
 
   # Enable sound.
   sound.enable = true;
-  sound.extraConfig = pkgs.lib.concatStringsSep "\n" [
-    ''
-      pcm_type.pipewire {
-        libs.native = ${pkgs.pipewire.lib}/lib/alsa-lib/libasound_module_pcm_pipewire.so;
-      }
-    ''
-    (builtins.readFile
-      (pkgs.pipewire + "/share/alsa/alsa.conf.d/50-pipewire.conf"))
-    (builtins.readFile
-      (pkgs.pipewire + "/share/alsa/alsa.conf.d/99-pipewire-default.conf"))
-  ];
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
