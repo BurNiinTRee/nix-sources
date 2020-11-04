@@ -1,16 +1,16 @@
 self: super:
-let kak-version = "2020-10-28";
+let kak-version = "2020-11-04";
 in
 {
-  kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: rec {
+  kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: {
     version = kak-version;
     src = self.kakoune-src;
     preConfigure = ''
-      export version="v${version}"
+      export version="v${kak-version}"
     '';
   });
 
-  kak-lsp = self.stdenv.mkDerivation rec {
+  kak-lsp = self.stdenv.mkDerivation {
     pname = "kak-lsp";
     version = kak-version;
 
@@ -18,7 +18,7 @@ in
 
     buildInputs = [
       (self.import-cargo.builders.importCargo {
-        lockFile = src + "/Cargo.lock";
+        lockFile = self.kak-lsp-src + "/Cargo.lock";
         pkgs = self;
       }).cargoHome
 
