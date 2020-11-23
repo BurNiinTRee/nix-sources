@@ -23,16 +23,16 @@
 
   containers = {
     pg.config = { config, pkgs, ... }: {
-    services.postgresql = {
-      enable = true;
-      ensureDatabases = [ "lars" ];
+      services.postgresql = {
+        enable = true;
+        ensureDatabases = [ "lars" ];
         ensureUsers = [{ name = "lars"; }];
-      authentication = ''
-        host all all ::1/128 trust
-      '';
+        authentication = ''
+          host all all ::1/128 trust
+        '';
+      };
+      users.users.lars.isNormalUser = true;
     };
-    users.users.lars.isNormalUser = true;
-  };
   };
 
   # Services for Database Theory
@@ -134,7 +134,7 @@
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ vaapiIntel ];
+    extraPackages = with pkgs; [ vaapiIntel intel-compute-runtime ];
     extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel ];
   };
 

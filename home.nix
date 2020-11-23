@@ -16,6 +16,9 @@ in {
 
   home.packages = with pkgs; [
     ardour
+    (arrayfire.overrideAttrs (old: {
+      cmakeFlags = builtins.tail old.cmakeFlags;
+    }))
     cargo-edit
     dua
     fd
