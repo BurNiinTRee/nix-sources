@@ -45,6 +45,7 @@ in {
       '';
     })
     killall
+    mysql-workbench
     niv
     nixfmt
     nixops
@@ -149,6 +150,11 @@ in {
             name = "WinSetOption";
             option = "filetype=nix";
             commands = "set-option window indentwidth 2";
+          }
+          {
+            name = "WinSetOption";
+            option = "filetype=latex";
+            commands = "hook window BufWritePost .* make";
           }
         ];
         keyMappings = [
