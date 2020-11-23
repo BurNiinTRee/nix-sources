@@ -34,6 +34,15 @@
     };
     users.users.lars.isNormalUser = true;
   };
+  # Services for Database Theory
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql80;
+    ensureUsers = [{
+      name = "lars";
+      ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
+    }];
+  };
 
   # LUKS setup
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
