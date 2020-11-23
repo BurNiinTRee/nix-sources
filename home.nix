@@ -21,6 +21,7 @@ in {
     }))
     cargo-edit
     dua
+    exercism
     fd
     ffmpeg
     file
