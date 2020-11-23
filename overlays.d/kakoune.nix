@@ -1,9 +1,7 @@
 self: super:
-let kak-version = "2020-11-09";
-in
 {
   kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: {
-    version = kak-version;
+    version = "master";
     src = self.kakoune-src;
     preConfigure = ''
       export version="v${kak-version}"
@@ -12,7 +10,7 @@ in
 
   kak-lsp = self.stdenv.mkDerivation {
     pname = "kak-lsp";
-    version = kak-version;
+    version = "master";
 
     src = self.kak-lsp-src;
 
