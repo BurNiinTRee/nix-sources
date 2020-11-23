@@ -35,38 +35,6 @@
         "type": "github"
       }
     },
-    "kak-lsp-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1601571519,
-        "narHash": "sha256-UUZ14a+6RyQeG0ajeeBNQFV1BZrkdnFKAzPD/O5xHAI=",
-        "owner": "ul",
-        "repo": "kak-lsp",
-        "rev": "354b46e3cf56f0da35b444941a701ca4c1135aa8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ul",
-        "repo": "kak-lsp",
-        "type": "github"
-      }
-    },
-    "kakoune-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1606081559,
-        "narHash": "sha256-93JVhYOZ7tCwnV1uq6qKG6wBndmegJJBTjrCUsc1k4E=",
-        "owner": "mawww",
-        "repo": "kakoune",
-        "rev": "14f7d2637c80258d80e5ae204e16dbb67a896ebc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mawww",
-        "repo": "kakoune",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1605744920,
@@ -87,8 +55,6 @@
       "inputs": {
         "home-manager": "home-manager",
         "import-cargo": "import-cargo",
-        "kak-lsp-src": "kak-lsp-src",
-        "kakoune-src": "kakoune-src",
         "nixpkgs": "nixpkgs"
       }
     }

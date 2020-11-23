@@ -1,46 +1,5 @@
 self: super:
 {
-  kakoune-unwrapped = super.kakoune-unwrapped.overrideAttrs (attrs: {
-    version = "master";
-    src = self.kakoune-src;
-    preConfigure = ''
-      export version="v${kak-version}"
-    '';
-  });
-
-  kak-lsp = self.stdenv.mkDerivation {
-    pname = "kak-lsp";
-    version = "master";
-
-    src = self.kak-lsp-src;
-
-    buildInputs = [
-      (self.import-cargo.builders.importCargo {
-        lockFile = self.kak-lsp-src + "/Cargo.lock";
-        pkgs = self;
-      }).cargoHome
-
-      self.rustc
-      self.cargo
-    ];
-
-    buildPhase = ''
-      cargo build --offline --release
-    '';
-    installPhase = ''
-      install -Dm775 ./target/release/kak-lsp $out/bin/kak-lsp
-    '';
-
-    meta = with self.lib; {
-      description = "Kakoune Language Server Protocol Client";
-      homepage = "https://github.com/ul/kak-lsp";
-      license = with licenses; [ unlicense /* or */ mit ];
-      maintainers = [ maintainers.spacekookie ];
-      platforms = platforms.all;
-    };
-  };
-
-
   kak-surround = self.stdenv.mkDerivation {
     name = "kakoune-surround";
     version = "2018-09-17";

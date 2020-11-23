@@ -7,22 +7,14 @@
       url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kakoune-src = {
-      url = "github:mawww/kakoune";
-      flake = false;
-    };
-    kak-lsp-src = {
-      url = "github:ul/kak-lsp";
-      flake = false;
-    };
     import-cargo.url = "github:edolstra/import-cargo";
   };
 
-  outputs = { self, nixpkgs, home-manager, import-cargo, kakoune-src, kak-lsp-src }: {
+  outputs = { self, nixpkgs, home-manager, import-cargo }: {
 
     legacyPackages.x86_64-linux = import nixpkgs {
       system = "x86_64-linux";
-      overlays = (import ./overlays.nix) ++ [ (self: super: { inherit kakoune-src kak-lsp-src; }) ];
+      overlays = (import ./overlays.nix);
       config = { allowUnfree = true; };
     };
     inherit (nixpkgs) lib;
@@ -42,7 +34,7 @@
               path = "/home/lars/Sync/nix-sources";
             };
           };
-          nixpkgs.overlays = (import ./overlays.nix) ++ [ (self: super: { inherit kakoune-src kak-lsp-src import-cargo; }) ];
+          nixpkgs.overlays = (import ./overlays.nix);
           nixpkgs.config.allowUnfree = true;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
