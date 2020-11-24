@@ -55,7 +55,7 @@ in {
     rustup
     simple-http-server
     steam
-    thunderbird-bin-78
+    thunderbird-78
     virtmanager
     wev
     wl-clipboard
