@@ -77,9 +77,7 @@ in {
 
     starship = {
       enable = true;
-      settings = {
-        status.disabled = false;
-      };
+      settings = { status.disabled = false; };
     };
 
     vscode = {
@@ -98,30 +96,37 @@ in {
           version = "0.3.2";
           sha256 = "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=";
         }
-      ] ++ (with pkgs.vscode-extensions; [ matklad.rust-analyzer bbenoist.Nix ]);
+      ] ++ (with pkgs.vscode-extensions; [
+        matklad.rust-analyzer
+        bbenoist.Nix
+      ]);
       userSettings = {
         "keyboard.dispatch" = "keyCode";
         "telemetry.enableTelemetry" = false;
         "telemetry.enableCrashReporter" = false;
-        "editor.fontFamily" = "Fira Code, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'";
+        "editor.fontFamily" =
+          "Fira Code, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'";
         "editor.fontLigatures" = true;
         "julia.enableTelemetry" = false;
         "julia.enableCrashReporter" = false;
         "julia.execution.resultType" = "both";
         "julia.NumThreads" = 8;
-        "terminal.integrated.commandsToSkipShell" = [ "language-julia.interrupt" ];
-        "python.pythonPath" = (pkgs.python3.withPackages (pypkgs: [ pypkgs.ipykernel ])) + "/bin/python";
-        "workbench.editorAssociations" = [ {
+        "terminal.integrated.commandsToSkipShell" =
+          [ "language-julia.interrupt" ];
+        "python.pythonPath" =
+          (pkgs.python3.withPackages (pypkgs: [ pypkgs.ipykernel ]))
+          + "/bin/python";
+        "workbench.editorAssociations" = [{
           "viewType" = "jupyter.notebook.ipynb";
           "filenamePattern" = "*.ipynb";
         }];
       };
     };
-    
 
     kakoune = {
       enable = true;
-      plugins = [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround ];
+      plugins =
+        [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround ];
       config = {
         colorScheme = "gruvbox";
         numberLines = {
