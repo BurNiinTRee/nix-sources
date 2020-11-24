@@ -16,9 +16,6 @@ in {
 
   home.packages = with pkgs; [
     ardour
-    (arrayfire.overrideAttrs (old: {
-      cmakeFlags = builtins.tail old.cmakeFlags;
-    }))
     cargo-edit
     dua
     exercism
@@ -41,7 +38,10 @@ in {
       phases = [ "buildPhase" ];
       buildInputs = [ makeWrapper ];
       buildPhase = ''
-        makeWrapper ${julia}/bin/julia $out/bin/julia --prefix LD_LIBRARY_PATH : /etc/profiles/per-user/lars/lib
+        makeWrapper ${julia}/bin/julia $out/bin/julia --prefix LD_LIBRARY_PATH : ${
+          (arrayfire.overrideAttrs
+            (old: { cmakeFlags = builtins.tail old.cmakeFlags; }))
+        }/lib --prefix PATH : ${gnumake}/bin
       '';
     })
     killall
