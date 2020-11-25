@@ -7,10 +7,9 @@
       url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    import-cargo.url = "github:edolstra/import-cargo";
   };
 
-  outputs = { self, nixpkgs, home-manager, import-cargo }: {
+  outputs = { self, nixpkgs, home-manager }: {
 
     legacyPackages.x86_64-linux = import nixpkgs {
       system = "x86_64-linux";
