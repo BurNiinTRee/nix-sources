@@ -48,8 +48,6 @@ in
     killall
     mysql-workbench
     niv
-    nixfmt
-    nixops
     patchage
     pciutils
     ripgrep
