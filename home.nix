@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+rnix-flake: { config, pkgs, ... }:
 let
   firefox = with pkgs;
     (wrapFirefox firefox-unwrapped {
@@ -52,6 +52,7 @@ in {
     patchage
     pciutils
     ripgrep
+    rnix-flake.packages.x86_64-linux.rnix-lsp
     rustup
     simple-http-server
     steam
@@ -83,12 +84,12 @@ in {
     vscode = {
       enable = true;
       extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        # {
-        #   name = "language-julia";
-        #   publisher = "julialang";
-        #   version = "1.0.10";
-        #   sha256 = "sha256-+tnyHNt5NVb6XqAobnS6C8rLh+3yA7OKeGiL08snrBI=";
-        # }
+        {
+          name = "nix-lsp";
+          publisher = "aaronduino";
+          version = "0.0.1";
+          sha256 = "sha256-PNXa/rBdXU9jlUdZcKJODU2+f5F53rtezA+lTzvDF6Q=";
+        }
 
         {
           name = "dance";
@@ -98,7 +99,6 @@ in {
         }
       ] ++ (with pkgs.vscode-extensions; [
         matklad.rust-analyzer
-        bbenoist.Nix
       ]);
       userSettings = {
         "keyboard.dispatch" = "keyCode";

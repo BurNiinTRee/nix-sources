@@ -7,9 +7,13 @@
       url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rnix-flake = {
+      url = "gitlab:jD91mZM2/nix-lsp";
+      inputs.nixpkgs.follows = "nixpkgs";
+  };
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { self, nixpkgs, home-manager, rnix-flake }: {
 
     legacyPackages.x86_64-linux = import nixpkgs {
       system = "x86_64-linux";
@@ -37,7 +41,7 @@
           nixpkgs.config.allowUnfree = true;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.lars = import ./home.nix;
+          home-manager.users.lars = import ./home.nix rnix-flake;
         })
         ./configuration.nix
         home-manager.nixosModules.home-manager
