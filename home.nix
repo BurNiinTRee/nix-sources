@@ -7,8 +7,10 @@ let
       browserName = "firefox";
       pname = "firefox";
       desktopName = "Firefox";
-    });
-in {
+    }
+    );
+in
+{
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -39,8 +41,7 @@ in {
       buildInputs = [ makeWrapper ];
       buildPhase = ''
         makeWrapper ${julia}/bin/julia $out/bin/julia --prefix LD_LIBRARY_PATH : ${
-          (arrayfire.overrideAttrs
-            (old: { cmakeFlags = builtins.tail old.cmakeFlags; }))
+          (arrayfire.overrideAttrs (old: { cmakeFlags = builtins.tail old.cmakeFlags; }))
         }/lib --prefix PATH : ${gnumake}/bin
       '';
     })
@@ -237,18 +238,26 @@ in {
     let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
     in builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig;
 
-  home.file = let
+  home.file =
+    let
     dirPath = firefox + "/lib/mozilla/native-messaging-hosts/";
     fileNames = builtins.attrNames (builtins.readDir dirPath);
-    files = map (n: {
+      files = map
+        (n: {
       path = dirPath + n;
       name = n;
-    }) fileNames;
-  in builtins.foldl' (a:
+        })
+        fileNames;
+    in
+    builtins.foldl'
+      (a:
     { name, path }:
     a // {
       ".mozilla/native-messaging-hosts/${name}".source = path;
-    }) { } files;
+        }
+      )
+      { }
+      files;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
