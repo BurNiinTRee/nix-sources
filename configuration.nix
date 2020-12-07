@@ -119,16 +119,16 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    jack.enable = true;
-    pulse.enable = true;
-  };
+  # hardware.pulseaudio.enable = false;
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa = {
+  #     enable = true;
+  #     support32Bit = true;
+  #   };
+  #   jack.enable = true;
+  #   pulse.enable = true;
+  # };
 
   # Enable GPU
   hardware.opengl = {
