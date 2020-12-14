@@ -1,14 +1,23 @@
 rnix-flake: { config, pkgs, ... }:
 let
   firefox = with pkgs;
-    (wrapFirefox firefox-unwrapped {
+    wrapFirefox firefox-unwrapped {
       forceWayland = true;
       extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
       browserName = "firefox";
       pname = "firefox";
       desktopName = "Firefox";
-    }
-    );
+    };
+  julia = pkgs.stdenv.mkDerivation {
+    inherit (pkgs.julia) name version meta;
+    phases = [ "buildPhase" ];
+    buildInputs = [ pkgs.makeWrapper ];
+    buildPhase = ''
+      makeWrapper ${pkgs.julia}/bin/julia $out/bin/julia --prefix LD_LIBRARY_PATH : ${
+        pkgs.arrayfire.overrideAttrs (old: { cmakeFlags = builtins.tail old.cmakeFlags; })
+      }/lib --prefix PATH : ${pkgs.gnumake}/bin
+    '';
+  };
 in
 {
   # Let Home Manager install and manage itself.
@@ -34,17 +43,8 @@ in
     helm
     htop
     iftop
+    julia
     jupyterlab-rust
-    (stdenv.mkDerivation {
-      inherit (julia) name version meta;
-      phases = [ "buildPhase" ];
-      buildInputs = [ makeWrapper ];
-      buildPhase = ''
-        makeWrapper ${julia}/bin/julia $out/bin/julia --prefix LD_LIBRARY_PATH : ${
-          (arrayfire.overrideAttrs (old: { cmakeFlags = builtins.tail old.cmakeFlags; }))
-        }/lib --prefix PATH : ${gnumake}/bin
-      '';
-    })
     killall
     mysql-workbench
     niv
@@ -110,6 +110,7 @@ in
         "julia.enableCrashReporter" = false;
         "julia.execution.resultType" = "both";
         "julia.NumThreads" = 8;
+        "julia.executablePath" = julia + "/bin/julia";
         "terminal.integrated.commandsToSkipShell" =
           [ "language-julia.interrupt" ];
         "python.pythonPath" =
