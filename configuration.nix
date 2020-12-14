@@ -16,6 +16,8 @@
 
   services.flatpak.enable = true;
 
+  hardware.steam-hardware.enable = true;
+
   virtualisation.libvirtd = {
     enable = true;
     qemuOvmf = true;
