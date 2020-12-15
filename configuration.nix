@@ -18,6 +18,8 @@
 
   hardware.steam-hardware.enable = true;
 
+  hardware.tuxedo-keyboard.enable = true;
+
   virtualisation.libvirtd = {
     enable = true;
     qemuOvmf = true;
