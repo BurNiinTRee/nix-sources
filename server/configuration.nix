@@ -1,4 +1,4 @@
-self: { config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   wellKnownServer = pkgs.writeTextFile {
@@ -31,14 +31,16 @@ in {
     enable = true;
     package = pkgs.mysql80;
     ensureDatabases = [ "reddit" ];
-    ensureUsers = [{
-      name = "lars";
-      ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
-    }
-    {
-      name = "claudia";
-      ensurePermissions = { "Reddit.*" = "ALL PRIVILEGES"; };
-    }];
+    ensureUsers = [
+      {
+        name = "lars";
+        ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
+      }
+      {
+        name = "claudia";
+        ensurePermissions = { "Reddit.*" = "ALL PRIVILEGES"; };
+      }
+    ];
   };
   services.prosody.xmppComplianceSuite = false;
 
@@ -54,7 +56,18 @@ in {
       "element.muehml.eu" = {
         forceSSL = true;
         enableACME = true;
-        locations."/".root = self.packages.x86_64-linux.element-web;
+        locations."/".root = (pkgs.element-web.override {
+          conf = {
+            default_server_config = {
+              "m.homeserver" = {
+                base_url = "https://matrix.muehml.eu";
+                server_name = "muehml.eu";
+              };
+            };
+
+            jitsi.preferredDomain = "jitsi.muehml.eu";
+          };
+        });
       };
 
       ${config.services.jitsi-meet.hostName} = {
@@ -89,7 +102,6 @@ in {
 
   services.matrix-synapse = {
     enable = true;
-    # package = self.packages.x86_64-linux.matrix-synapse;
     server_name = "muehml.eu";
     enable_metrics = true;
     enable_registration = true;
@@ -110,7 +122,7 @@ in {
       "turn:turn.muehml.eu:3478?transport=udp"
       "turn:turn.muehml.eu:3478?transport=tcp"
     ];
-    turn_shared_secret = config.services.coturn.static-auth-secret;
+    # turn_shared_secret = config.services.coturn.static-auth-secret;
   };
 
   services.postgresql = {
@@ -137,7 +149,7 @@ in {
   services.coturn = {
     enable = true;
     use-auth-secret = true;
-    static-auth-secret = builtins.readFile ./coturn-secret;
+    # static-auth-secret = builtins.readFile ./coturn-secret;
     realm = "turn.muehml.eu";
     no-tcp-relay = true;
     no-tls = true;
