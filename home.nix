@@ -35,7 +35,6 @@ in
     file
     fira-code
     firefox
-    flatpak-builder
     gcc
     gnome3.gnome-tweaks
     gnomeExtensions.gsconnect
@@ -46,7 +45,7 @@ in
     julia
     jupyterlab-rust
     killall
-    mysql-workbench
+    # mysql-workbench
     niv
     patchage
     pciutils
@@ -55,6 +54,7 @@ in
     rustup
     simple-http-server
     steam
+    tab-rs
     thunderbird-78
     virtmanager
     wev
@@ -77,7 +77,16 @@ in
 
     starship = {
       enable = true;
-      settings = { status.disabled = false; };
+      settings = {
+        status.disabled = false;
+        custom.tab = {
+          description = "The current tab in the tab terminal multiplexer";
+          command = "tab --starship";
+          when = "tab --starship";
+          format = "[$output]($style)";
+          style = "bold blue";
+        };
+      };
     };
 
     vscode = {
@@ -237,22 +246,34 @@ in
     let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
     in builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig;
 
+  xdg.configFile."tab.yml".text = pkgs.lib.generators.toYAML
+    { } {
+    workspace = [{
+      tab = "home";
+      directory = "~";
+    }
+    {
+      tab = "nix-sources";
+      directory = "~/Sync/nix-sources";
+    }];
+  };
+
   home.file =
     let
-    dirPath = firefox + "/lib/mozilla/native-messaging-hosts/";
-    fileNames = builtins.attrNames (builtins.readDir dirPath);
+      dirPath = firefox + "/lib/mozilla/native-messaging-hosts/";
+      fileNames = builtins.attrNames (builtins.readDir dirPath);
       files = map
         (n: {
-      path = dirPath + n;
-      name = n;
+          path = dirPath + n;
+          name = n;
         })
         fileNames;
     in
     builtins.foldl'
       (a:
-    { name, path }:
-    a // {
-      ".mozilla/native-messaging-hosts/${name}".source = path;
+        { name, path }:
+        a // {
+          ".mozilla/native-messaging-hosts/${name}".source = path;
         }
       )
       { }

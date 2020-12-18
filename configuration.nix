@@ -20,6 +20,9 @@
 
   hardware.tuxedo-keyboard.enable = true;
 
+  services.thermald.enable = true;
+  services.gamemode.enable = true;
+
   virtualisation.libvirtd = {
     enable = true;
     qemuOvmf = true;
@@ -178,7 +181,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "21.03"; # Did you read the comment?
 
 }
 
