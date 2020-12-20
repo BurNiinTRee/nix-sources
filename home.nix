@@ -139,7 +139,6 @@ in
       plugins =
         [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround ];
       config = {
-        colorScheme = "gruvbox";
         numberLines = {
           enable = true;
           highlightCursor = true;
