@@ -92,6 +92,7 @@ in
 
     vscode = {
       enable = true;
+      package = pkgs.vscodium;
       extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "nix-lsp";
@@ -110,6 +111,7 @@ in
         matklad.rust-analyzer
       ]);
       userSettings = {
+        "update.mode" = "none";
         "keyboard.dispatch" = "keyCode";
         "telemetry.enableTelemetry" = false;
         "telemetry.enableCrashReporter" = false;
