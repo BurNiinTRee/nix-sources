@@ -49,6 +49,7 @@ in
     niv
     patchage
     pciutils
+    pijul
     ripgrep
     rnix-flake.packages.x86_64-linux.rnix-lsp
     rustup
@@ -245,6 +246,14 @@ in
   xdg.configFile."kak-lsp/kak-lsp.toml".text =
     let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
     in builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig;
+
+  xdg.configFile."pijul/config.toml".text = pkgs.lib.generators.toINI {} {
+    author = {
+      name = ''"BurNiinTRee"'';
+      full_name = ''"Lars Mühmel"'';
+      email = ''"larsmuehmel@web.de"'';
+    };
+  };
 
   xdg.configFile."tab.yml".text = pkgs.lib.generators.toYAML
     { } {
