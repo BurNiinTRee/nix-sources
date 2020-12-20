@@ -117,7 +117,6 @@ in
         "telemetry.enableCrashReporter" = false;
         "editor.fontFamily" =
           "Fira Code, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'";
-        "editor.fontLigatures" = true;
         "julia.enableTelemetry" = false;
         "julia.enableCrashReporter" = false;
         "julia.execution.resultType" = "both";
