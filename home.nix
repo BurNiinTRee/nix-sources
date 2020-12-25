@@ -46,6 +46,7 @@ in
     jupyterlab-rust
     killall
     # mysql-workbench
+    multimc
     niv
     patchage
     pciutils
