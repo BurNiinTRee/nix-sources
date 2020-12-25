@@ -113,6 +113,7 @@ in
       userSettings = {
         "update.mode" = "none";
         "keyboard.dispatch" = "keyCode";
+        "workbench.colorTheme" = "Default Light+";
         "telemetry.enableTelemetry" = false;
         "telemetry.enableCrashReporter" = false;
         "editor.fontFamily" =
