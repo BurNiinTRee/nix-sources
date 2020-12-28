@@ -215,7 +215,10 @@ in
       '';
     };
 
-    bat.enable = true;
+    bat = {
+      enable = true;
+      config.theme = "Solarized (light)";
+    };
 
     direnv = {
       enable = true;
