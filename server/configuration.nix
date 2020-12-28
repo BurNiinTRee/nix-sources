@@ -26,22 +26,6 @@ in {
     allowedTCPPorts = [ 80 443 3478 3479 3306 ];
   };
 
-  # Services for Database Theory
-  services.mysql = {
-    enable = true;
-    package = pkgs.mysql80;
-    ensureDatabases = [ "reddit" ];
-    ensureUsers = [
-      {
-        name = "lars";
-        ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
-      }
-      {
-        name = "claudia";
-        ensurePermissions = { "Reddit.*" = "ALL PRIVILEGES"; };
-      }
-    ];
-  };
   services.prosody.xmppComplianceSuite = false;
 
   services.nginx = {
