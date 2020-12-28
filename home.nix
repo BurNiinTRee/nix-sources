@@ -1,4 +1,4 @@
-rnix-flake: { config, pkgs, ... }:
+inputs: { config, pkgs, ... }:
 let
   firefox = with pkgs;
     wrapFirefox firefox-unwrapped {
@@ -41,6 +41,8 @@ in
     gnomeExtensions.draw-on-your-screen
     helm
     htop
+    inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
+    inputs.deploy-rs.defaultPackage.x86_64-linux #.packages.x86_64-linux.nixops
     iftop
     julia
     jupyterlab-rust
@@ -52,7 +54,6 @@ in
     pciutils
     pijul
     ripgrep
-    rnix-flake.packages.x86_64-linux.rnix-lsp
     rustup
     simple-http-server
     steam

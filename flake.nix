@@ -2,6 +2,10 @@
   description = "My Nixos System";
 
   inputs = {
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-20.09";
     home-manager = {
@@ -14,7 +18,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-release, home-manager, rnix-flake }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-release, home-manager, rnix-flake, deploy-rs, ... }:
     let
       overlays = (import ./overlays.nix);
     in
@@ -33,6 +37,17 @@
           ./server
         ];
       };
+
+      deploy.nodes."muehml.eu" = {
+        hostname = "muehml.eu";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."muehml.eu";
+        };
+        sshUser = "root";
+      };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       nixosConfigurations.larstop2 = self.lib.nixosSystem {
         system = "x86_64-linux";
@@ -56,7 +71,7 @@
             };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.lars = import ./home.nix rnix-flake;
+            home-manager.users.lars = import ./home.nix inputs;
           })
           ./configuration.nix
           ./modules/gamemode.nix
