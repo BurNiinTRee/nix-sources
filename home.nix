@@ -59,6 +59,7 @@ in
     steam
     tab-rs
     thunderbird-78
+    tokei
     virtmanager
     wev
     wl-clipboard
