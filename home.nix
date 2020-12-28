@@ -37,6 +37,7 @@ in
     firefox
     gcc
     gnome3.gnome-tweaks
+    gnome3.evolution
     gnomeExtensions.gsconnect
     gnomeExtensions.draw-on-your-screen
     helm
