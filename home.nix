@@ -39,6 +39,7 @@ in
     gnome3.gnome-tweaks
     gnomeExtensions.gsconnect
     gnomeExtensions.draw-on-your-screen
+    gnomeExtensions.appindicator
     helm
     htop
     inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
@@ -47,9 +48,8 @@ in
     julia
     jupyterlab-rust
     killall
-    # mysql-workbench
     multimc
-    niv
+    nextcloud-client
     patchage
     pciutils
     pijul

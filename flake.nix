@@ -66,7 +66,6 @@
             };
             nixpkgs.overlays = overlays;
             nixpkgs.config = {
-              permittedInsecurePackages = [ "python2.7-cryptography-2.9.2" ];
               allowUnfree = true;
             };
             home-manager.useGlobalPkgs = true;
