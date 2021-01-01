@@ -37,7 +37,6 @@ in
     firefox
     gcc
     gnome3.gnome-tweaks
-    gnome3.evolution
     gnomeExtensions.gsconnect
     gnomeExtensions.draw-on-your-screen
     helm
@@ -129,9 +128,7 @@ in
         "julia.executablePath" = julia + "/bin/julia";
         "terminal.integrated.commandsToSkipShell" =
           [ "language-julia.interrupt" ];
-        "python.pythonPath" =
-          (pkgs.python3.withPackages (pypkgs: [ pypkgs.ipykernel ]))
-          + "/bin/python";
+        "python.pythonPath" = "";
         "workbench.editorAssociations" = [{
           "viewType" = "jupyter.notebook.ipynb";
           "filenamePattern" = "*.ipynb";
