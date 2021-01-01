@@ -12,10 +12,11 @@
   };
 
   services.openssh.enable = true;
+  services.openssh.passwordAuthentication = false;
 
   users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOsubAF9SruRBOTXRI2nPAMX5I0gD1OOheji91/NGknv lars@install" ];
 
-  imports = [ ./hardware-configuration.nix ./configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./configuration.nix ./mail-server.nix ./nextcloud-server.nix ];
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
