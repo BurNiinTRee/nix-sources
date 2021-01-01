@@ -61,7 +61,7 @@
             nix.registry.pkgs = {
               to = {
                 type = "path";
-                path = "/home/lars/Sync/nix-sources";
+                path = "/home/lars/nix-sources";
               };
             };
             nixpkgs.overlays = overlays;
