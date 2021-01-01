@@ -4,7 +4,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -89,7 +90,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ wget vim kakoune ];
+  environment.systemPackages = with pkgs; [ file kakoune vim  wget ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -179,4 +180,3 @@
   system.stateVersion = "21.03"; # Did you read the comment?
 
 }
-
