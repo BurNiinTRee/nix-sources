@@ -49,7 +49,6 @@ in
     jupyterlab-rust
     killall
     multimc
-    nextcloud-client
     patchage
     pciutils
     pijul
@@ -246,6 +245,7 @@ in
       enable = true;
       pinentryFlavor = "gnome3";
     };
+    nextcloud-client.enable = true;
   };
 
   xdg.configFile."kak-lsp/kak-lsp.toml".text =
