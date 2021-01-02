@@ -75,6 +75,7 @@ in
       shellAliases = {
         cat = "bat";
         iftop = "sudo iftop -B -m 10M";
+        code = "codium";
       };
     };
 
