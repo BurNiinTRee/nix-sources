@@ -45,7 +45,7 @@
 
   # Services for Database Theory
   services.mysql = {
-    enable = true;
+    enable = false;
     package = pkgs.mysql80;
     ensureUsers = [{
       name = "lars";
