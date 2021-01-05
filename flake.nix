@@ -23,7 +23,6 @@
       overlays = (import ./overlays.nix);
     in
     {
-
       legacyPackages.x86_64-linux = import nixpkgs {
         system = "x86_64-linux";
         inherit overlays;
