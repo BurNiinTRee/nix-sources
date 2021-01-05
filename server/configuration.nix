@@ -93,6 +93,8 @@ in {
     database_type = "psycopg2";
     database_args.password = "synapse";
 
+    app_service_config_files = [ "/etc/telegram-registration.yaml" ];
+
     listeners = [{
       port = 8008;
       tls = false;
@@ -147,6 +149,22 @@ in {
 
       allowed-peer-ip=49.12.64.193
     '';
+  };
+
+  services.mautrix-telegram = {
+    enable = true;
+    environmentFile = "/etc/mautrix-env";
+    settings = {
+      homeserver = {
+        domain = "muehml.eu";
+        address = "http://localhost:8008";
+      };
+      bridge.permissions = {
+        "@lars:muehml.eu" = "admin";
+        "muehml.eu" = "full";
+      };
+    };
+
   };
 
   security.acme = {
