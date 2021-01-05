@@ -76,5 +76,11 @@
           home-manager.nixosModules.home-manager
         ];
       };
+      templates = {
+        cargo-pijul = {
+          path = ./templates/cargo-pijul;
+          description = "A template for a simple cargo package built with cargo-import and version controlled with pijul";
+        };
+      };
     };
 }
