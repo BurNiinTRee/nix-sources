@@ -27,6 +27,7 @@ in
 
   home.packages = with pkgs; [
     ardour
+    blender
     cargo-edit
     dua
     exercism
