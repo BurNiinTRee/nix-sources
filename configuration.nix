@@ -126,7 +126,7 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  # sound.enable = true;
   # hardware.pulseaudio.enable = false;
   # services.pipewire = {
   #   enable = true;
@@ -168,7 +168,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lars = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "audio" "kvm" "video" "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
   # This value determines the NixOS release from which the default
