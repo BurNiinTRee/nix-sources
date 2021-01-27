@@ -137,6 +137,10 @@ in
       };
     };
 
+    nushell = {
+      enable = true;
+    };
+
     kakoune = {
       enable = true;
       plugins =
