@@ -104,12 +104,17 @@ in
           version = "0.0.1";
           sha256 = "sha256-PNXa/rBdXU9jlUdZcKJODU2+f5F53rtezA+lTzvDF6Q=";
         }
-
         {
           name = "dance";
           publisher = "gregoire";
           version = "0.3.2";
           sha256 = "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=";
+        }
+        {
+          name = "meson";
+          publisher = "asabil";
+          version = "1.3.0";
+          sha256 = "sha256-QMp3dEFx6Mu5pgzklylW6b/ugYbtbT/qz8IeeuzPZeA=";
         }
       ] ++ (with pkgs.vscode-extensions; [
         matklad.rust-analyzer
@@ -129,11 +134,7 @@ in
         "julia.executablePath" = julia + "/bin/julia";
         "terminal.integrated.commandsToSkipShell" =
           [ "language-julia.interrupt" ];
-        "python.pythonPath" = "";
-        "workbench.editorAssociations" = [{
-          "viewType" = "jupyter.notebook.ipynb";
-          "filenamePattern" = "*.ipynb";
-        }];
+        "mesonbuild.configureOnOpen" = false;
       };
     };
 
