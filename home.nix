@@ -8,16 +8,6 @@ let
       pname = "firefox";
       desktopName = "Firefox";
     };
-  julia = pkgs.stdenv.mkDerivation {
-    inherit (pkgs.julia) name version meta;
-    phases = [ "buildPhase" ];
-    buildInputs = [ pkgs.makeWrapper ];
-    buildPhase = ''
-      makeWrapper ${pkgs.julia}/bin/julia $out/bin/julia --prefix LD_LIBRARY_PATH : ${
-        pkgs.arrayfire.overrideAttrs (old: { cmakeFlags = builtins.tail old.cmakeFlags; })
-      }/lib --prefix PATH : ${pkgs.gnumake}/bin
-    '';
-  };
 in
 {
   # Let Home Manager install and manage itself.
@@ -131,7 +121,7 @@ in
         "julia.enableCrashReporter" = false;
         "julia.execution.resultType" = "both";
         "julia.NumThreads" = 8;
-        "julia.executablePath" = julia + "/bin/julia";
+        "julia.executablePath" = pkgs.julia + "/bin/julia";
         "terminal.integrated.commandsToSkipShell" =
           [ "language-julia.interrupt" ];
         "mesonbuild.configureOnOpen" = false;
