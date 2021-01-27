@@ -40,9 +40,9 @@ in
     jupyterlab-rust
     killall
     multimc
-    patchage
     pciutils
     pijul
+    qjackctl
     ripgrep
     rustup
     simple-http-server
