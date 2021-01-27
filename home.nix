@@ -258,7 +258,8 @@ in
     let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
     in builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig;
 
-  xdg.configFile."pijul/config.toml".text = pkgs.lib.generators.toINI {} {
+  xdg.configFile."pijul/config.toml".text = pkgs.lib.generators.toINI
+    { } {
     author = {
       name = ''"BurNiinTRee"'';
       full_name = ''"Lars Mühmel"'';
