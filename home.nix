@@ -72,23 +72,25 @@ in
       };
     };
 
-    starship = {
+    bat = {
       enable = true;
-      settings = {
-        status.disabled = false;
-        custom.tab = {
-          description = "The current tab in the tab terminal multiplexer";
-          command = "tab --starship";
-          when = "tab --starship";
-          format = "[$output]($style)";
-          style = "bold blue";
-        };
-      };
+      config.theme = "Solarized (light)";
     };
 
-    nushell = {
+    direnv = {
       enable = true;
+      enableNixDirenvIntegration = true;
     };
+
+    git = {
+      enable = true;
+      lfs.enable = true;
+      extraConfig = { pull = { ff = "only"; }; };
+      userEmail = "larsmuehmel@web.de";
+      userName = "Lars Mühmel";
+    };
+
+    gpg.enable = true;
 
     kakoune = {
       enable = true;
@@ -168,30 +170,25 @@ in
       '';
     };
 
-    bat = {
+    nushell = {
       enable = true;
-      config.theme = "Solarized (light)";
-    };
-
-    direnv = {
-      enable = true;
-      enableNixDirenvIntegration = true;
     };
 
     password-store.enable = true;
-    #    browserpass = {
-    #      enable = true;
-    #      browsers = [ "firefox" ];
-    #    };
-    git = {
-      enable = true;
-      lfs.enable = true;
-      extraConfig = { pull = { ff = "only"; }; };
-      userEmail = "larsmuehmel@web.de";
-      userName = "Lars Mühmel";
-    };
 
-    gpg.enable = true;
+    starship = {
+      enable = true;
+      settings = {
+        status.disabled = false;
+        custom.tab = {
+          description = "The current tab in the tab terminal multiplexer";
+          command = "tab --starship";
+          when = "tab --starship";
+          format = "[$output]($style)";
+          style = "bold blue";
+        };
+      };
+    };
   };
 
   services = {
