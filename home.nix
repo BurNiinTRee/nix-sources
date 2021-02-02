@@ -20,6 +20,7 @@ in
     blender
     cargo-edit
     dua
+    exa
     exercism
     fd
     ffmpeg
@@ -67,7 +68,7 @@ in
       shellAliases = {
         cat = "bat";
         iftop = "sudo iftop -B -m 10M";
-        code = "codium";
+        ls = "exa";
       };
     };
 
