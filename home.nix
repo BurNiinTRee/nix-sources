@@ -48,6 +48,7 @@ in
     simple-http-server
     steam
     tab-rs
+    texlab
     thunderbird-78
     tokei
     virtmanager
@@ -84,50 +85,6 @@ in
       };
     };
 
-    vscode = {
-      enable = true;
-      package = pkgs.vscodium;
-      extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "nix-lsp";
-          publisher = "aaronduino";
-          version = "0.0.1";
-          sha256 = "sha256-PNXa/rBdXU9jlUdZcKJODU2+f5F53rtezA+lTzvDF6Q=";
-        }
-        {
-          name = "dance";
-          publisher = "gregoire";
-          version = "0.3.2";
-          sha256 = "sha256-+g8EXeCkPOPvZ60JoXkGTeSXYWrXmKrcbUaEfDppdgA=";
-        }
-        {
-          name = "meson";
-          publisher = "asabil";
-          version = "1.3.0";
-          sha256 = "sha256-QMp3dEFx6Mu5pgzklylW6b/ugYbtbT/qz8IeeuzPZeA=";
-        }
-      ] ++ (with pkgs.vscode-extensions; [
-        matklad.rust-analyzer
-      ]);
-      userSettings = {
-        "update.mode" = "none";
-        "keyboard.dispatch" = "keyCode";
-        "workbench.colorTheme" = "Default Light+";
-        "telemetry.enableTelemetry" = false;
-        "telemetry.enableCrashReporter" = false;
-        "editor.fontFamily" =
-          "Fira Code, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'";
-        "julia.enableTelemetry" = false;
-        "julia.enableCrashReporter" = false;
-        "julia.execution.resultType" = "both";
-        "julia.NumThreads" = 8;
-        "julia.executablePath" = pkgs.julia + "/bin/julia";
-        "terminal.integrated.commandsToSkipShell" =
-          [ "language-julia.interrupt" ];
-        "mesonbuild.configureOnOpen" = false;
-      };
-    };
-
     nushell = {
       enable = true;
     };
@@ -156,7 +113,7 @@ in
           }
           {
             name = "WinSetOption";
-            option = "filetype=rust";
+            option = "filetype=(rust|julia|nix)";
             commands = "lsp-enable-window";
           }
           {
@@ -246,7 +203,29 @@ in
 
   xdg.configFile."kak-lsp/kak-lsp.toml".text =
     let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
-    in builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig;
+    in
+    (builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig) + ''
+
+       [language.julia]
+       filetypes = ["julia"]
+       roots = [".git"]
+       command = "julia"
+       args = [
+         "--startup-file=no",
+         "--history-file=no",
+         "-e",
+         """
+           using LanguageServer
+           using Pkg;
+           import StaticLint;
+           import SymbolServer;
+           env_path = dirname(Pkg.Types.Context().env.project_file);
+           server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
+           server.runlinter = true;
+           run(server);
+         """,
+       ]
+       '';
 
   xdg.configFile."pijul/config.toml".text = pkgs.lib.generators.toINI
     { } {
@@ -263,10 +242,10 @@ in
       tab = "home";
       directory = "~";
     }
-    {
-      tab = "nix-sources";
-      directory = "~/Sync/nix-sources";
-    }];
+      {
+        tab = "nix-sources";
+        directory = "~/Sync/nix-sources";
+      }];
   };
 
   home.file =
