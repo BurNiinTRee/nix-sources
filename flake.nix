@@ -8,6 +8,7 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-20.09-small";
+    nixpkgs-wayland.url = "github:colemickens/nixpkgs-wayland";
     home-manager = {
       url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +21,12 @@
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-release, home-manager, rnix-flake, deploy-rs, ... }:
     let
-      overlays = (import ./overlays.nix);
+      overlays = (import ./overlays.nix) ++ [
+        inputs.nixpkgs-wayland.overlay
+        (self: super: {
+          obs-studio = super.waylandPkgs.obs-studio-dmabuf;
+        })
+      ];
     in
     {
       legacyPackages.x86_64-linux = import nixpkgs {
@@ -53,14 +59,25 @@
         modules = [
           ({ pkgs, ... }: {
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-            nix.package = pkgs.nixUnstable;
-            nix.extraOptions = ''
-              experimental-features = nix-command flakes
-            '';
-            nix.registry.pkgs = {
-              to = {
-                type = "path";
-                path = "/home/lars/nix-sources";
+            nix = {
+              binaryCachePublicKeys = [
+                "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+              ];
+              binaryCaches = [
+                "https://cache.nixos.org"
+                "https://nixpkgs-wayland.cachix.org"
+              ];
+
+              package = pkgs.nixUnstable;
+              extraOptions = ''
+                experimental-features = nix-command flakes
+              '';
+              registry.pkgs = {
+                to = {
+                  type = "path";
+                  path = "/home/lars/nix-sources";
+                };
               };
             };
             nixpkgs.overlays = overlays;

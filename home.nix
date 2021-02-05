@@ -64,6 +64,7 @@ in
       sessionVariables = {
         EDITOR = "kak";
         LV2_PATH = "~/.nix-profile/lib/lv2";
+        QT_QPA_PLATFORM = "wayland";
       };
       shellAliases = {
         cat = "bat";
@@ -95,7 +96,7 @@ in
     kakoune = {
       enable = true;
       plugins =
-        [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround ];
+        [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround pkgs.kak-digraphs ];
       config = {
         numberLines = {
           enable = true;
@@ -118,6 +119,11 @@ in
             name = "WinSetOption";
             option = "filetype=(rust|julia|nix)";
             commands = "lsp-enable-window";
+          }
+          {
+            name = "WinSetOption";
+            option = "filetype=julia";
+            commands = "digraphs-enable-on <a-d> <a-s>";
           }
           {
             name = "WinSetOption";
@@ -174,6 +180,13 @@ in
       enable = true;
     };
 
+    obs-studio = {
+      enable = true;
+      plugins = [
+        pkgs.waylandPkgs.obs-xdg-portal
+      ];
+    };
+
     password-store.enable = true;
 
     starship = {
@@ -198,6 +211,8 @@ in
     };
     nextcloud-client.enable = true;
   };
+
+  xdg.configFile."kak/digraphs/digraphs.dat".source = pkgs.kak-digraphs + "/share/kak/autoload/plugins/digraphs.dat";
 
   xdg.configFile."kak-lsp/kak-lsp.toml".text =
     let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
