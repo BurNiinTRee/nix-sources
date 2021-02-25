@@ -63,7 +63,6 @@ in
       enable = true;
       sessionVariables = {
         EDITOR = "kak";
-        LV2_PATH = "~/.nix-profile/lib/lv2";
         QT_QPA_PLATFORM = "wayland";
       };
       shellAliases = {

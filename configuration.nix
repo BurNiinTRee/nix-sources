@@ -90,7 +90,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ file kakoune vim  wget ];
+  environment.systemPackages = with pkgs; [ file kakoune vim wget ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -116,9 +116,6 @@
     from = 1714;
     to = 1764;
   }];
-  # for syncthing
-  networking.firewall.allowedTCPPorts = [ 22000 ];
-  networking.firewall.allowedUDPPorts = [ 21027 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -126,17 +123,19 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = false;
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa = {
-  #     enable = true;
-  #     support32Bit = true;
-  #   };
-  #   jack.enable = true;
-  #   pulse.enable = true;
-  # };
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    socketActivation = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    jack.enable = true;
+    pulse.enable = true;
+  };
 
   # Enable GPU
   hardware.opengl = {
@@ -178,5 +177,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.03"; # Did you read the comment?
-
 }
