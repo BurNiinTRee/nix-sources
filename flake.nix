@@ -6,9 +6,12 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-update-checker = {
+      url = "github:BurNiinTRee/nixos-update-checker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-20.09-small";
-    nixpkgs-wayland.url = "github:colemickens/nixpkgs-wayland";
     home-manager = {
       url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,9 +26,6 @@
     let
       overlays = (import ./overlays.nix) ++ [
         inputs.nixpkgs-wayland.overlay
-        (self: super: {
-          obs-studio = super.waylandPkgs.obs-studio-dmabuf;
-        })
       ];
     in
     {
@@ -41,6 +41,14 @@
         modules = [
           ./server
         ];
+      };
+
+      devShell.x86_64-linux = self.legacyPackages.x86_64-linux.mkShell {
+        name = "nix-sources";
+        buildInputs = [ inputs.nixos-update-checker.defaultPackage.x86_64-linux ];
+        shellHook = ''
+          nixos-update-checker nixos-unstable nixos-20.09-small
+        '';
       };
 
       deploy.nodes."muehml.eu" = {
