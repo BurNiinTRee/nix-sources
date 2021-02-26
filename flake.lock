@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cachix": {
+      "locked": {
+        "lastModified": 1614267137,
+        "narHash": "sha256-9XF2tp66RkXjhBs4iqcCYQ2xUdc4r2QAh/yaMHr3lok=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "42809feaa9f7474f5566a5c6e8e317e15e39160e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -185,17 +201,39 @@
     },
     "nixpkgs-release": {
       "locked": {
-        "lastModified": 1614259733,
-        "narHash": "sha256-cfpLxFK3GVdUywpJ+3UksUV+js5JAovLCJkvuw7U3gU=",
+        "lastModified": 1614309161,
+        "narHash": "sha256-93kRxDPyEW9QIpxU71kCaV1r+hgOgP6/aVgC7vvO8IU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fbc078d2451d67b3091ead72ddece78a3d48c226",
+        "rev": "0e499fde7af3c28d63e9b13636716b86c3162b93",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-20.09-small",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-wayland": {
+      "inputs": {
+        "cachix": "cachix",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "unstableSmall": "unstableSmall"
+      },
+      "locked": {
+        "lastModified": 1614337294,
+        "narHash": "sha256-Ckk6gDC4Ug0r4O/rg4WVbpu2ke13RiRoDvsSr7AocAA=",
+        "owner": "colemickens",
+        "repo": "nixpkgs-wayland",
+        "rev": "c743b7e00927bd7bb454c0b131b2f8151710ccb0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "colemickens",
+        "repo": "nixpkgs-wayland",
         "type": "github"
       }
     },
@@ -242,7 +280,24 @@
         "nixos-update-checker": "nixos-update-checker",
         "nixpkgs": "nixpkgs",
         "nixpkgs-release": "nixpkgs-release",
+        "nixpkgs-wayland": "nixpkgs-wayland",
         "rnix-flake": "rnix-flake"
+      }
+    },
+    "unstableSmall": {
+      "locked": {
+        "lastModified": 1614315981,
+        "narHash": "sha256-0uOvSTfFDwQCQApXaIt3jbU0dycCY8eoC2V/OSjzKw4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "74b9241e60c796ff68876f87916062d54c4aa0f5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "utils": {
