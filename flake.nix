@@ -6,10 +6,6 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-update-checker = {
-      url = "github:BurNiinTRee/nixos-update-checker";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-20.09-small";
     nixpkgs-wayland = {
@@ -47,13 +43,13 @@
         ];
       };
 
-      devShell.x86_64-linux = self.legacyPackages.x86_64-linux.mkShell {
-        name = "nix-sources";
-        buildInputs = [ inputs.nixos-update-checker.defaultPackage.x86_64-linux ];
-        shellHook = ''
-          nixos-update-checker nixos-unstable nixos-20.09-small
-        '';
-      };
+      # devShell.x86_64-linux = self.legacyPackages.x86_64-linux.mkShell {
+      #   name = "nix-sources";
+      #   buildInputs = [ inputs.nixos-update-checker.defaultPackage.x86_64-linux ];
+      #   shellHook = ''
+      #     nixos-update-checker nixos-unstable nixos-20.09-small
+      #   '';
+      # };
 
       deploy.nodes."muehml.eu" = {
         hostname = "muehml.eu";
