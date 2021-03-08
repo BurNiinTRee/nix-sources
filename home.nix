@@ -116,7 +116,7 @@ in
           }
           {
             name = "WinSetOption";
-            option = "filetype=(rust|julia|nix)";
+            option = "filetype=(rust|julia|nix|latex)";
             commands = "lsp-enable-window";
           }
           {
