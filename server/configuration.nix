@@ -12,9 +12,6 @@ let
       {
           "m.homeserver": {
               "base_url": "https://matrix.muehml.eu"
-          },
-          "im.vector.element.jitsi": {
-              "preferredDomain": "jitsi.muehml.eu"
           }
       }'';
     destination = "/.well-known/matrix/client";
@@ -48,15 +45,8 @@ in {
                 server_name = "muehml.eu";
               };
             };
-
-            jitsi.preferredDomain = "jitsi.muehml.eu";
           };
         });
-      };
-
-      ${config.services.jitsi-meet.hostName} = {
-        enableACME = true;
-        forceSSL = true;
       };
 
       "muehml.eu" = {
@@ -72,7 +62,7 @@ in {
               add_header 'Access-Control-Allow-Origin' '*';
             '';
           };
-          "/".return = "301 https://jitsi.muehml.eu$request_uri";
+          "/".return = "301 https://cloud.muehml.eu$request_uri";
         };
 
       };
@@ -120,34 +110,6 @@ in {
         TEMPLATE template0
         LC_COLLATE = "C"
         LC_CTYPE = "C";
-    '';
-  };
-
-  services.jitsi-meet = {
-    enable = true;
-    hostName = "jitsi.muehml.eu";
-  };
-  services.jitsi-videobridge = {
-    enable = true;
-    openFirewall = true;
-  };
-
-  services.coturn = {
-    enable = true;
-    use-auth-secret = true;
-    # static-auth-secret = builtins.readFile ./coturn-secret;
-    realm = "turn.muehml.eu";
-    no-tcp-relay = true;
-    no-tls = true;
-    no-dtls = true;
-    extraConfig = ''
-      user-quota=12
-      total-quota=1200
-      denied-peer-ip=10.0.0.0-10.255.255.255
-      denied-peer-ip=192.168.0.0-192.168.255.255
-      denied-peer-ip=172.16.0.0-172.31.255.255
-
-      allowed-peer-ip=49.12.64.193
     '';
   };
 
