@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+nix flake update --refresh
+
+sudo nixos-rebuild switch --flake pkgs
+
+deploy
+
+julia update-julia.jl
