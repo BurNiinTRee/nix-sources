@@ -17,7 +17,7 @@ in
 
   home.packages = with pkgs; [
     ardour
-    blender
+    # blender
     cargo-edit
     dua
     exa
