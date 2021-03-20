@@ -167,7 +167,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lars = {
     isNormalUser = true;
-    extraGroups = [ "audio" "kvm" "video" "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "audio" "libvirtd" "kvm" "video" "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
   # This value determines the NixOS release from which the default
