@@ -48,7 +48,6 @@ in
     rustup
     simple-http-server
     steam
-    tab-rs
     texlab
     thunderbird-78
     tokei
@@ -192,13 +191,6 @@ in
       enable = true;
       settings = {
         status.disabled = false;
-        custom.tab = {
-          description = "The current tab in the tab terminal multiplexer";
-          command = "tab --starship";
-          when = "tab --starship";
-          format = "[$output]($style)";
-          style = "bold blue";
-        };
       };
     };
   };
@@ -246,18 +238,6 @@ in
       full_name = ''"Lars Mühmel"'';
       email = ''"larsmuehmel@web.de"'';
     };
-  };
-
-  xdg.configFile."tab.yml".text = pkgs.lib.generators.toYAML
-    { } {
-    workspace = [{
-      tab = "home";
-      directory = "~";
-    }
-      {
-        tab = "nix-sources";
-        directory = "~/Sync/nix-sources";
-      }];
   };
 
   home.file =
