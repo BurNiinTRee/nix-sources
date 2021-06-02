@@ -33,24 +33,28 @@ in
     gnomeExtensions.draw-on-your-screen
     gnomeExtensions.appindicator
     helm
+    helvum
     htop
     inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
     inputs.deploy-rs.defaultPackage.x86_64-linux #.packages.x86_64-linux.nixops
+    inputs.wgpu-mandelbrot.defaultPackage.x86_64-linux
+    intel-gpu-tools
     iftop
     julia
-    jupyterlab-rust
     killall
+    kodi-wayland
+    mullvad-vpn
     multimc
     pciutils
     pijul
     qjackctl
     ripgrep
-    rustup
     simple-http-server
     steam
     texlab
     thunderbird-78
     tokei
+    transmission-remote-gtk
     virtmanager
     wev
     wl-clipboard
@@ -63,10 +67,14 @@ in
       sessionVariables = {
         EDITOR = "kak";
         QT_QPA_PLATFORM = "wayland";
+        LV2_PATH = pkgs.lib.strings.makeSearchPath "" [
+          "/home/lars/Music/Pianoteq 7/x86-64bit/"
+          (pkgs.helm + "/lib/lv2")
+        ];
       };
       shellAliases = {
         cat = "bat";
-        iftop = "sudo iftop -B -m 10M";
+        iftop = "sudo iftop -B -m 100M";
         ls = "exa";
       };
     };
@@ -180,9 +188,6 @@ in
 
     obs-studio = {
       enable = true;
-      plugins = [
-        pkgs.waylandPkgs.obs-xdg-portal
-      ];
     };
 
     password-store.enable = true;
@@ -208,7 +213,7 @@ in
   xdg.configFile."kak-lsp/kak-lsp.toml".text =
     let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
     in
-    (builtins.replaceStrings [ "rls" ] [ "rust-analyzer" ] orig) + ''
+    (builtins.replaceStrings [ "if command -v rustup >/dev/null; then $(rustup which rls); else rls; fi" ] [ (pkgs.rust-analyzer + "/bin/rust-analyzer") ] orig) + ''
 
        [language.julia]
        filetypes = ["julia"]
@@ -232,13 +237,14 @@ in
        '';
 
   xdg.configFile."pijul/config.toml".text = pkgs.lib.generators.toINI
-    { } {
-    author = {
-      name = ''"BurNiinTRee"'';
-      full_name = ''"Lars Mühmel"'';
-      email = ''"larsmuehmel@web.de"'';
+    { }
+    {
+      author = {
+        name = ''"BurNiinTRee"'';
+        full_name = ''"Lars Mühmel"'';
+        email = ''"larsmuehmel@web.de"'';
+      };
     };
-  };
 
   home.file =
     let

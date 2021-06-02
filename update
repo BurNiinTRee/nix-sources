@@ -6,6 +6,6 @@ nix flake update --refresh
 
 sudo nixos-rebuild switch --flake pkgs
 
-deploy
+deploy pkgs
 
-julia update-julia.jl
+# julia --startup-file=no update-julia.jl

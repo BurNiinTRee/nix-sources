@@ -11,6 +11,6 @@ self: super: {
       sha256 = "sha256-X0nDWQoUl7+YY/gHRcU8VP8qnLRko+qWML6X9fZxF8U=";
     };
 
-    cargoSha256 = "sha256-xiGRlo9mRAlLzp5VtZQhqxBj9C8FF4S5bc+gCOL+7gU=";
+    cargoSha256 = "sha256-Wh36WL/YKKQCH21L0VK5EzcZ8r6xAkv0T2PWBJgCLck=";
   };
 }

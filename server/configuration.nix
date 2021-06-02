@@ -99,6 +99,9 @@ in {
       "turn:turn.muehml.eu:3478?transport=tcp"
     ];
     # turn_shared_secret = config.services.coturn.static-auth-secret;
+    extraConfig = ''
+      experimental_features: { spaces_enabled: true }
+    '';
   };
 
   services.postgresql = {

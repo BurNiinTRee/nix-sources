@@ -14,8 +14,6 @@
     hwclock -s
   '';
 
-  security.rngd.enable = lib.mkDefault false;
-
   boot.initrd.availableKernelModules = [
     "9p"
     "9pnet_virtio"

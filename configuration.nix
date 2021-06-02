@@ -14,6 +14,9 @@
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = [ "kvm-intel" ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  boot.kernelPackages = pkgs.linuxPackages_5_12;
 
   services.flatpak.enable = true;
 
@@ -65,6 +68,10 @@
   };
 
   networking.hostName = "larstop2"; # Define your hostname.
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -91,6 +98,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ file kakoune vim wget ];
+  environment.gnome.excludePackages = [ pkgs.gnome.epiphany ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -116,8 +124,12 @@
     from = 1714;
     to = 1764;
   }];
+
+  networking.wireguard.enable = true;
+
+  services.mullvad-vpn.enable = true;
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -134,6 +146,12 @@
       support32Bit = true;
     };
     jack.enable = true;
+    config.jack = {
+      "jack.properties" = {
+        "node.latency" = "64/48000";
+        "jack.short-name" = true;
+      };
+    };
     pulse.enable = true;
   };
 
@@ -161,8 +179,14 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
 
-  services.xserver.desktopManager.gnome3.enable = true;
-  services.gnome3 = { chrome-gnome-shell.enable = true; };
+  services.xserver.desktopManager.gnome.enable = true;
+  services.gnome = { chrome-gnome-shell.enable = true; };
+
+
+  programs.cdemu = {
+    enable = true;
+    group = "video";
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lars = {

@@ -1,32 +1,32 @@
 self: super: {
   libinih = self.stdenv.mkDerivation rec {
-      pname = "libinih";
-      version = "r52";
+    pname = "libinih";
+    version = "r53";
 
-      src = self.fetchFromGitHub {
-          owner = "benhoyt";
-          repo = "inih";
-          rev = version;
-          sha256 = "sha256-pIaDvCxAY9r5UiutUStI66PC3v7L19hpD3Ev9cmoW1M=";
-      };
+    src = self.fetchFromGitHub {
+      owner = "benhoyt";
+      repo = "inih";
+      rev = version;
+      sha256 = "sha256-hi29V40q3c3IvPH7eH3q3z1PiNN59Y0zMhgSroUsDjc=";
+    };
 
-      buildInputs = with self; [ meson ninja ];
+    buildInputs = with self; [ meson ninja ];
 
-      mesonFlags = ''
-        -Ddefault_library=shared
-        -Ddistro_install=true
-      '';
+    mesonFlags = ''
+      -Ddefault_library=shared
+      -Ddistro_install=true
+    '';
 
   };
   gamemode = self.stdenv.mkDerivation rec {
     pname = "gamemode";
-    version = "1.6";
+    version = "1.6.1";
 
     src = self.fetchFromGitHub {
       owner = "FeralInteractive";
       repo = "gamemode";
       rev = version;
-      sha256 = "sha256-Ccxarp0f5w2vfzlzqwvGmHF1PKL+A92xDZidEhA2sKQ=";
+      sha256 = "sha256-P00OnZiPZyxBu9zuG+3JNorXHBhJZy+cKPjX+duZrJ0=";
     };
 
     buildInputs = with self; [ meson ninja pkgconfig systemd dbus libinih ];

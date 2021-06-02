@@ -2,16 +2,12 @@
   description = "My Nixos System";
 
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-20.09-small";
-    nixpkgs-wayland = {
-      url = "github:colemickens/nixpkgs-wayland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-21.05-small";
     home-manager = {
       url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,12 +16,15 @@
       url = "gitlab:jD91mZM2/nix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wgpu-mandelbrot = {
+      url = "github:BurNiinTRee/wgpu-mandelbrot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-release, home-manager, rnix-flake, deploy-rs, ... }:
     let
       overlays = (import ./overlays.nix) ++ [
-        inputs.nixpkgs-wayland.overlay
       ];
     in
     {
@@ -43,6 +42,13 @@
         ];
       };
 
+      nixosConfigurations.rpi = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          ./rpi
+        ];
+      };
+
       # devShell.x86_64-linux = self.legacyPackages.x86_64-linux.mkShell {
       #   name = "nix-sources";
       #   buildInputs = [ inputs.nixos-update-checker.defaultPackage.x86_64-linux ];
@@ -51,11 +57,20 @@
       #   '';
       # };
 
-      deploy.nodes."muehml.eu" = {
+      deploy.nodes."muehml" = {
         hostname = "muehml.eu";
         profiles.system = {
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."muehml.eu";
+        };
+        sshUser = "root";
+      };
+
+      deploy.nodes.rpi = {
+        hostname = "rpi.local";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi;
         };
         sshUser = "root";
       };
@@ -70,11 +85,9 @@
             nix = {
               binaryCachePublicKeys = [
                 "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-                "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
               ];
               binaryCaches = [
                 "https://cache.nixos.org"
-                "https://nixpkgs-wayland.cachix.org"
               ];
 
               package = pkgs.nixUnstable;
