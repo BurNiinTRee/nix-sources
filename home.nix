@@ -37,6 +37,8 @@ in
     htop
     inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
     inputs.deploy-rs.defaultPackage.x86_64-linux #.packages.x86_64-linux.nixops
+    inputs.pianoteq.defaultPackage.x86_64-linux
+    inputs.organteq.defaultPackage.x86_64-linux
     inputs.wgpu-mandelbrot.defaultPackage.x86_64-linux
     intel-gpu-tools
     iftop
@@ -68,9 +70,11 @@ in
         EDITOR = "kak";
         QT_QPA_PLATFORM = "wayland";
         LV2_PATH = pkgs.lib.strings.makeSearchPath "" [
-          "/home/lars/Music/Pianoteq 7/x86-64bit/"
+          "/home/lars/Music/Pianoteq-7/x86-64bit/"
           (pkgs.helm + "/lib/lv2")
         ];
+        # Workaround Ardour not wanting to work with virtual sound cards
+        ARDOUR_ALSA_DEVICE = "default";
       };
       shellAliases = {
         cat = "bat";

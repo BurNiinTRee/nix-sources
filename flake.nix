@@ -17,7 +17,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wgpu-mandelbrot = {
-      url = "github:BurNiinTRee/wgpu-mandelbrot";
+      url = "path:/home/lars/projects/rust/wgpu-mandelbrot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    pianoteq = {
+      url = "path:/home/lars/Music/Pianoteq-7";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    organteq = {
+      url = "path:/home/lars/Music/Organteq-1/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -110,7 +118,6 @@
             home-manager.users.lars = import ./home.nix inputs;
           })
           ./configuration.nix
-          ./modules/gamemode.nix
           home-manager.nixosModules.home-manager
         ];
       };

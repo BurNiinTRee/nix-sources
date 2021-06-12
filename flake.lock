@@ -10,11 +10,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1621509262,
-        "narHash": "sha256-XyCLtTVTQPXM5LXA1vffP27/tWwEn9VVESESHYNNMFA=",
+        "lastModified": 1623011836,
+        "narHash": "sha256-02M4P3eqUdV+ouZb8n1KDR1CXeZQm17cKpjKZKi0c10=",
         "owner": "serokell",
         "repo": "deploy-rs",
-        "rev": "d2d05e1357b84d5d70a3acba866c01eca2e4e2aa",
+        "rev": "70d71b3027b1793b780f1e2435bdbbe1b0cb9ac6",
         "type": "github"
       },
       "original": {
@@ -68,11 +68,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1622589899,
-        "narHash": "sha256-y9cGxs22V+AiU7W7bcLvV1ljESjHPf9EId61qrYotC4=",
+        "lastModified": 1623103231,
+        "narHash": "sha256-ns6p4FYqdMHmcaZZjNC1HhxApfxKlpAPbvbOzhiLbas=",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "cb227dc6c29eb4f768d04958f4fe6d9d3d4aba46",
+        "rev": "aa36e2d6b481a54b95fbddbecb76076e0f38eb89",
         "type": "github"
       },
       "original": {
@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1610392286,
-        "narHash": "sha256-3wFl5y+4YZO4SgRYK8WE7JIS3p0sxbgrGaQ6RMw+d98=",
+        "lastModified": 1622810282,
+        "narHash": "sha256-4wmvM3/xfD0hCdNDIXVzRMfL4yB1J+DjH6Zte2xbAxk=",
         "owner": "nmattia",
         "repo": "naersk",
-        "rev": "d7bfbad3304fd768c0f93a4c3b50976275e6d4be",
+        "rev": "e8061169e1495871b56be97c5c51d310fae01374",
         "type": "github"
       },
       "original": {
@@ -162,11 +162,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1622282707,
-        "narHash": "sha256-+GOrUDsdneUqrOm9d+9bHXjEVoVcU8tm14WGVzbt6gg=",
+        "lastModified": 1622966049,
+        "narHash": "sha256-6g+28v94ISkVk9TBSsITVOnB2slK8plieWPIF2jo/l0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6933d068c5d2fcff398e802f7c4e271bbdab6705",
+        "rev": "fbfb79400a08bf754e32b4d4fc3f7d8f8055cf94",
         "type": "github"
       },
       "original": {
@@ -178,11 +178,11 @@
     },
     "nixpkgs-release": {
       "locked": {
-        "lastModified": 1622593737,
-        "narHash": "sha256-9loxFJg85AbzJrSkU4pE/divZ1+zOxDy2FSjlrufCB8=",
+        "lastModified": 1623167561,
+        "narHash": "sha256-zBbKMBDznieJfsygKqzaE9FoQXoopMYZP011H8VrqnU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bb8a5e54845012ed1375ffd5f317d2fdf434b20e",
+        "rev": "f2c9d568c8a1e2d85362932b22eeb6d73e003f9f",
         "type": "github"
       },
       "original": {
@@ -204,6 +204,38 @@
       "original": {
         "id": "nixpkgs",
         "type": "indirect"
+      }
+    },
+    "organteq": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "narHash": "sha256-cgfpG/5Dqg++K97448D3h5IC7eIdBuE0UkEF/zwZ5tU=",
+        "path": "/home/lars/Music/Organteq-1/",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/lars/Music/Organteq-1/",
+        "type": "path"
+      }
+    },
+    "pianoteq": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "narHash": "sha256-nACqqRwXEJ+jzBHBv0trQy8ZotkL9iB8pkBLGuuyi4Q=",
+        "path": "/home/lars/Music/Pianoteq-7",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/lars/Music/Pianoteq-7",
+        "type": "path"
       }
     },
     "rnix-flake": {
@@ -234,6 +266,8 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-release": "nixpkgs-release",
+        "organteq": "organteq",
+        "pianoteq": "pianoteq",
         "rnix-flake": "rnix-flake",
         "wgpu-mandelbrot": "wgpu-mandelbrot"
       }
@@ -257,11 +291,11 @@
     },
     "utils": {
       "locked": {
-        "lastModified": 1610051610,
-        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
+        "lastModified": 1622445595,
+        "narHash": "sha256-m+JRe6Wc5OZ/mKw2bB3+Tl0ZbtyxxxfnAWln8Q5qs+Y=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
+        "rev": "7d706970d94bc5559077eb1a6600afddcd25a7c8",
         "type": "github"
       },
       "original": {
@@ -310,17 +344,13 @@
         "utils": "utils_3"
       },
       "locked": {
-        "lastModified": 1621604803,
-        "narHash": "sha256-umu3zb9OC/kIUHURbjkXAOltlyl0y0yRTI/Yx4SxRz8=",
-        "owner": "BurNiinTRee",
-        "repo": "wgpu-mandelbrot",
-        "rev": "566f5e1011e81d92545ae4287f8fbaefeb1b5eab",
-        "type": "github"
+        "narHash": "sha256-GcW/LbzH8dyTPYMbfyfPXVGHBRlQDp7ffSh3nJe0F7U=",
+        "path": "/home/lars/projects/rust/wgpu-mandelbrot",
+        "type": "path"
       },
       "original": {
-        "owner": "BurNiinTRee",
-        "repo": "wgpu-mandelbrot",
-        "type": "github"
+        "path": "/home/lars/projects/rust/wgpu-mandelbrot",
+        "type": "path"
       }
     }
   },

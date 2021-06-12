@@ -15,6 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelModules = [ "kvm-intel" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.plymouth.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_5_12;
 
@@ -25,7 +26,6 @@
   hardware.tuxedo-keyboard.enable = true;
 
   services.thermald.enable = true;
-  services.gamemode.enable = true;
 
   virtualisation.libvirtd = {
     enable = true;
@@ -134,10 +134,25 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  # Realtime stuff
+  security.rtkit.enable = true;
+  security.pam.loginLimits = [
+    { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+    { domain = "@audio"; item = "rtprio"; type = "-"; value = "99"; }
+    { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
+    { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
+  ];
+
+  services.udev.extraRules = ''
+    KERNEL=="rtc0", GROUP="audio"
+    KERNEL=="hpet", GROUP="audio"
+  '';
+
+
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     socketActivation = true;
@@ -153,6 +168,27 @@
       };
     };
     pulse.enable = true;
+    media-session.config.bluez-monitor.rules = [
+      {
+        matches = [{ "device.name" = "~bluez_card.*"; }];
+        actions = {
+          "update-props" = {
+            "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+            "bluez5.msbc-support" = true;
+            "bluez5.sbc-xq-support" = true;
+          };
+        };
+      }
+      {
+        matches = [
+          { "node.name" = "~bluez_input.*"; }
+          { "node.name" = "~bluez_output.*"; }
+        ];
+        actions = {
+          "node.pause-on-idle" = false;
+        };
+      }
+    ];
   };
 
   # Enable GPU
@@ -182,6 +218,14 @@
   services.xserver.desktopManager.gnome.enable = true;
   services.gnome = { chrome-gnome-shell.enable = true; };
 
+
+  programs.gamemode = {
+    enable = true;
+    settings.custom = {
+      start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+      end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+    };
+  };
 
   programs.cdemu = {
     enable = true;
