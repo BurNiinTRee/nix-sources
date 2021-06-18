@@ -1,0 +1,13 @@
+diff --git a/src/application.rs b/src/application.rs
+index 98155a4..1eab098 100644
+--- a/src/application.rs
++++ b/src/application.rs
+@@ -49,7 +49,7 @@ mod imp {
+                 .build();
+             window
+                 .settings()
+-                .set_gtk_application_prefer_dark_theme(true);
++                .set_gtk_application_prefer_dark_theme(false);
+             window.show();
+         }
+ 

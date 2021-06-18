@@ -163,7 +163,6 @@
     jack.enable = true;
     config.jack = {
       "jack.properties" = {
-        "node.latency" = "64/48000";
         "jack.short-name" = true;
       };
     };

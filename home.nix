@@ -18,6 +18,7 @@ in
   home.packages = with pkgs; [
     ardour
     # blender
+    calf
     cargo-edit
     dua
     exa
@@ -47,6 +48,7 @@ in
     kodi-wayland
     mullvad-vpn
     multimc
+    pavucontrol
     pciutils
     pijul
     qjackctl
@@ -70,8 +72,8 @@ in
         EDITOR = "kak";
         QT_QPA_PLATFORM = "wayland";
         LV2_PATH = pkgs.lib.strings.makeSearchPath "" [
-          "/home/lars/Music/Pianoteq-7/x86-64bit/"
-          (pkgs.helm + "/lib/lv2")
+          "/etc/profiles/per-user/lars/lib/lv2"
+          "/home/lars/.lv2"
         ];
         # Workaround Ardour not wanting to work with virtual sound cards
         ARDOUR_ALSA_DEVICE = "default";
@@ -90,13 +92,16 @@ in
 
     direnv = {
       enable = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv.enable = true;
     };
 
     git = {
       enable = true;
       lfs.enable = true;
-      extraConfig = { pull = { ff = "only"; }; };
+      extraConfig = {
+        pull = { ff = "only"; };
+        init = { defaultBranch = "main"; };
+      };
       userEmail = "larsmuehmel@web.de";
       userName = "Lars Mühmel";
     };
