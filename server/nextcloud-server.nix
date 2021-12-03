@@ -9,7 +9,7 @@ in
     hostName = domain;
     https = true;
     config = {
-      adminpass = "password";
+      adminpassFile = "/etc/nx-pass-file";
     };
   };
 

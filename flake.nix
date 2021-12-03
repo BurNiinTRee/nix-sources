@@ -12,7 +12,7 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-21.05-small";
+    nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-21.11-small";
     home-manager = {
       url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -126,7 +126,7 @@
           ./configuration.nix
           home-manager.nixosModules.home-manager
           musnix.nixosModules.musnix
-        ] ++ (import ./modules.nix);
+        ];
       };
       templates = {
         cargo-pijul = {
