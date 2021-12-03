@@ -17,7 +17,7 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.plymouth.enable = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_5_12;
+  # boot.kernelPackages = pkgs.linuxPackages_5_9_rt;
 
   services.flatpak.enable = true;
 
@@ -25,11 +25,11 @@
 
   hardware.tuxedo-keyboard.enable = true;
 
-  services.thermald.enable = true;
+  # services.thermald.enable = true;
 
   virtualisation.libvirtd = {
     enable = true;
-    qemuOvmf = true;
+    qemu.ovmf.enable = true;
   };
 
   containers = {
@@ -98,7 +98,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [ file kakoune vim wget ];
-  environment.gnome.excludePackages = [ pkgs.gnome.epiphany ];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -136,23 +136,11 @@
 
   # Realtime stuff
   security.rtkit.enable = true;
-  security.pam.loginLimits = [
-    { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
-    { domain = "@audio"; item = "rtprio"; type = "-"; value = "99"; }
-    { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
-    { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
-  ];
-
-  services.udev.extraRules = ''
-    KERNEL=="rtc0", GROUP="audio"
-    KERNEL=="hpet", GROUP="audio"
-  '';
-
-
 
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  # services.wireplumber.enable = true;
   services.pipewire = {
     enable = true;
     socketActivation = true;
@@ -164,9 +152,124 @@
     config.jack = {
       "jack.properties" = {
         "jack.short-name" = true;
+        "node.latency" = "64/48000";
       };
     };
+
+    config.client-rt = {
+      "stream.properties" = {
+        "node.latency" = "64/48000";
+      };
+    };
+
     pulse.enable = true;
+    config.pipewire-pulse = {
+      "context.modules" = [
+        {
+          name = "libpipewire-module-rtkit";
+          args = {
+            "nice.level" = -11;
+            "rt.prio" = 88;
+            "rt.time.soft" = 2000000;
+            "rt.time.hard" = 2000000;
+          };
+        }
+        { name = "libpipewire-module-protocol-native"; }
+        { name = "libpipewire-module-client-node"; }
+        { name = "libpipewire-module-adapter"; }
+        { name = "libpipewire-module-metadata"; }
+        {
+          name = "libpipewire-module-protocol-pulse";
+          args = {
+            "server.address" = [ "unix:native" ];
+            "vm.overrides" = {
+              "pulse.min.quantum" = "1024/48000";
+            };
+          };
+        }
+      ];
+    };
+    config.pipewire = {
+      "context.properties" = {
+        "link.max-buffers" = 16;
+        "log.level" = 2;
+        "default.clock.rate" = 48000;
+        "default.clock.quantum" = 128;
+        "default.clock.min-quantum" = 32;
+        "default.clock.max-quantum" = 1024;
+        "core.daemon" = true;
+        "core.name" = "pipewire-0";
+      };
+
+      "context.modules" = [
+        {
+          name = "libpipewire-module-rtkit";
+          args = {
+            "nice.level" = -11;
+            "rt.prio" = 88;
+            "rt.time.soft" = 2000000;
+            "rt.time.hard" = 2000000;
+          };
+          flags = [ "ifexists" "nofail" ];
+        }
+        { name = "libpipewire-module-protocol-native"; }
+        { name = "libpipewire-module-profiler"; }
+        { name = "libpipewire-module-metadata"; }
+        { name = "libpipewire-module-spa-device-factory"; }
+        { name = "libpipewire-module-spa-node-factory"; }
+        { name = "libpipewire-module-client-node"; }
+        { name = "libpipewire-module-client-device"; }
+        {
+          name = "libpipewire-module-portal";
+          flags = [ "ifexists" "nofail" ];
+        }
+        {
+          name = "libpipewire-module-access";
+          args = { };
+        }
+        { name = "libpipewire-module-adapter"; }
+        { name = "libpipewire-module-link-factory"; }
+        { name = "libpipewire-module-session-manager"; }
+
+        # # RNNoise noise suppressor
+        # {
+        #   name = "libpipewire-module-filter-chain";
+        #   args = {
+        #     "node.name" = "rnnoise_source";
+        #     "node.description" = "Noise Canceling source";
+        #     "media.name" = "Noise Canceling source";
+        #     "filter.graph" = {
+        #       "nodes" = [{
+        #         "type" = "ladspa";
+        #         "name" = "rnnoise";
+        #         "plugin" = "ladspa/librnnoise_ladspa";
+        #         "label" = "noise_suppressor_mono";
+        #       }];
+        #     };
+        #     "capture.props"."node.passive" = true;
+        #     "playback.props" = {
+        #       "media.class" = "Audio/Source";
+        #       "channel_map" = "mono";
+        #     };
+        #   };
+        # }
+      ];
+    };
+
+    media-session.config.alsa-monitor = {
+      rules = [
+        {
+          matches = [{ "node.nick" = "UMC1820"; }];
+          actions = {
+            update-props = {
+              "api.alsa.period-size" = 6;
+              "api.alsa.disable-batch" = true;
+            };
+          };
+        }
+      ];
+    };
+
     media-session.config.bluez-monitor.rules = [
       {
         matches = [{ "device.name" = "~bluez_card.*"; }];
@@ -187,7 +290,34 @@
           "node.pause-on-idle" = false;
         };
       }
+      {
+        matches = [{ "device.name" = "bluez_card.AC:57:75:5B:AA:3E"; }];
+        actions = {
+          "update-props" = {
+            "bluez5.auto-connect" = [ "hfp_ag" "hsp_ag" "a2dp_source" ];
+            "bluez5.a2dp-source-role" = "input";
+          };
+        };
+      }
+
+      {
+        matches = [{ "device.name" = "bluez_cardAC:57:75:5B:AA:3E"; }];
+        actions = {
+          "update-props" = {
+            "bluez5.auto-connect" = [ "hfg_ag" "hsp_ag" "a2db_source" ];
+            "bluez5.a2dp-source-role" = "input";
+          };
+        };
+      }
     ];
+  };
+
+  musnix = {
+    enable = true;
+    kernel = {
+      # optimize = true;
+      # realtime = true;
+    };
   };
 
   # Enable GPU
@@ -212,10 +342,21 @@
   services.xserver.libinput.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
 
   services.xserver.desktopManager.gnome.enable = true;
-  services.gnome = { chrome-gnome-shell.enable = true; };
+  services.gnome = {
+    chrome-gnome-shell.enable = true;
+    gnome-online-accounts.enable = false;
+    evolution-data-server.enable = pkgs.lib.mkForce false;
+  };
+  services.telepathy.enable = false;
+  programs.geary.enable = false;
+  programs.evolution.enable = false;
+  environment.gnome.excludePackages = [ pkgs.gnome.epiphany ];
 
 
   programs.gamemode = {
@@ -225,6 +366,11 @@
       end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
     };
   };
+
+  powerManagement = {
+    enable = true;
+  };
+  services.power-profiles-daemon.enable = true;
 
   programs.cdemu = {
     enable = true;

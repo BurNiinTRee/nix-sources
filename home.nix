@@ -1,10 +1,10 @@
 inputs: { config, pkgs, ... }:
 let
   firefox = with pkgs;
-    wrapFirefox firefox-unwrapped {
+    wrapFirefox firefox-bin-unwrapped {
       forceWayland = true;
       extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
-      browserName = "firefox";
+      applicationName = "firefox";
       pname = "firefox";
       desktopName = "Firefox";
     };
@@ -16,11 +16,11 @@ in
   systemd.user.startServices = true;
 
   home.packages = with pkgs; [
-    ardour
     # blender
-    calf
     cargo-edit
+    carla
     dua
+    easyeffects
     exa
     exercism
     fd
@@ -31,53 +31,113 @@ in
     gcc
     gnome3.gnome-tweaks
     gnomeExtensions.gsconnect
-    gnomeExtensions.draw-on-your-screen
     gnomeExtensions.appindicator
-    helm
+    # gnomeExtensions.cpufreq
+    gnumake
+    graphviz
     helvum
+    helix
     htop
     inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
     inputs.deploy-rs.defaultPackage.x86_64-linux #.packages.x86_64-linux.nixops
-    inputs.pianoteq.defaultPackage.x86_64-linux
-    inputs.organteq.defaultPackage.x86_64-linux
-    inputs.wgpu-mandelbrot.defaultPackage.x86_64-linux
+    inputs.reaper.defaultPackage.x86_64-linux
     intel-gpu-tools
     iftop
+    jitsi-meet-electron
     julia
     killall
     kodi-wayland
+    krita-beta
     mullvad-vpn
-    multimc
     pavucontrol
     pciutils
     pijul
+    pulseaudio
     qjackctl
     ripgrep
+    rust-analyzer
+    rustfmt
     simple-http-server
-    steam
+    teams
     texlab
-    thunderbird-78
+    thunderbird-wayland
     tokei
     transmission-remote-gtk
+    usbutils
     virtmanager
     wev
     wl-clipboard
     xournalpp
+    zoom-us
+  ] ++
+  # LV2 Plugins
+  [
+    calf
+    helm
+    inputs.pianoteq.defaultPackage.x86_64-linux
+    inputs.organteq.defaultPackage.x86_64-linux
+    rnnoise-plugin
+    CHOWTapeModel
+    ams-lv2
+    artyFX
+    avldrums-lv2
+    bchoppr
+    bjumblr
+    boops
+    bschaffl
+    bsequencer
+    bshapr
+    bslizr
+    distrho
+    drumgizmo
+    eq10q
+    # faustPhysicalModeling
+    # faustStk
+    fmsynth
+    fomp
+    fverb
+    gxmatcheq-lv2
+    gxplugins-lv2
+    infamousPlugins
+    kapitonov-plugins-pack
+    magnetophonDSP.CharacterCompressor
+    magnetophonDSP.CompBus
+    # magnetophonDSP.ConstantDetuneChorus
+    magnetophonDSP.LazyLimiter
+    magnetophonDSP.MBdistortion
+    magnetophonDSP.RhythmDelay
+    magnetophonDSP.VoiceOfFaust
+    # magnetophonDSP.faustCompressors
+    magnetophonDSP.pluginUtils
+    magnetophonDSP.shelfMultiBand
+    mda_lv2
+    metersLv2
+    mod-distortion
+    molot-lite
+    mooSpace
+    ninjas2
+    noise-repellent
+    plujain-ramp
+    rkrlv2
+    sfizz
+    sorcer
+    surge
+    swh_lv2
+    talentedhack
+    tunefish
+    vocproc
+    x42-avldrums
+    x42-gmsynth
+    zam-plugins
+    zyn-fusion
   ];
 
   programs = {
     bash = {
       enable = true;
-      sessionVariables = {
-        EDITOR = "kak";
-        QT_QPA_PLATFORM = "wayland";
-        LV2_PATH = pkgs.lib.strings.makeSearchPath "" [
-          "/etc/profiles/per-user/lars/lib/lv2"
-          "/home/lars/.lv2"
-        ];
-        # Workaround Ardour not wanting to work with virtual sound cards
-        ARDOUR_ALSA_DEVICE = "default";
-      };
+      # initExtra = ''
+      #   exec nu
+      # '';
       shellAliases = {
         cat = "bat";
         iftop = "sudo iftop -B -m 100M";
@@ -92,7 +152,9 @@ in
 
     direnv = {
       enable = true;
-      nix-direnv.enable = true;
+      nix-direnv = {
+        enable = true;
+      };
     };
 
     git = {
@@ -111,7 +173,7 @@ in
     kakoune = {
       enable = true;
       plugins =
-        [ pkgs.kakounePlugins.kak-auto-pairs pkgs.kak-cargo pkgs.kak-surround pkgs.kak-digraphs ];
+        [ pkgs.kak-cargo pkgs.kak-surround pkgs.kak-digraphs ];
       config = {
         numberLines = {
           enable = true;
@@ -124,11 +186,6 @@ in
             name = "KakBegin";
             option = ".*";
             commands = ''set-option global termcmd "gnome-terminal -- sh -c"'';
-          }
-          {
-            name = "WinCreate";
-            option = ".*";
-            commands = "auto-pairs-enable";
           }
           {
             name = "WinSetOption";
@@ -171,10 +228,16 @@ in
             mode = "user";
           }
           {
-            docstring = "surround selection";
+            docstring = "Surround selection";
             effect = ": surround<ret>";
             key = "s";
             mode = "user";
+          }
+          {
+            docstring = "Select next placeholder";
+            effect = "<a-;>: lsp-snippets-select-next-placeholders<ret>";
+            key = "<a-tab>";
+            mode = "insert";
           }
         ];
         scrollOff.columns = 10;
@@ -193,6 +256,9 @@ in
 
     nushell = {
       enable = true;
+      settings = {
+        prompt = "STARSHIP_SHELL= starship prompt";
+      };
     };
 
     obs-studio = {
@@ -217,33 +283,22 @@ in
     nextcloud-client.enable = true;
   };
 
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = {
+      name = "adwaita";
+      package = pkgs.adwaita-qt;
+    };
+  };
+
+
   xdg.configFile."kak/digraphs/digraphs.dat".source = pkgs.kak-digraphs + "/share/kak/autoload/plugins/digraphs.dat";
 
-  xdg.configFile."kak-lsp/kak-lsp.toml".text =
-    let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
-    in
-    (builtins.replaceStrings [ "if command -v rustup >/dev/null; then $(rustup which rls); else rls; fi" ] [ (pkgs.rust-analyzer + "/bin/rust-analyzer") ] orig) + ''
-
-       [language.julia]
-       filetypes = ["julia"]
-       roots = [".git"]
-       command = "julia"
-       args = [
-         "--startup-file=no",
-         "--history-file=no",
-         "-e",
-         """
-           using LanguageServer
-           using Pkg;
-           import StaticLint;
-           import SymbolServer;
-           env_path = dirname(Pkg.Types.Context().env.project_file);
-           server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
-           server.runlinter = true;
-           run(server);
-         """,
-       ]
-       '';
+  # xdg.configFile."kak-lsp/kak-lsp.toml".text =
+  #   let orig = builtins.readFile (pkgs.kak-lsp.src + "/kak-lsp.toml");
+  #   in
+  #   (builtins.replaceStrings [ "if command -v rustup >/dev/null; then $(rustup which rls); else rls; fi" ] [ ("env CARGO=${pkgs.cargo}/bin/cargo RUSTC=${pkgs.rustc}/bin/rustc RUSTFMT=${pkgs.rustfmt}/bin/rustfmt ${pkgs.rust-analyzer}/bin/rust-analyzer") ] orig);
 
   xdg.configFile."pijul/config.toml".text = pkgs.lib.generators.toINI
     { }
@@ -254,6 +309,17 @@ in
         email = ''"larsmuehmel@web.de"'';
       };
     };
+
+
+  home.sessionVariables = {
+    EDITOR = "kak";
+    LV2_PATH = pkgs.lib.strings.makeSearchPath "" [
+      "/etc/profiles/per-user/lars/lib/lv2"
+    ];
+    LADSPA_PATH = pkgs.lib.strings.makeSearchPath "" [
+      "/etc/profiles/per-user/lars/lib"
+    ];
+  };
 
   home.file =
     let

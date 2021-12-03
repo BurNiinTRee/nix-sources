@@ -4,7 +4,7 @@ in
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud21;
+    package = pkgs.nextcloud22;
     autoUpdateApps.enable = true;
     hostName = domain;
     https = true;

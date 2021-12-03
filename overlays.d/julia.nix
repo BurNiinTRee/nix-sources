@@ -1,23 +1,11 @@
 self: super: {
   julia = self.buildFHSUserEnv {
     name = "julia";
-    runScript = ''
-      env JULIA_NUM_THREADS=4 CURL_CA_BUNDLE=/etc/ssl/certs/ca-bundle.crt ${self.stdenv.mkDerivation {
-      pname = "julia";
-      version = self.julia_16-bin.version;
-      buildInputs = [ self.qt5.wrapQtAppsHook ];
-      dontWrapQtApps = true;
-      dontUnpack = true;
-      installPhase = ''
-        cp -r ${self.julia_16-bin} $out
-        chmod +w $out/bin/
-        wrapQtApp $out/bin/julia --prefix LD_LIBRARY_PATH : /lib/julia
-        chmod -w $out/bin/
-      '';
-    }}/bin/julia --sysimage /home/lars/nix-sources/julia-stuff/sysimage.so'';
+
+    runScript = "julia";
 
     targetPkgs = pkgs: with pkgs; [
-      self.julia_16-bin
+      julia_16-bin
       alsaLib
       arrayfire #.overrideAttrs (old: { cmakeFlags = builtins.tail old.cmakeFlags; })
       atk

@@ -78,7 +78,7 @@ in {
     enable = true;
     server_name = "muehml.eu";
     enable_metrics = true;
-    enable_registration = true;
+    enable_registration = false;
 
     database_type = "psycopg2";
     database_args.password = "synapse";

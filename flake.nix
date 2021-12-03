@@ -3,6 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "/home/lars/packages/nixpkgs";
+    musnix = {
+      url = "github:cidkidnix/musnix/flake-rework";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,23 +21,24 @@
       url = "gitlab:jD91mZM2/nix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    wgpu-mandelbrot = {
-      url = "path:/home/lars/projects/rust/wgpu-mandelbrot";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     pianoteq = {
-      url = "path:/home/lars/Music/Pianoteq-7";
+      url = "path:/home/lars/Music/Pianoteq-7/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     organteq = {
       url = "path:/home/lars/Music/Organteq-1/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    reaper = {
+      url = "path:/home/lars/Music/Reaper/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-release, home-manager, rnix-flake, deploy-rs, ... }:
+  outputs = inputs@{ self, nixpkgs, musnix, nixpkgs-release, home-manager, rnix-flake, deploy-rs, ... }:
     let
       overlays = (import ./overlays.nix) ++ [
+        musnix.overlay
       ];
     in
     {
@@ -74,14 +80,14 @@
         sshUser = "root";
       };
 
-      deploy.nodes.rpi = {
-        hostname = "rpi.local";
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi;
-        };
-        sshUser = "root";
-      };
+      # deploy.nodes.rpi = {
+      #   hostname = "rpi.local";
+      #   profiles.system = {
+      #     user = "root";
+      #     path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi;
+      #   };
+      #   sshUser = "root";
+      # };
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
@@ -119,7 +125,8 @@
           })
           ./configuration.nix
           home-manager.nixosModules.home-manager
-        ];
+          musnix.nixosModules.musnix
+        ] ++ (import ./modules.nix);
       };
       templates = {
         cargo-pijul = {
