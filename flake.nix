@@ -17,6 +17,10 @@
     #   url = "github:rycee/home-manager";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+    nix-matlab = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "gitlab:doronbehar/nix-matlab";
+    };
     rnix-flake = {
       url = "gitlab:jD91mZM2/nix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,10 +39,11 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, musnix, nixpkgs-release, home-manager, rnix-flake, deploy-rs, ... }:
+  outputs = inputs@{ self, nixpkgs, musnix, nixpkgs-release, home-manager, rnix-flake, nix-matlab, deploy-rs, ... }:
     let
       overlays = (import ./overlays.nix) ++ [
         musnix.overlay
+        nix-matlab.overlay
       ];
     in
     {

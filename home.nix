@@ -48,6 +48,7 @@ in
     killall
     kodi-wayland
     krita-beta
+    matlab
     mullvad-vpn
     pavucontrol
     pciutils
