@@ -5,7 +5,7 @@ self: super: {
     runScript = "julia";
 
     targetPkgs = pkgs: with pkgs; [
-      julia_16-bin
+      julia-bin
       alsaLib
       arrayfire #.overrideAttrs (old: { cmakeFlags = builtins.tail old.cmakeFlags; })
       atk
