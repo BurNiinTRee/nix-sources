@@ -13,10 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-21.11-small";
-    home-manager = {
-      url = "github:rycee/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # home-manager = {
+    #   url = "github:rycee/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     rnix-flake = {
       url = "gitlab:jD91mZM2/nix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
