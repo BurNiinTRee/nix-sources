@@ -4,8 +4,8 @@ set -e
 
 nix flake update --refresh
 
-nixos-rebuild dry-run --flake pkgs --no-write-lock-file
-sudo nixos-rebuild switch --flake pkgs --no-write-lock-file
+nixos-rebuild dry-run
+sudo nixos-rebuild switch
 
 deploy pkgs#muehml
 

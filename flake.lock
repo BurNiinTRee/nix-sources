@@ -78,10 +78,7 @@
     },
     "naersk": {
       "inputs": {
-        "nixpkgs": [
-          "rnix-flake",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1629707199,
@@ -141,6 +138,20 @@
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1639505474,
+        "narHash": "sha256-lnu8bPuJL/ayG4JaZO6wt3y6f1nDeAB380hmFwAMnhQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fc58c3761e9b9b3aee635bb2894bab97aa1b6ff6",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
       }
     },
     "organteq": {
