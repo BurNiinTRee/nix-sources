@@ -7,7 +7,6 @@ self: super: {
     targetPkgs = pkgs: with pkgs; [
       julia-bin
       alsaLib
-      arrayfire #.overrideAttrs (old: { cmakeFlags = builtins.tail old.cmakeFlags; })
       atk
       at-spi2-atk
       cairo
