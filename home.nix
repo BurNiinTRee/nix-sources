@@ -17,6 +17,7 @@ in
 
   home.packages = with pkgs; [
     # blender
+    blanket
     cargo-edit
     carla
     dua
@@ -64,6 +65,7 @@ in
     thunderbird-wayland
     tokei
     transmission-remote-gtk
+    transmission-gtk
     usbutils
     virtmanager
     wev
@@ -156,6 +158,10 @@ in
       nix-direnv = {
         enable = true;
       };
+    };
+
+    fzf = {
+      enable = true;
     };
 
     git = {
@@ -273,6 +279,11 @@ in
       settings = {
         status.disabled = false;
       };
+    };
+
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
     };
   };
 
