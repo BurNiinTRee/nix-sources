@@ -1,6 +1,0 @@
-current_channel = "main"
-
-[remotes]
-
-[hooks]
-record = []
