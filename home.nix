@@ -29,6 +29,7 @@ in
     file
     fira-code
     firefox
+    gamescope
     gcc
     gnome3.gnome-tweaks
     gnomeExtensions.gsconnect
