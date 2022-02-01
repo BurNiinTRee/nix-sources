@@ -329,7 +329,7 @@ in
       author = {
         name = ''"BurNiinTRee"'';
         full_name = ''"Lars Mühmel"'';
-        email = ''"larsmuehmel@web.de"'';
+        email = ''"lars@muehml.eu"'';
       };
     };
 
