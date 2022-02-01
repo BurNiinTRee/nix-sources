@@ -102,12 +102,7 @@
           ({ pkgs, ... }: {
             system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
             nix = {
-              binaryCachePublicKeys = [
-                "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-              ];
-              binaryCaches = [
-                "https://cache.nixos.org"
-              ];
+              nixPath = [ "nixpkgs=${nixpkgs}" ];
 
               package = pkgs.nixUnstable;
               extraOptions = ''
