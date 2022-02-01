@@ -41,7 +41,6 @@ in
     helix
     htop
     inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
-    inputs.deploy-rs.defaultPackage.x86_64-linux #.packages.x86_64-linux.nixops
     inputs.reaper.defaultPackage.x86_64-linux
     intel-gpu-tools
     iftop

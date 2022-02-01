@@ -4,7 +4,7 @@ set -e
 
 nix flake update --refresh
 
-nixos-rebuild dry-run
 sudo nixos-rebuild switch
 
-deploy pkgs
+nixos-rebuild switch --target-host muehml --flake pkgs#muehml
+nixos-rebuild switch --target-host rpi --flake pkgs#rpi

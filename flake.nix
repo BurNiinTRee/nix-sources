@@ -8,15 +8,7 @@
       url = "github:cidkidnix/musnix/flake-rework";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixpkgs-release.url = "github:NixOS/nixpkgs/nixos-21.11";
-    # home-manager = {
-    #   url = "github:rycee/home-manager";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     nix-matlab = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "gitlab:doronbehar/nix-matlab";
@@ -61,34 +53,12 @@
         ];
       };
 
-      deploy.nodes."muehml" = {
-        hostname = "muehml.eu";
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."muehml.eu";
-        };
-        sshUser = "root";
-      };
-
-
-      nixosConfigurations.rpi = nixpkgs-release.lib.nixosSystem {
+        nixosConfigurations.rpi = nixpkgs-release.lib.nixosSystem {
         system = "aarch64-linux";
-        # system = "x86_64-linux";
         modules = [
           ./rpi
         ];
       };
-      deploy.nodes.rpi = {
-        hostname = "rpi.local";
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi;
-        };
-        sshUser = "root";
-      };
-
-
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       nixosConfigurations.larstop2 = self.lib.nixosSystem {
         system = "x86_64-linux";
