@@ -20,6 +20,7 @@ in
     blanket
     cargo-edit
     carla
+    clang-tools
     deluge
     dua
     easyeffects
@@ -35,7 +36,6 @@ in
     gnome3.gnome-tweaks
     gnomeExtensions.gsconnect
     gnomeExtensions.appindicator
-    # gnomeExtensions.cpufreq
     gnumake
     graphviz
     helvum
