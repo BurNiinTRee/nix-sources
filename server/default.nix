@@ -16,17 +16,30 @@
 
   users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOsubAF9SruRBOTXRI2nPAMX5I0gD1OOheji91/NGknv lars@install" ];
 
-  imports = [ ./hardware-configuration.nix ./configuration.nix ./mail-server.nix ./nextcloud-server.nix ];
+  imports = [ ./hardware-configuration.nix ./mail-server.nix ./nextcloud-server.nix ];
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
   environment.systemPackages = [ pkgs.htop pkgs.dua ];
 
+  security.acme = {
+    email = "lars@muehml.eu";
+    acceptTerms = true;
+  };
+  
+  services.nginx = {
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedTlsSettings = true;
+  };
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+
   # https://nixos.wiki/wiki/Install_NixOS_on_Hetzner_Online
   networking = {
     usePredictableInterfaceNames = false;
-    hostName = "matrix-homeserver";
+    hostName = "muehml";
+    domain = "eu";
     defaultGateway6 = {
       address = "fe80::1";
       interface = "eth0";
