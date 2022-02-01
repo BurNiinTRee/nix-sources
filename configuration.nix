@@ -17,7 +17,7 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.plymouth.enable = true;
 
-  # boot.kernelPackages = pkgs.linuxPackages_5_9_rt;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   services.flatpak.enable = true;
 
