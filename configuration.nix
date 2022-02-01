@@ -24,6 +24,9 @@
   hardware.steam-hardware.enable = true;
 
   hardware.tuxedo-keyboard.enable = true;
+  boot.kernelParams = [
+    "tuxedo_keyboard.state=0"
+  ];
 
   # services.thermald.enable = true;
 
