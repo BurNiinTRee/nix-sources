@@ -292,6 +292,11 @@ in
       };
     };
 
+    vscode = {
+      enable = true;
+      package = pkgs.vscodium;
+    };
+
     zoxide = {
       enable = true;
       enableBashIntegration = true;
