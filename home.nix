@@ -20,6 +20,7 @@ in
     blanket
     cargo-edit
     carla
+    deluge
     dua
     easyeffects
     exa
@@ -65,7 +66,6 @@ in
     texlab
     thunderbird-wayland
     tokei
-    transmission-remote-gtk
     transmission-gtk
     usbutils
     virtmanager
