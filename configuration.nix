@@ -367,6 +367,11 @@
     };
   };
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
+
   powerManagement = {
     enable = true;
     cpuFreqGovernor = lib.mkForce "powersave";
