@@ -61,6 +61,7 @@ in
     rust-analyzer
     rustfmt
     simple-http-server
+    spotify
     teams
     texlab
     thunderbird-wayland
@@ -68,6 +69,7 @@ in
     transmission-gtk
     usbutils
     virtmanager
+    vlc
     wev
     wl-clipboard
     xournalpp
