@@ -2,7 +2,7 @@
 
 set -e
 
-nix flake update --refresh
+nix flake update
 
 sudo nixos-rebuild switch
 

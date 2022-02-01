@@ -31,7 +31,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, musnix, nixpkgs-release, home-manager, rnix-flake, nix-matlab, deploy-rs, ... }:
+  outputs = inputs@{ self, nixpkgs, musnix, nixpkgs-release, home-manager, rnix-flake, nix-matlab, ... }:
     let
       overlays = (import ./overlays.nix) ++ [
         musnix.overlay
