@@ -140,9 +140,9 @@ in
   programs = {
     bash = {
       enable = true;
-      # initExtra = ''
-      #   exec nu
-      # '';
+      initExtra = ''
+        exec nu
+      '';
       shellAliases = {
         cat = "bat";
         iftop = "sudo iftop -B -m 100M";
@@ -266,7 +266,16 @@ in
     nushell = {
       enable = true;
       settings = {
-        prompt = "STARSHIP_SHELL= starship prompt";
+        prompt = "starship prompt";
+        startup = [
+          # "alias cat = bat"
+          "alias iftop = sudo iftop -B -m 100M"
+          "zoxide init nushell --hook prompt | save /tmp/zoxide.nu"
+          "source /tmp/zoxide.nu"
+          "mkdir ~/.cache/starship"
+          "starship init nu | save ~/.cache/starship/init.nu"
+          "source ~/.cache/starship/init.nu"
+        ];
       };
     };
 
