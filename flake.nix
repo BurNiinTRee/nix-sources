@@ -54,7 +54,7 @@
       };
       inherit (nixpkgs) lib;
 
-      nixosConfigurations."muehml.eu" = nixpkgs-release.lib.nixosSystem {
+      nixosConfigurations."muehml" = nixpkgs-release.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./server
