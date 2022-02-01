@@ -16,7 +16,6 @@ in
   systemd.user.startServices = true;
 
   home.packages = with pkgs; [
-    # blender
     blanket
     cargo-edit
     carla
