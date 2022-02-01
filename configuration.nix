@@ -143,7 +143,6 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  # services.wireplumber.enable = true;
   services.pipewire = {
     enable = true;
     socketActivation = true;
@@ -164,6 +163,9 @@
         "node.latency" = "64/48000";
       };
     };
+
+    wireplumber.enable = true;
+    media-session.enable = !config.services.pipewire.wireplumber.enable;
 
     pulse.enable = true;
     config.pipewire-pulse = {
@@ -259,60 +261,6 @@
       ];
     };
 
-    media-session.config.alsa-monitor = {
-      rules = [
-        {
-          matches = [{ "node.nick" = "UMC1820"; }];
-          actions = {
-            update-props = {
-              "api.alsa.period-size" = 6;
-              "api.alsa.disable-batch" = true;
-            };
-          };
-        }
-      ];
-    };
-
-    media-session.config.bluez-monitor.rules = [
-      {
-        matches = [{ "device.name" = "~bluez_card.*"; }];
-        actions = {
-          "update-props" = {
-            "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
-            "bluez5.msbc-support" = true;
-            "bluez5.sbc-xq-support" = true;
-          };
-        };
-      }
-      {
-        matches = [
-          { "node.name" = "~bluez_input.*"; }
-          { "node.name" = "~bluez_output.*"; }
-        ];
-        actions = {
-          "node.pause-on-idle" = false;
-        };
-      }
-      {
-        matches = [{ "device.name" = "bluez_card.AC:57:75:5B:AA:3E"; }];
-        actions = {
-          "update-props" = {
-            "bluez5.auto-connect" = [ "hfp_ag" "hsp_ag" "a2dp_source" ];
-            "bluez5.a2dp-source-role" = "input";
-          };
-        };
-      }
-
-      {
-        matches = [{ "device.name" = "bluez_cardAC:57:75:5B:AA:3E"; }];
-        actions = {
-          "update-props" = {
-            "bluez5.auto-connect" = [ "hfg_ag" "hsp_ag" "a2db_source" ];
-            "bluez5.a2dp-source-role" = "input";
-          };
-        };
-      }
-    ];
   };
 
   musnix = {
