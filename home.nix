@@ -346,7 +346,7 @@ in
 
   home.file =
     let
-      dirPath = firefox + "/lib/mozilla/native-messaging-hosts/";
+      dirPath = firefox + "/usr/lib/mozilla/native-messaging-hosts/";
       fileNames = builtins.attrNames (builtins.readDir dirPath);
       files = map
         (n: {
