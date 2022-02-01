@@ -61,21 +61,6 @@
         ];
       };
 
-      nixosConfigurations.rpi = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          ./rpi
-        ];
-      };
-
-      # devShell.x86_64-linux = self.legacyPackages.x86_64-linux.mkShell {
-      #   name = "nix-sources";
-      #   buildInputs = [ inputs.nixos-update-checker.defaultPackage.x86_64-linux ];
-      #   shellHook = ''
-      #     nixos-update-checker nixos-unstable nixos-20.09-small
-      #   '';
-      # };
-
       deploy.nodes."muehml" = {
         hostname = "muehml.eu";
         profiles.system = {
@@ -85,14 +70,23 @@
         sshUser = "root";
       };
 
-      # deploy.nodes.rpi = {
-      #   hostname = "rpi.local";
-      #   profiles.system = {
-      #     user = "root";
-      #     path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi;
-      #   };
-      #   sshUser = "root";
-      # };
+
+      nixosConfigurations.rpi = nixpkgs-release.lib.nixosSystem {
+        system = "aarch64-linux";
+        # system = "x86_64-linux";
+        modules = [
+          ./rpi
+        ];
+      };
+      deploy.nodes.rpi = {
+        hostname = "rpi.local";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi;
+        };
+        sshUser = "root";
+      };
+
 
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
@@ -127,12 +121,6 @@
           home-manager.nixosModules.home-manager
           musnix.nixosModules.musnix
         ];
-      };
-      templates = {
-        cargo-pijul = {
-          path = ./templates/cargo-pijul;
-          description = "A template for a simple cargo package built with cargo-import and version controlled with pijul";
-        };
       };
     };
 }
