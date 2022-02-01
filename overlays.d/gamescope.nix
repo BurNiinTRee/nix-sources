@@ -1,4 +1,5 @@
-self: super: {
+self: super:
+let
   stb = super.stb.overrideAttrs (o: {
     installPhase = o.installPhase + ''
       mkdir -p $out/lib/pkgconfig
@@ -13,30 +14,23 @@ self: super: {
       EOF
     '';
   });
+in
+{
   gamescope = self.stdenv.mkDerivation rec {
     pname = "gamescope";
-    version = "3.10.3";
+    version = "3.9.5";
     src = self.fetchFromGitHub {
       owner = "Plagman";
       repo = pname;
       rev = version;
-      sha256 = "sha256-Kg+VhAWrQhOiEHqEJVI9M0Ku//wI5IHD+nNnb/DWHas=";
+      sha256 = "sha256-Ih+baHP13IcSaKM7Et9QaLNgZFRiapPPf44YpTgoG1c=";
       fetchSubmodules = true;
     };
 
     mesonFlags = [ "-Dpipewire=enabled" ];
 
-    # patchPhase = ''
-    #   cp -r ${self.stb.src} subprojects/stb
-    # '';
-
-    # dontFixCmake = true;
-    # dontUseCmakeConfigure = true;
-
-
     nativeBuildInputs = with self; [
-      # cmake
-      meson_0_60
+      meson
       ninja
       pkg-config
     ];
