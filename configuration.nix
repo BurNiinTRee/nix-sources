@@ -7,6 +7,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./tinc.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
