@@ -18,19 +18,19 @@ in
 {
   rnote = self.stdenv.mkDerivation rec {
     pname = "rnote";
-    version = "0.2.5";
+    version = "0.3.1";
 
     src = self.fetchFromGitHub {
       repo = pname;
       owner = "flxzt";
       rev = "v${version}";
-      sha256 = "sha256-4C0jsKmZeqzlEzJk9XLF41CZDFVsSklRmizY7N4zz+A=";
+      sha256 = "sha256-J+rGPwH1OCOwWHUQmzlsvSh09oKCe4nFGTf6E5zgmvo=";
     };
 
     cargoDeps = self.rustPlatform.fetchCargoTarball {
       inherit src;
       name = "${pname}-${version}";
-      hash = "sha256-CvxUynDRnPGoqWxxzdZoQUys/kMwj3f9/IXVA4EqiNU=";
+      hash = "sha256-2sEIFNxrRGxjUXutSo9ZtsVnkY3BMdQxqkDJQnIxk88=";
     };
 
     patches = [
