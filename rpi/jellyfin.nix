@@ -11,6 +11,7 @@
     recommendedGzipSettings = true;
     recommendedProxySettings = true;
     recommendedOptimisation = true;
+    defaultListenAddresses = [ "10.0.0.1" "192.168.0.105" ];
     virtualHosts = {
       "rpi.local" = {
         locations."/" = {

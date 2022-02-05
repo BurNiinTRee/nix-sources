@@ -8,9 +8,9 @@
   services.tinc.networks = {
     home = {
       name = "larstop2";
-      bindToAddress = "192.168.0.103";
       settings = {
         ConnectTo = "rpi";
+        Mode = "router";
       };
     };
   };
