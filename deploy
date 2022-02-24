@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo nixos-rebuild switch
+
+nixos-rebuild switch --target-host muehml --flake pkgs#muehml
+nixos-rebuild switch --target-host rpi --flake pkgs#rpi

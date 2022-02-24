@@ -1,14 +1,4 @@
-inputs: { config, pkgs, ... }:
-let
-  firefox = with pkgs;
-    wrapFirefox firefox-bin-unwrapped {
-      forceWayland = true;
-      extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
-      applicationName = "firefox";
-      pname = "firefox";
-      desktopName = "Firefox";
-    };
-in
+inputs@{ config, lib, pkgs, pianoteq, organteq, reaper, ... }:
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -21,6 +11,7 @@ in
     carla
     clang-tools
     deluge
+    dolphin-emu
     dua
     easyeffects
     exa
@@ -29,8 +20,7 @@ in
     ffmpeg
     file
     fira-code
-    firefox
-    gamescope
+    # firefox
     gcc
     gnome3.gnome-tweaks
     gnomeExtensions.gsconnect
@@ -41,7 +31,7 @@ in
     helix
     htop
     inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
-    inputs.reaper.defaultPackage.x86_64-linux
+    inputs.reaper.packages.x86_64-linux.reaper
     intel-gpu-tools
     iftop
     jitsi-meet-electron
@@ -50,6 +40,7 @@ in
     kodi-wayland
     krita-beta
     matlab
+    mesa-demos
     mullvad-vpn
     pavucontrol
     pciutils
@@ -63,7 +54,7 @@ in
     spotify
     teams
     texlab
-    thunderbird-wayland
+    thunderbird-bin
     tokei
     transmission-gtk
     usbutils
@@ -78,8 +69,8 @@ in
   [
     calf
     helm
-    inputs.pianoteq.defaultPackage.x86_64-linux
-    inputs.organteq.defaultPackage.x86_64-linux
+    pianoteq.defaultPackage.x86_64-linux
+    organteq.defaultPackage.x86_64-linux
     rnnoise-plugin
     CHOWTapeModel
     ams-lv2
@@ -163,6 +154,26 @@ in
 
     fzf = {
       enable = true;
+    };
+
+    firefox = {
+      enable = true;
+      package = pkgs.firefox.override
+        {
+          cfg = {
+            enableGnomeExtensions = true;
+            enableBrowserpass = true;
+          };
+          extraNativeMessagingHosts = [ pkgs.gnomeExtensions.gsconnect ];
+        };
+      #   wrapFirefox pkgs.firefox-bin-unwrapped {
+
+      #   forceWayland = true;
+      #   extraNativeMessagingHosts = [ browserpass gnomeExtensions.gsconnect ];
+      #   applicationName = "firefox";
+      #   pname = "firefox";
+      #   desktopName = "Firefox";
+      # };
     };
 
     git = {
@@ -262,6 +273,11 @@ in
       '';
     };
 
+    nix-index = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+
     nushell = {
       enable = true;
       settings = {
@@ -337,6 +353,9 @@ in
       };
     };
 
+  xdg.configFile."REAPER/UserPlugins/reaper_reapack-x86_64.so".source = inputs.reaper.packages.x86_64-linux.reapack + "/UserPlugins/reaper_reapack-x86_64.so";
+
+
 
   home.sessionVariables = {
     EDITOR = "kak";
@@ -347,27 +366,6 @@ in
       "/etc/profiles/per-user/lars/lib"
     ];
   };
-
-  home.file =
-    let
-      dirPath = firefox + "/usr/lib/mozilla/native-messaging-hosts/";
-      fileNames = builtins.attrNames (builtins.readDir dirPath);
-      files = map
-        (n: {
-          path = dirPath + n;
-          name = n;
-        })
-        fileNames;
-    in
-    builtins.foldl'
-      (a:
-        { name, path }:
-        a // {
-          ".mozilla/native-messaging-hosts/${name}".source = path;
-        }
-      )
-      { }
-      files;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

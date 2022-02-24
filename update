@@ -2,9 +2,6 @@
 
 set -e
 
-nix flake update
+nix flake update --commit-lock-file
 
-sudo nixos-rebuild switch
-
-nixos-rebuild switch --target-host muehml --flake pkgs#muehml
-nixos-rebuild switch --target-host rpi --flake pkgs#rpi
+./deploy

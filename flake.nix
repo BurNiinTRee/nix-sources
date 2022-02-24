@@ -29,13 +29,17 @@
       url = "path:/home/lars/Music/Reaper/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, musnix, nixpkgs-release, home-manager, rnix-flake, nix-matlab, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-release, ... }:
     let
-      overlays = (import ./overlays.nix) ++ [
-        musnix.overlay
-        nix-matlab.overlay
+      overlays = (import ./common/overlays.nix) ++ [
+        inputs.musnix.overlay
+        inputs.nix-matlab.overlay
       ];
     in
     {
@@ -46,51 +50,30 @@
       };
       inherit (nixpkgs) lib;
 
-      nixosConfigurations."muehml" = nixpkgs-release.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./server
-        ];
-      };
+      nixosConfigurations = {
+        larstop2 = self.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = inputs // { inherit overlays; };
+          modules = [
+            ./larstop2
+          ];
+        };
 
-        nixosConfigurations.rpi = nixpkgs-release.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          ./rpi
-        ];
-      };
+        "muehml" = nixpkgs-release.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { nixpkgs = nixpkgs-release; };
+          modules = [
+            ./server
+          ];
+        };
 
-      nixosConfigurations.larstop2 = self.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ({ pkgs, ... }: {
-            system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-            nix = {
-              nixPath = [ "nixpkgs=${nixpkgs}" ];
-
-              package = pkgs.nixUnstable;
-              extraOptions = ''
-                experimental-features = nix-command flakes
-              '';
-              registry.pkgs = {
-                to = {
-                  type = "path";
-                  path = "/home/lars/nix-sources";
-                };
-              };
-            };
-            nixpkgs.overlays = overlays;
-            nixpkgs.config = {
-              allowUnfree = true;
-            };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.lars = import ./home.nix inputs;
-          })
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          musnix.nixosModules.musnix
-        ];
+        rpi = nixpkgs-release.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { nixpkgs = nixpkgs-release; };
+          modules = [
+            ./rpi
+          ];
+        };
       };
     };
 }

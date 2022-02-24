@@ -2,6 +2,7 @@
 {
   services.deluge = {
     enable = true;
+    group = "media";
     declarative = true;
     dataDir = "/Media";
     authFile = "/etc/deluge-passwd";

@@ -16,6 +16,18 @@ let
   });
 in
 {
+  gamescope-new = self.gamescope.overrideAttrs (o: rec {
+    version = "3.11.9";
+    src = self.fetchFromGitHub {
+      owner = "Plagman";
+      repo = o.pname;
+      rev = version;
+      fetchSubmodules = true;
+      hash = "sha256-Q5HKfS3ZPj2M3BebLDgjGpAe46e7nKy3AWk4aicucjg=";
+    };
+    buildInputs = o.buildInputs ++ [ self.wlroots ];
+    mesonFlags = o.mesonFlags ++ [ "--force_fallback_for=[]" ];
+  });
   gamescope = self.stdenv.mkDerivation rec {
     pname = "gamescope";
     version = "3.9.5";
@@ -42,7 +54,8 @@ in
       libseat
       libudev
       libxkbcommon
-      mesa
+      libglvnd
+      mesa # for libgbm
       pipewire
       pixman
       SDL2

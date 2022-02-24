@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ config, pkgs, lib, nixpkgs, ... }: {
   nix = {
     gc = {
       automatic = true;
@@ -9,7 +9,9 @@
       automatic = true;
       dates = [ "03:30" ];
     };
+    nixPath = [ "nixpkgs=/etc/nixpkgs" ];
   };
+  environment.etc."nixpkgs".source = nixpkgs;
 
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;

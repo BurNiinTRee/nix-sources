@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ./tinc-hosts.nix ];
+  imports = [ ../common/tinc-hosts.nix ];
   networking.interfaces."tinc.home".ipv4.addresses = [{ 
-    address = "10.0.0.2"; 
+    address = "10.99.0.2"; 
     prefixLength = 24;
     }];
   services.tinc.networks = {
