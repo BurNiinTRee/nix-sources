@@ -16,16 +16,32 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "id": "flake-utils",
+        "type": "indirect"
+      }
+    },
     "home-manager": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
-        "lastModified": 1643933104,
-        "narHash": "sha256-NZPuFxRsZKN8pjRuHPpzlMyt6JQhcjiduBG8bMghSjE=",
+        "lastModified": 1645628011,
+        "narHash": "sha256-iNZCTjJ63TN5oM6rx2f4H0zaCbXM/iup7UWtQuCuyTM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "63dccc4e60422c1db2c3929b2fd1541f36b7e664",
+        "rev": "0b1745b4ef4c35ec5d554b176539730fcb5ec141",
         "type": "github"
       },
       "original": {
@@ -83,11 +99,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1643727886,
-        "narHash": "sha256-G/JYR4Xl15WVSbDXFToe8niZAvjzqJkTTsanLPviVG4=",
+        "lastModified": 1645715006,
+        "narHash": "sha256-rEs9dWmwhYyUKWxgmCLsDMXzzPNfu1gACNNC8Itfp0o=",
         "owner": "doronbehar",
         "repo": "nix-matlab",
-        "rev": "9471c2f7e307c25626b9abc62ae1ad4a35e2b9da",
+        "rev": "4be7b1df2b94213b082f7179ec00dfe691d5caf1",
         "type": "gitlab"
       },
       "original": {
@@ -98,46 +114,32 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1643653624,
-        "narHash": "sha256-+8hLMsQrZ2rkvcEtEId6HMe8GPxVb5ga+Vh1fdsqJDU=",
+        "lastModified": 1645433236,
+        "narHash": "sha256-4va4MvJ076XyPp5h8sm5eMQvCrJ6yZAbBmyw95dGyw4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a529f0c125a78343b145a8eb2b915b0295e4f459",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs-release": {
-      "locked": {
-        "lastModified": 1643788601,
-        "narHash": "sha256-6l5Ax44pC/Oo/Muj5Y/NA27Pd38Wty/7GtGSSmYNug4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f6ddd55d5f9d5eca08df138c248008c1ba73ecec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-21.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1643805626,
-        "narHash": "sha256-AXLDVMG+UaAGsGSpOtQHPIKB+IZ0KSd9WS77aanGzgc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "554d2d8aa25b6e583575459c297ec23750adb6cb",
+        "rev": "7f9b6e2babf232412682c09e57ed666d8f84ac2d",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-release": {
+      "locked": {
+        "lastModified": 1645652565,
+        "narHash": "sha256-yVQN2Wi8xSSpuj6JTck/6IOJ40hNvmoReMvFY86xd9w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4275a321beab5a71872fb7a5fe5da511bb2bec73",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -165,7 +167,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-bresBDrOCh2Sii4xtH82I0wyO2xz9OLG+2QAmOVS5t8=",
+        "narHash": "sha256-E43nZU3kaNHbDcF4wGLaYRh96VSPmEaiiJu0dxkLsZk=",
         "path": "/home/lars/Music/Pianoteq-7/",
         "type": "path"
       },
@@ -176,12 +178,13 @@
     },
     "reaper": {
       "inputs": {
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "narHash": "sha256-TAywYy3KMG7HRnaApLcYrw4vPpxE4+5fpMA9xDKp3hU=",
+        "narHash": "sha256-cDyA3c++Dl6IHsT+jkjPCVoHaGtfnWa5kax1PxQaNGE=",
         "path": "/home/lars/Music/Reaper/",
         "type": "path"
       },
@@ -217,7 +220,7 @@
         "home-manager": "home-manager",
         "musnix": "musnix",
         "nix-matlab": "nix-matlab",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nixpkgs-release": "nixpkgs-release",
         "organteq": "organteq",
         "pianoteq": "pianoteq",
