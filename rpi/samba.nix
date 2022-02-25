@@ -14,10 +14,6 @@
     };
   };
 
-  services.samba-wsdd = {
-    enable = true;
-  };
-
   users.users.ftp = {
     isSystemUser = true;
     group = "media";
