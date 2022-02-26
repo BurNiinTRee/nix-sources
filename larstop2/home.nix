@@ -22,6 +22,7 @@ inputs@{ config, lib, pkgs, pianoteq, organteq, reaper, ... }:
     fira-code
     # firefox
     gcc
+    gnome3.gnome-boxes
     gnome3.gnome-tweaks
     gnomeExtensions.gsconnect
     gnomeExtensions.appindicator
