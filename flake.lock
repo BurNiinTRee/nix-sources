@@ -37,11 +37,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1645628011,
-        "narHash": "sha256-iNZCTjJ63TN5oM6rx2f4H0zaCbXM/iup7UWtQuCuyTM=",
+        "lastModified": 1645867939,
+        "narHash": "sha256-p3vHHMM5W6ojmStJqKpLvdnzxxKGG015U7OK6PJE8lo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0b1745b4ef4c35ec5d554b176539730fcb5ec141",
+        "rev": "c7a13f76a78bb5c225ca5e08e9a109347d130792",
         "type": "github"
       },
       "original": {
@@ -167,7 +167,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-E43nZU3kaNHbDcF4wGLaYRh96VSPmEaiiJu0dxkLsZk=",
+        "narHash": "sha256-PNomvjmo2hE32FcnitzLL1dpsZh47ibAP1XedX7FmJg=",
         "path": "/home/lars/Music/Pianoteq-7/",
         "type": "path"
       },
