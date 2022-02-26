@@ -49,6 +49,22 @@
         "type": "indirect"
       }
     },
+    "modartt": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "narHash": "sha256-rkgxL1BsyPnGt88w/p+lADyHrgjVLZkzYhhyOkVBwno=",
+        "path": "/home/lars/Music/Modartt/",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/lars/Music/Modartt/",
+        "type": "path"
+      }
+    },
     "musnix": {
       "inputs": {
         "nixpkgs": [
@@ -144,38 +160,6 @@
         "type": "github"
       }
     },
-    "organteq": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "narHash": "sha256-L5xDHG7D4t53/KZpYI2eieHw0uY3odV0f2VRNDtjbsk=",
-        "path": "/home/lars/Music/Organteq-1/",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/lars/Music/Organteq-1/",
-        "type": "path"
-      }
-    },
-    "pianoteq": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "narHash": "sha256-PNomvjmo2hE32FcnitzLL1dpsZh47ibAP1XedX7FmJg=",
-        "path": "/home/lars/Music/Pianoteq-7/",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/lars/Music/Pianoteq-7/",
-        "type": "path"
-      }
-    },
     "reaper": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -218,12 +202,11 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "modartt": "modartt",
         "musnix": "musnix",
         "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs",
         "nixpkgs-release": "nixpkgs-release",
-        "organteq": "organteq",
-        "pianoteq": "pianoteq",
         "reaper": "reaper",
         "rnix-flake": "rnix-flake"
       }
