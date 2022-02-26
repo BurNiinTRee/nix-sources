@@ -7,14 +7,14 @@ self: super: {
             domain = "gitlab.gnome.org";
             owner = "GNOME";
             repo = "fractal";
-            rev = "37fbe7cbfbbf61bba80d087b682ce7d8575407a4";
-            hash = "sha256-7nlHSun46aHjJu10BDON9Up5p/rHn2INzse55DiycN8=";
+            rev = "c1f17381ef9f45e78a443b4db21a1f4955f6b49f";
+            hash = "sha256-euhzUb0j5hVKZ9mmSppuGDKH+XeTDYuOWNkUDoTWlAs=";
         };
 
         cargoDeps = self.rustPlatform.fetchCargoTarball {
             inherit src;
             name = "${pname}-0.0.1";
-            hash = "sha256-7V2bpHVkFRVu40bRaclMAdquE79X9vjlk7BIsgTEAHQ=";
+            hash = "sha256-fbzJ7ZOgiROM2R3GnBrTNYO5w4NQIUDUHMPHrdAUYUE=";
         };
 
         nativeBuildInputs = with self; [
