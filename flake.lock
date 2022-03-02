@@ -115,14 +115,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1645988646,
-        "narHash": "sha256-F+EXXZv24ozWGkJxQCSgyh++2WEFwc1jTxcqQXNFnx0=",
-        "type": "git",
-        "url": "file:///home/lars/packages/nix-matlab"
+        "lastModified": 1646264732,
+        "narHash": "sha256-7MDUPrlT/Ye/6txDBUMe1HETQMb4ozUTT4DiHO4njeQ=",
+        "owner": "BurNiinTRee",
+        "repo": "nix-matlab",
+        "rev": "f8eaee34238ed1e00e8db3196a0bc1f6b8854d83",
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/lars/packages/nix-matlab"
+        "owner": "BurNiinTRee",
+        "repo": "nix-matlab",
+        "type": "gitlab"
       }
     },
     "nixpkgs": {
@@ -143,11 +146,11 @@
     },
     "nixpkgs-release": {
       "locked": {
-        "lastModified": 1646011258,
-        "narHash": "sha256-+aen4zu5uVp52arEcgL2maCS0zQDuG1t+Azwd/O1gN4=",
+        "lastModified": 1646162891,
+        "narHash": "sha256-Yoyur5LD3nRKFZRwVi2lHZi2HKoWUJFAHgIFcYsRhho=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a25df4c2b79c4343bcc72ad671200e5a3e286c41",
+        "rev": "b099eaa0e01a45fc3459bbe987c3405c425ef05c",
         "type": "github"
       },
       "original": {
