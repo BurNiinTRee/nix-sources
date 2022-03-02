@@ -116,16 +116,13 @@
       },
       "locked": {
         "lastModified": 1645988646,
-        "narHash": "sha256-1g45O0AJrJKaAkUSuLFul+Nl3FibTy8nCfCAPb29KSg=",
-        "owner": "doronbehar",
-        "repo": "nix-matlab",
-        "rev": "4d37b026cc62764abdca230316912e4d491dc159",
-        "type": "gitlab"
+        "narHash": "sha256-F+EXXZv24ozWGkJxQCSgyh++2WEFwc1jTxcqQXNFnx0=",
+        "type": "git",
+        "url": "file:///home/lars/packages/nix-matlab"
       },
       "original": {
-        "owner": "doronbehar",
-        "repo": "nix-matlab",
-        "type": "gitlab"
+        "type": "git",
+        "url": "file:///home/lars/packages/nix-matlab"
       }
     },
     "nixpkgs": {
