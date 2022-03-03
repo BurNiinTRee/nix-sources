@@ -115,26 +115,26 @@
         ]
       },
       "locked": {
-        "lastModified": 1646264732,
-        "narHash": "sha256-7MDUPrlT/Ye/6txDBUMe1HETQMb4ozUTT4DiHO4njeQ=",
-        "owner": "BurNiinTRee",
+        "lastModified": 1646321483,
+        "narHash": "sha256-5BpXM9B0npCURyuqjygVMnI32QDnYmucc5ca48dWzpg=",
+        "owner": "doronbehar",
         "repo": "nix-matlab",
-        "rev": "f8eaee34238ed1e00e8db3196a0bc1f6b8854d83",
+        "rev": "b6758352e571066b59368e4d2d7000428b77c9b5",
         "type": "gitlab"
       },
       "original": {
-        "owner": "BurNiinTRee",
+        "owner": "doronbehar",
         "repo": "nix-matlab",
         "type": "gitlab"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1646159311,
-        "narHash": "sha256-ILKckkiG074t3a0pwaPLjio8zVWgowpEp7AUwI5HjHE=",
+        "lastModified": 1646254136,
+        "narHash": "sha256-8nQx02tTzgYO21BP/dy5BCRopE8OwE8Drsw98j+Qoaw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "18bd82edcc752d6a0e6cce1401ba0c81353a03ca",
+        "rev": "3e072546ea98db00c2364b81491b893673267827",
         "type": "github"
       },
       "original": {
@@ -146,11 +146,11 @@
     },
     "nixpkgs-release": {
       "locked": {
-        "lastModified": 1646162891,
-        "narHash": "sha256-Yoyur5LD3nRKFZRwVi2lHZi2HKoWUJFAHgIFcYsRhho=",
+        "lastModified": 1646258393,
+        "narHash": "sha256-mKDoCi5Baqainjf0Nx6oTPhaxKQdj4P17XTdhTtXGRA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b099eaa0e01a45fc3459bbe987c3405c425ef05c",
+        "rev": "ed02c2ba0384b2800db41333045a6fb781f12aac",
         "type": "github"
       },
       "original": {
