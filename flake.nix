@@ -17,12 +17,8 @@
       url = "gitlab:jD91mZM2/nix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pianoteq = {
-      url = "path:/home/lars/Music/Pianoteq-7/";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    organteq = {
-      url = "path:/home/lars/Music/Organteq-1/";
+    modartt = {
+      url = "path:/home/lars/Music/Modartt/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     reaper = {

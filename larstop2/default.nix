@@ -24,6 +24,6 @@ inputs@{ config, pkgs, lib, self, nixpkgs, home-manager, musnix, overlays, ... }
   };
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit (inputs) reaper rnix-flake pianoteq organteq; };
+  home-manager.extraSpecialArgs = { inherit (inputs) reaper rnix-flake modartt; };
   home-manager.users.lars = import ./home.nix;
 }

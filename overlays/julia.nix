@@ -15,7 +15,7 @@ self: super: {
       electron
       expat
       freetype
-      gdk_pixbuf
+      gdk-pixbuf
       glib
       gnumake
       gtk3

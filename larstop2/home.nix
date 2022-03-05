@@ -1,4 +1,4 @@
-inputs@{ config, lib, pkgs, pianoteq, organteq, reaper, ... }:
+inputs@{ config, lib, pkgs, modartt, reaper, ... }:
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -47,7 +47,7 @@ inputs@{ config, lib, pkgs, pianoteq, organteq, reaper, ... }:
     pciutils
     pijul
     pulseaudio
-    qjackctl
+    qpwgraph
     ripgrep
     rust-analyzer
     rustfmt
@@ -62,6 +62,8 @@ inputs@{ config, lib, pkgs, pianoteq, organteq, reaper, ... }:
     virtmanager
     vlc
     wev
+    wine
+    winetricks
     wl-clipboard
     xournalpp
     zoom-us
@@ -70,8 +72,8 @@ inputs@{ config, lib, pkgs, pianoteq, organteq, reaper, ... }:
   [
     calf
     helm
-    pianoteq.defaultPackage.x86_64-linux
-    organteq.defaultPackage.x86_64-linux
+    modartt.packages.x86_64-linux.pianoteq
+    modartt.packages.x86_64-linux.organteq
     rnnoise-plugin
     CHOWTapeModel
     ams-lv2
@@ -159,7 +161,7 @@ inputs@{ config, lib, pkgs, pianoteq, organteq, reaper, ... }:
 
     firefox = {
       enable = true;
-      package = pkgs.firefox.override
+      package = pkgs.firefox-wayland.override
         {
           cfg = {
             enableGnomeExtensions = true;

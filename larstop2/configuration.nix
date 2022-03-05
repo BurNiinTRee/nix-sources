@@ -31,6 +31,8 @@
 
   # services.thermald.enable = true;
 
+  virtualisation.spiceUSBRedirection.enable = true;
+
   virtualisation.libvirtd = {
     enable = true;
     qemu.ovmf.enable = true;
@@ -144,8 +146,16 @@
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ vaapiIntel intel-compute-runtime ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel ];
+    extraPackages = with pkgs; [
+      vaapiIntel
+      intel-media-driver
+      vaapiVdpau
+      libvdpau-va-gl
+      intel-compute-runtime
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      vaapiIntel
+    ];
   };
 
   # Enable the X11 windowing system.
@@ -193,6 +203,14 @@
     enable = true;
     group = "video";
   };
+
+  services.samba = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  # For QMidiNet
+  networking.firewall.allowedUDPPorts = [ 21928 ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lars = {
