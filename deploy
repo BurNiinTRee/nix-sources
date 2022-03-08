@@ -2,7 +2,5 @@
 
 set -e
 
-sudo nixos-rebuild switch
-
-nixos-rebuild switch --target-host muehml --flake pkgs#muehml
-nixos-rebuild switch --target-host rpi --flake pkgs#rpi
+nix run nixpkgs#nixos-rebuild -- switch --target-host muehml --flake .#muehml
+nix run nixpkgs#nixos-rebuild -- switch --target-host rpi --flake .#rpi
