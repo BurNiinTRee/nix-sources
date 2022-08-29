@@ -26,7 +26,7 @@
   environment.systemPackages = [ pkgs.htop pkgs.dua ];
 
   security.acme = {
-    email = "lars@muehml.eu";
+    defaults.email = "lars@muehml.eu";
     acceptTerms = true;
   };
   
@@ -54,4 +54,5 @@
       useDHCP = true;
     };
   };
+  system.stateVersion = "21.11"; 
 }
