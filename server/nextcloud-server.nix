@@ -10,7 +10,27 @@ in
     https = true;
     config = {
       adminpassFile = "/etc/nx-pass-file";
+      dbtype = "pgsql";
+      dbuser = "nextcloud";
+      dbhost = "/run/postgresql";
+      dbname = "nextcloud";
+      defaultPhoneRegion = "SE";
     };
+  };
+
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "nextcloud" ];
+    ensureUsers = [
+      { name = "nextcloud";
+        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+      }
+    ];
+  };
+
+  systemd.services."nextcloud-setup" = {
+    requires = [  "postgresql.service" ];
+    after = [ "postgresql.service" ];
   };
 
   services.nginx.virtualHosts = {
