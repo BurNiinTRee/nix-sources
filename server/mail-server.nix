@@ -36,8 +36,14 @@ in
       local_recipient_maps=proxy:unix:passwd.byname $alias_maps
       smtpd_sasl_path = private/auth
       smtpd_sasl_auth_enable = yes
+      smtpd_milters = local:/run/opendkim/opendkim.sock
+      non_smtpd_milters = $smtpd_milters milter_default_action = accept 
     '';
     postmasterAlias = "lars";
+    rootAlias = "lars";
+    virtual = ''
+      @muehml.eu lars
+    '';
   };
 
   services.dovecot2 = {
@@ -55,6 +61,17 @@ in
       }
     '';
   };
+
+  services.opendkim = {
+    enable = true;
+    domains = "csl:muehml.eu";
+    selector = "default";
+    configFile = pkgs.writeText "opendkim.conf" ''
+      UMask 0002
+    '';
+  };
+
+  users.users.postfix.extraGroups = [ "opendkim" ];
   networking.firewall.allowedTCPPorts = [ 25 143 465 587 993 ];
   users.users.lars = { isNormalUser = true; };
   environment.systemPackages = [ pkgs.file ];
