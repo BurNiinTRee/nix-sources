@@ -9,13 +9,19 @@ in
     hostName = domain;
     https = true;
     config = {
-      adminpassFile = "/etc/nx-pass-file";
+      adminpassFile = config.age.secrets.nx-initial-admin-pass.path;
       dbtype = "pgsql";
       dbuser = "nextcloud";
       dbhost = "/run/postgresql";
       dbname = "nextcloud";
       defaultPhoneRegion = "SE";
     };
+  };
+
+  age.secrets.nx-initial-admin-pass = {
+    owner = "nextcloud";
+    group = "nextcloud";
+    file = ../secrets/nx-initial-admin-pass.age;
   };
 
   services.postgresql = {
