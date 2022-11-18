@@ -1,4 +1,4 @@
-inputs@{ config, pkgs, lib, self, nixpkgs, home-manager, musnix, overlays, ... }:
+inputs@{ config, pkgs, lib, self, nixpkgs, home-manager, musnix, ... }:
 {
   imports = [
     ./configuration.nix
@@ -18,7 +18,7 @@ inputs@{ config, pkgs, lib, self, nixpkgs, home-manager, musnix, overlays, ... }
     nixPath = [ "nixpkgs=/etc/nixpkgs/" ];
   };
   environment.etc."nixpkgs".source = nixpkgs;
-  nixpkgs.overlays = overlays;
+  nixpkgs.overlays = import ./overlays;
   nixpkgs.config = {
     allowUnfree = true;
   };
