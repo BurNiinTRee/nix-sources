@@ -1,4 +1,4 @@
-{ config, pkgs, flakeInputs, ... }:
+{ config, pkgs, ... }:
 {
 
   programs.home-manager.enable = true;

@@ -12,43 +12,50 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    flake-parts.url = "github:BurNiinTRee/flake-parts";
   };
 
-  outputs = { self, nixpkgs, agenix, home-manager, nixpkgs-unstable, ... }@inputs:
-    {
-      homeConfigurations = {
-        user = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs-unstable { system = "x86_64-linux"; };
-          extraSpecialArgs = { flakeInputs = inputs; };
-          modules = [ ./fedora-home ];
+  outputs = { self, nixpkgs, agenix, home-manager, nixpkgs-unstable, flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit self; } {
+      systems = [ "x86_64-linux" ];
+
+      perSystem = { config, pkgs, system, ... }: {
+        legacyPackages = pkgs;
+        nixpkgs.path = nixpkgs-unstable;
+
+        devShells.default = pkgs.mkShell {
+          packages = [ pkgs.nixos-rebuild ];
         };
+
       };
-
-
-      legacyPackages.x86_64-linux = import nixpkgs-unstable { system = "x86_64-linux"; };
-
-
-      devShells.x86_64-linux.default = with nixpkgs-unstable.legacyPackages.x86_64-linux;
-        mkShell {
-          packages = [ nixos-rebuild ];
+      flake = {
+        homeConfigurations = {
+          user = home-manager.lib.homeManagerConfiguration {
+            pkgs = import nixpkgs-unstable {
+              system = "x86_64-linux";
+            };
+            modules = [ ./fedora-home ];
+          };
         };
 
-      nixosConfigurations = {
-        "muehml" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { flakeInputs = inputs; };
-          modules = [
-            ./server
-            agenix.nixosModule
-          ];
-        };
 
-        rpi = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = { nixpkgs = nixpkgs; };
-          modules = [
-            ./rpi
-          ];
+        nixosConfigurations = {
+          "muehml" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = { flakeInputs = inputs; };
+            modules = [
+              ./server
+              agenix.nixosModule
+            ];
+          };
+
+          rpi = nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            specialArgs = { nixpkgs = nixpkgs; };
+            modules = [
+              ./rpi
+            ];
+          };
         };
       };
     };

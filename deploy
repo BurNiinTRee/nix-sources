@@ -3,5 +3,5 @@
 set -e
 
 home-manager switch --flake pkgs
-nixos-rebuild switch --target-host muehml --flake .#muehml
+nix run pkgs#nixos-rebuild -- switch --target-host muehml --flake pkgs#muehml
 # nixos-rebuild switch --target-host rpi --flake .#rpi
