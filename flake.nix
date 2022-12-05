@@ -22,9 +22,11 @@
       perSystem = { config, pkgs, system, ... }: {
         legacyPackages = pkgs;
         nixpkgs.path = nixpkgs-unstable;
+        nixpkgs.overlays = [ agenix.overlay ];
 
         devShells.default = pkgs.mkShell {
-          packages = [ pkgs.nixos-rebuild ];
+          packages = [ pkgs.nixos-rebuild pkgs.agenix ];
+          RULES = "${self}/secrets/secrets.nix";
         };
 
       };
