@@ -4,7 +4,7 @@ in
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud24;
+    package = pkgs.nextcloud25;
     autoUpdateApps.enable = true;
     hostName = domain;
     https = true;
@@ -16,6 +16,9 @@ in
       dbname = "nextcloud";
       defaultPhoneRegion = "SE";
     };
+    # We don't use SSE
+    enableBrokenCiphersForSSE = false;
+    enableImagemagick = false;
   };
 
   age.secrets.nx-initial-admin-pass = {

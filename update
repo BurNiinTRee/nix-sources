@@ -2,8 +2,6 @@
 
 set -e
 
-nix-channel --update
-nix-env -u
 
 nix flake update --commit-lock-file
 

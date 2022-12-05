@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nixpkgs, ... }: {
+{ config, pkgs, lib, flakeInputs, ... }: {
   nix = {
     gc = {
       automatic = true;
@@ -14,7 +14,14 @@
       experimental-features = nix-command flakes
     '';
   };
-  environment.etc."nixpkgs".source = nixpkgs;
+  nix.registry.nixpkgs = {
+    from = {
+      id = "nixpkgs";
+      type = "indirect";
+    };
+    flake = flakeInputs.nixpkgs;
+  };
+  environment.etc."nixpkgs".source = flakeInputs.nixpkgs;
 
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;
@@ -25,13 +32,13 @@
     ./hardware-configuration.nix 
     ./mail-server.nix 
     ./nextcloud-server.nix
-    ./pleroma.nix
+    # ./pleroma.nix
   ];
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
-  environment.systemPackages = [ pkgs.htop pkgs.dua ];
+  environment.systemPackages = [ pkgs.htop pkgs.dua pkgs.nix-du ];
 
   security.acme = {
     defaults.email = "lars@muehml.eu";
