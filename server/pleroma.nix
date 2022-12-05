@@ -5,8 +5,10 @@
     group = "pleroma";
     file = ../secrets/pleroma-secrets.age;
   };
+  nixpkgs.overlays = [ (import ../overlays/pleroma.nix) ];
   services.pleroma = {
     enable = true;
+    package = pkgs.akkoma;
     secretConfigFile = config.age.secrets.pleroma-secrets.path;
     configs = [
       ''
@@ -37,8 +39,8 @@
         
         config :pleroma, Pleroma.Repo,
           adapter: Ecto.Adapters.Postgres,
-          username: "pleroma",
-          database: "pleroma",
+          username: "akkoma",
+          database: "akkoma",
           hostname: "localhost"
         
         # Configure web push notifications
@@ -89,6 +91,8 @@
       ''
     ];
   };
+
+  systemd.services.pleroma.environment."DEBUG" = "1";
 
   services.nginx.virtualHosts = {
     "muehml.eu".locations."/.well-known/host-meta".return = "301 https://social.muehml.eu$request_uri";
