@@ -36,7 +36,7 @@
             pkgs = import nixpkgs-unstable {
               system = "x86_64-linux";
             };
-            modules = [ ./fedora-home ];
+            modules = [ ./home/user.nix ];
           };
         };
 
