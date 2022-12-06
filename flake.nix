@@ -47,7 +47,7 @@
 
 
         devShells.default = pkgs.mkShell {
-          packages = [ pkgs.nixos-rebuild pkgs.agenix ];
+          packages = [ pkgs.agenix ];
           RULES = "${self}/secrets/secrets.nix";
         };
         formatter = pkgs.nixpkgs-fmt;
