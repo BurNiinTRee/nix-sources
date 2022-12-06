@@ -12,11 +12,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-parts.url = "github:BurNiinTRee/flake-parts";
   };
 
   outputs = { self, nixpkgs, agenix, home-manager, nixpkgs-stable, flake-parts, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit self; } {
+    flake-parts.lib.mkFlake { inherit self; } ({withSystem, ...}:{
       systems = [ "x86_64-linux" ];
 
       perSystem = { config, pkgs, system, ... }: {
@@ -56,9 +55,6 @@
           };
         };
 
-
-
-
         devShells.default = pkgs.mkShell {
           packages = [ pkgs.agenix ];
           RULES = "${self}/secrets/secrets.nix";
@@ -67,13 +63,11 @@
       };
       flake = {
         homeConfigurations = {
-          user = home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs {
-              system = "x86_64-linux";
-            };
+          user = withSystem "x86_64-linux" ({ pkgs, ...}: home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
             modules = [ ./home/user.nix ];
             extraSpecialArgs = { flakeInputs = inputs; };
-          };
+          });
         };
 
 
@@ -96,5 +90,5 @@
           };
         };
       };
-    };
+    });
 }
