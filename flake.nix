@@ -26,19 +26,32 @@
         packages = {
           update = pkgs.writeShellApplication {
             name = "update";
-            runtimeInputs = [ pkgs.nix ];
+            runtimeInputs = [ pkgs.nix config.packages.deploy ];
             text = ''
               nix flake update --commit-lock-file /var/home/user/nix-sources
-              nix run pkgs#deploy
+              deploy
             '';
           };
           deploy = pkgs.writeShellApplication {
             name = "deploy";
-            runtimeInputs = [ pkgs.home-manager pkgs.nixos-rebuild ];
+            runtimeInputs = [ config.packages.home config.packages.muehml ];
+            text = ''
+              home # home-manager switch
+              muehml # deploy to muehml.eu
+            '';
+          };
+          home = pkgs.writeShellApplication {
+            name = "home";
+            runtimeInputs = [ pkgs.home-manager ];
             text = ''
               home-manager switch --flake pkgs
+            '';
+          };
+          muehml = pkgs.writeShellApplication {
+            name = "muehml";
+            runtimeInputs = [ pkgs.nixos-rebuild ];
+            text = ''
               nixos-rebuild switch --target-host muehml --flake pkgs#muehml
-              # nixos-rebuild switch --target-host rpi --flake pkgs#rpi
             '';
           };
         };
