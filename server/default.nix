@@ -28,9 +28,9 @@
 
   users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOsubAF9SruRBOTXRI2nPAMX5I0gD1OOheji91/NGknv lars@install" ];
 
-  imports = [ 
-    ./hardware-configuration.nix 
-    ./mail-server.nix 
+  imports = [
+    ./hardware-configuration.nix
+    ./mail-server.nix
     ./nextcloud-server.nix
     # ./pleroma.nix
   ];
@@ -44,7 +44,7 @@
     defaults.email = "lars@muehml.eu";
     acceptTerms = true;
   };
-  
+
   services.nginx = {
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
@@ -69,5 +69,5 @@
       useDHCP = true;
     };
   };
-  system.stateVersion = "21.11"; 
+  system.stateVersion = "21.11";
 }

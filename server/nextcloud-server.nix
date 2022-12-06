@@ -31,14 +31,15 @@ in
     enable = true;
     ensureDatabases = [ "nextcloud" ];
     ensureUsers = [
-      { name = "nextcloud";
+      {
+        name = "nextcloud";
         ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
       }
     ];
   };
 
   systemd.services."nextcloud-setup" = {
-    requires = [  "postgresql.service" ];
+    requires = [ "postgresql.service" ];
     after = [ "postgresql.service" ];
   };
 
