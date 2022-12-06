@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-home-manager switch --flake pkgs
-nix run pkgs#nixos-rebuild -- switch --target-host muehml --flake pkgs#muehml
-# nixos-rebuild switch --target-host rpi --flake .#rpi

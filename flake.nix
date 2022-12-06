@@ -23,6 +23,29 @@
         legacyPackages = pkgs;
         nixpkgs.overlays = [ agenix.overlay ];
 
+        packages = {
+          update = pkgs.writeShellApplication {
+            name = "update";
+            runtimeInputs = [ pkgs.nix ];
+            text = ''
+              nix flake update --commit-lock-file /var/home/user/nix-sources
+              nix run pkgs#deploy
+            '';
+          };
+          deploy = pkgs.writeShellApplication {
+            name = "deploy";
+            runtimeInputs = [ pkgs.home-manager pkgs.nixos-rebuild ];
+            text = ''
+              home-manager switch --flake pkgs
+              nixos-rebuild switch --target-host muehml --flake pkgs#muehml
+              # nixos-rebuild switch --target-host rpi --flake pkgs#rpi
+            '';
+          };
+        };
+
+
+
+
         devShells.default = pkgs.mkShell {
           packages = [ pkgs.nixos-rebuild pkgs.agenix ];
           RULES = "${self}/secrets/secrets.nix";
