@@ -17,7 +17,7 @@
   ];
 
   home.sessionVariables = {
-    EDITOR = "${config.programs.vscode.package}/bin/vscodium -w";
+    EDITOR = "${config.programs.vscode.package}/bin/codium -w";
   };
 
 
