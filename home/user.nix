@@ -6,6 +6,8 @@
   programs.direnv.nix-direnv.enable = true;
   programs.bash.enable = true;
   programs.starship.enable = true;
+  programs.skim.enable = true;
+  programs.htop.enable = true;
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
@@ -14,6 +16,8 @@
   home.packages = with pkgs; [
     nil
     nixpkgs-fmt
+    ripgrep
+    fd
   ];
 
   home.sessionVariables = {
