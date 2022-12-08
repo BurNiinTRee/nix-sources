@@ -41,7 +41,7 @@
     settings =
       let emptyFlakeRegistry = pkgs.writeText "flake-registry.json" (builtins.toJSON { flakes = [ ]; version = 2; });
       in {
-        extra-experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+        experimental-features = [ "nix-command" "flakes" "repl-flake" "ca-derivations" ];
         sandbox = true;
         connect-timeout = 5;
         log-lines = 25;
@@ -49,7 +49,7 @@
         fallback = true;
         warn-dirty = false;
         auto-optimise-store = true;
-        max-jobs = 8;
+        max-jobs = 6;
         flake-registry = emptyFlakeRegistry;
       };
   };
