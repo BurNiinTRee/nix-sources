@@ -78,6 +78,7 @@
     nssmdns = true;
     allowPointToPoint = true;
     interfaces = [ "tinc.home" "enp57s0f1" "wlp58s0" ];
+    openFirewall = true;
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
