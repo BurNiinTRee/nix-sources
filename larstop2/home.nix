@@ -1,134 +1,142 @@
-inputs@{ config, lib, pkgs, modartt, reaper, ... }:
-{
+inputs @ {
+  config,
+  lib,
+  pkgs,
+  modartt,
+  reaper,
+  ...
+}: {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   systemd.user.startServices = true;
 
-  home.packages = with pkgs; [
-    blanket
-    cargo-edit
-    carla
-    clang-tools
-    deluge
-    dolphin-emu
-    dua
-    easyeffects
-    exa
-    exercism
-    fd
-    ffmpeg
-    file
-    fira-code
-    # firefox
-    gcc
-    gnome3.gnome-boxes
-    gnome3.gnome-tweaks
-    gnomeExtensions.gsconnect
-    gnomeExtensions.appindicator
-    gnumake
-    graphviz
-    helvum
-    helix
-    htop
-    inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
-    inputs.reaper.packages.x86_64-linux.reaper
-    intel-gpu-tools
-    iftop
-    jitsi-meet-electron
-    julia
-    killall
-    kodi-wayland
-    krita-beta
-    matlab
-    mesa-demos
-    mullvad-vpn
-    pavucontrol
-    pciutils
-    pijul
-    pulseaudio
-    qpwgraph
-    ripgrep
-    rust-analyzer
-    rustfmt
-    simple-http-server
-    spotify
-    teams
-    texlab
-    thunderbird-bin
-    tokei
-    transmission-gtk
-    usbutils
-    virtmanager
-    vlc
-    wev
-    wine
-    winetricks
-    wl-clipboard
-    xournalpp
-    zoom-us
-  ] ++
-  # LV2 Plugins
-  [
-    calf
-    helm
-    modartt.packages.x86_64-linux.pianoteq
-    modartt.packages.x86_64-linux.organteq
-    rnnoise-plugin
-    CHOWTapeModel
-    ams-lv2
-    artyFX
-    avldrums-lv2
-    bchoppr
-    bjumblr
-    boops
-    bschaffl
-    bsequencer
-    bshapr
-    bslizr
-    distrho
-    drumgizmo
-    eq10q
-    # faustPhysicalModeling
-    # faustStk
-    fmsynth
-    fomp
-    fverb
-    gxmatcheq-lv2
-    gxplugins-lv2
-    infamousPlugins
-    kapitonov-plugins-pack
-    magnetophonDSP.CharacterCompressor
-    magnetophonDSP.CompBus
-    # magnetophonDSP.ConstantDetuneChorus
-    magnetophonDSP.LazyLimiter
-    magnetophonDSP.MBdistortion
-    magnetophonDSP.RhythmDelay
-    magnetophonDSP.VoiceOfFaust
-    # magnetophonDSP.faustCompressors
-    magnetophonDSP.pluginUtils
-    magnetophonDSP.shelfMultiBand
-    mda_lv2
-    metersLv2
-    mod-distortion
-    molot-lite
-    mooSpace
-    ninjas2
-    noise-repellent
-    plujain-ramp
-    rkrlv2
-    sfizz
-    sorcer
-    surge
-    swh_lv2
-    talentedhack
-    tunefish
-    vocproc
-    x42-avldrums
-    x42-gmsynth
-    zam-plugins
-    zyn-fusion
-  ];
+  home.packages = with pkgs;
+    [
+      blanket
+      cargo-edit
+      carla
+      clang-tools
+      deluge
+      dolphin-emu
+      dua
+      easyeffects
+      exa
+      exercism
+      fd
+      ffmpeg
+      file
+      fira-code
+      # firefox
+      gcc
+      gnome3.gnome-boxes
+      gnome3.gnome-tweaks
+      gnomeExtensions.gsconnect
+      gnomeExtensions.appindicator
+      gnumake
+      graphviz
+      helvum
+      helix
+      htop
+      inputs.rnix-flake.packages.x86_64-linux.rnix-lsp
+      inputs.reaper.packages.x86_64-linux.reaper
+      intel-gpu-tools
+      iftop
+      jitsi-meet-electron
+      julia
+      killall
+      kodi-wayland
+      krita-beta
+      matlab
+      mesa-demos
+      mullvad-vpn
+      pavucontrol
+      pciutils
+      pijul
+      pulseaudio
+      qpwgraph
+      ripgrep
+      rust-analyzer
+      rustfmt
+      simple-http-server
+      spotify
+      teams
+      texlab
+      thunderbird-bin
+      tokei
+      transmission-gtk
+      usbutils
+      virtmanager
+      vlc
+      wev
+      wine
+      winetricks
+      wl-clipboard
+      xournalpp
+      zoom-us
+    ]
+    ++
+    # LV2 Plugins
+    [
+      calf
+      helm
+      modartt.packages.x86_64-linux.pianoteq
+      modartt.packages.x86_64-linux.organteq
+      rnnoise-plugin
+      CHOWTapeModel
+      ams-lv2
+      artyFX
+      avldrums-lv2
+      bchoppr
+      bjumblr
+      boops
+      bschaffl
+      bsequencer
+      bshapr
+      bslizr
+      distrho
+      drumgizmo
+      eq10q
+      # faustPhysicalModeling
+      # faustStk
+      fmsynth
+      fomp
+      fverb
+      gxmatcheq-lv2
+      gxplugins-lv2
+      infamousPlugins
+      kapitonov-plugins-pack
+      magnetophonDSP.CharacterCompressor
+      magnetophonDSP.CompBus
+      # magnetophonDSP.ConstantDetuneChorus
+      magnetophonDSP.LazyLimiter
+      magnetophonDSP.MBdistortion
+      magnetophonDSP.RhythmDelay
+      magnetophonDSP.VoiceOfFaust
+      # magnetophonDSP.faustCompressors
+      magnetophonDSP.pluginUtils
+      magnetophonDSP.shelfMultiBand
+      mda_lv2
+      metersLv2
+      mod-distortion
+      molot-lite
+      mooSpace
+      ninjas2
+      noise-repellent
+      plujain-ramp
+      rkrlv2
+      sfizz
+      sorcer
+      surge
+      swh_lv2
+      talentedhack
+      tunefish
+      vocproc
+      x42-avldrums
+      x42-gmsynth
+      zam-plugins
+      zyn-fusion
+    ];
 
   programs = {
     bash = {
@@ -161,13 +169,14 @@ inputs@{ config, lib, pkgs, modartt, reaper, ... }:
 
     firefox = {
       enable = true;
-      package = pkgs.firefox-wayland.override
+      package =
+        pkgs.firefox-wayland.override
         {
           cfg = {
             enableGnomeExtensions = true;
             enableBrowserpass = true;
           };
-          extraNativeMessagingHosts = [ pkgs.gnomeExtensions.gsconnect ];
+          extraNativeMessagingHosts = [pkgs.gnomeExtensions.gsconnect];
         };
       #   wrapFirefox pkgs.firefox-bin-unwrapped {
 
@@ -183,8 +192,8 @@ inputs@{ config, lib, pkgs, modartt, reaper, ... }:
       enable = true;
       lfs.enable = true;
       extraConfig = {
-        pull = { ff = "only"; };
-        init = { defaultBranch = "main"; };
+        pull = {ff = "only";};
+        init = {defaultBranch = "main";};
       };
       userEmail = "larsmuehmel@web.de";
       userName = "Lars Mühmel";
@@ -194,8 +203,7 @@ inputs@{ config, lib, pkgs, modartt, reaper, ... }:
 
     kakoune = {
       enable = true;
-      plugins =
-        [ pkgs.kak-cargo pkgs.kak-surround pkgs.kak-digraphs ];
+      plugins = [pkgs.kak-cargo pkgs.kak-surround pkgs.kak-digraphs];
       config = {
         numberLines = {
           enable = true;
@@ -338,7 +346,6 @@ inputs@{ config, lib, pkgs, modartt, reaper, ... }:
     };
   };
 
-
   xdg.configFile."kak/digraphs/digraphs.dat".source = pkgs.kak-digraphs + "/share/kak/autoload/plugins/digraphs.dat";
 
   # xdg.configFile."kak-lsp/kak-lsp.toml".text =
@@ -346,8 +353,9 @@ inputs@{ config, lib, pkgs, modartt, reaper, ... }:
   #   in
   #   (builtins.replaceStrings [ "if command -v rustup >/dev/null; then $(rustup which rls); else rls; fi" ] [ ("env CARGO=${pkgs.cargo}/bin/cargo RUSTC=${pkgs.rustc}/bin/rustc RUSTFMT=${pkgs.rustfmt}/bin/rustfmt ${pkgs.rust-analyzer}/bin/rust-analyzer") ] orig);
 
-  xdg.configFile."pijul/config.toml".text = pkgs.lib.generators.toINI
-    { }
+  xdg.configFile."pijul/config.toml".text =
+    pkgs.lib.generators.toINI
+    {}
     {
       author = {
         name = ''"BurNiinTRee"'';
@@ -357,8 +365,6 @@ inputs@{ config, lib, pkgs, modartt, reaper, ... }:
     };
 
   xdg.configFile."REAPER/UserPlugins/reaper_reapack-x86_64.so".source = inputs.reaper.packages.x86_64-linux.reapack + "/UserPlugins/reaper_reapack-x86_64.so";
-
-
 
   home.sessionVariables = {
     EDITOR = "kak";

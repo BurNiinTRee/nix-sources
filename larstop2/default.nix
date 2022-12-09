@@ -1,5 +1,13 @@
-inputs@{ config, pkgs, lib, self, nixpkgs, home-manager, musnix, ... }:
-{
+inputs @ {
+  config,
+  pkgs,
+  lib,
+  self,
+  nixpkgs,
+  home-manager,
+  musnix,
+  ...
+}: {
   imports = [
     ./configuration.nix
     home-manager.nixosModules.home-manager
@@ -15,7 +23,7 @@ inputs@{ config, pkgs, lib, self, nixpkgs, home-manager, musnix, ... }:
       type = "path";
       path = "/home/lars/nix-sources";
     };
-    nixPath = [ "nixpkgs=/etc/nixpkgs/" ];
+    nixPath = ["nixpkgs=/etc/nixpkgs/"];
   };
   environment.etc."nixpkgs".source = nixpkgs;
   nixpkgs.overlays = import ./overlays;
@@ -24,6 +32,6 @@ inputs@{ config, pkgs, lib, self, nixpkgs, home-manager, musnix, ... }:
   };
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = { inherit (inputs) reaper rnix-flake modartt; };
+  home-manager.extraSpecialArgs = {inherit (inputs) reaper rnix-flake modartt;};
   home-manager.users.lars = import ./home.nix;
 }

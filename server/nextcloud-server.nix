@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
-let domain = "cloud.muehml.eu";
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  domain = "cloud.muehml.eu";
+in {
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud25;
@@ -29,7 +32,7 @@ in
 
   services.postgresql = {
     enable = true;
-    ensureDatabases = [ "nextcloud" ];
+    ensureDatabases = ["nextcloud"];
     ensureUsers = [
       {
         name = "nextcloud";
@@ -39,8 +42,8 @@ in
   };
 
   systemd.services."nextcloud-setup" = {
-    requires = [ "postgresql.service" ];
-    after = [ "postgresql.service" ];
+    requires = ["postgresql.service"];
+    after = ["postgresql.service"];
   };
 
   services.nginx.virtualHosts = {
@@ -55,6 +58,5 @@ in
         "/".return = "301 https://cloud.muehml.eu$request_uri";
       };
     };
-
   };
 }

@@ -1,4 +1,10 @@
-{ config, pkgs, lib, flakeInputs, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  flakeInputs,
+  ...
+}: {
   nix = {
     gc = {
       automatic = true;
@@ -7,9 +13,9 @@
     };
     optimise = {
       automatic = true;
-      dates = [ "03:30" ];
+      dates = ["03:30"];
     };
-    nixPath = [ "nixpkgs=/etc/nixpkgs" ];
+    nixPath = ["nixpkgs=/etc/nixpkgs"];
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -26,7 +32,7 @@
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;
 
-  users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOsubAF9SruRBOTXRI2nPAMX5I0gD1OOheji91/NGknv lars@install" ];
+  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOsubAF9SruRBOTXRI2nPAMX5I0gD1OOheji91/NGknv lars@install"];
 
   imports = [
     ./hardware-configuration.nix
@@ -38,7 +44,7 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
-  environment.systemPackages = [ pkgs.htop pkgs.dua pkgs.nix-du ];
+  environment.systemPackages = [pkgs.htop pkgs.dua pkgs.nix-du];
 
   security.acme = {
     defaults.email = "lars@muehml.eu";
@@ -50,7 +56,7 @@
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
   };
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [80 443];
 
   # https://nixos.wiki/wiki/Install_NixOS_on_Hetzner_Online
   networking = {
@@ -62,10 +68,12 @@
       interface = "eth0";
     };
     interfaces."eth0" = {
-      ipv6.addresses = [{
-        address = "2a01:4f8:c17:a38f::1";
-        prefixLength = 64;
-      }];
+      ipv6.addresses = [
+        {
+          address = "2a01:4f8:c17:a38f::1";
+          prefixLength = 64;
+        }
+      ];
       useDHCP = true;
     };
   };

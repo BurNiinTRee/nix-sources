@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # Realtime stuff
   security.rtkit.enable = true;
 
@@ -26,17 +30,19 @@
         "jack.short-name" = true;
         # "node.latency" = "64/48000";
       };
-      "jack.rules" = [{
-        matches = [
-          {
-            "application.process.binary" = "pianoteq";
-          }
-          {
-            "application.process.binary" = "reaper";
-          }
-        ];
-        actions.update-props."node.latency" = "64/48000";
-      }];
+      "jack.rules" = [
+        {
+          matches = [
+            {
+              "application.process.binary" = "pianoteq";
+            }
+            {
+              "application.process.binary" = "reaper";
+            }
+          ];
+          actions.update-props."node.latency" = "64/48000";
+        }
+      ];
     };
 
     config.client-rt = {
@@ -60,14 +66,14 @@
             "rt.time.hard" = 2000000;
           };
         }
-        { name = "libpipewire-module-protocol-native"; }
-        { name = "libpipewire-module-client-node"; }
-        { name = "libpipewire-module-adapter"; }
-        { name = "libpipewire-module-metadata"; }
+        {name = "libpipewire-module-protocol-native";}
+        {name = "libpipewire-module-client-node";}
+        {name = "libpipewire-module-adapter";}
+        {name = "libpipewire-module-metadata";}
         {
           name = "libpipewire-module-protocol-pulse";
           args = {
-            "server.address" = [ "unix:native" ];
+            "server.address" = ["unix:native"];
             "vm.overrides" = {
               "pulse.min.quantum" = "1024/48000";
             };
@@ -96,26 +102,26 @@
             "rt.time.soft" = 2000000;
             "rt.time.hard" = 2000000;
           };
-          flags = [ "ifexists" "nofail" ];
+          flags = ["ifexists" "nofail"];
         }
-        { name = "libpipewire-module-protocol-native"; }
-        { name = "libpipewire-module-profiler"; }
-        { name = "libpipewire-module-metadata"; }
-        { name = "libpipewire-module-spa-device-factory"; }
-        { name = "libpipewire-module-spa-node-factory"; }
-        { name = "libpipewire-module-client-node"; }
-        { name = "libpipewire-module-client-device"; }
+        {name = "libpipewire-module-protocol-native";}
+        {name = "libpipewire-module-profiler";}
+        {name = "libpipewire-module-metadata";}
+        {name = "libpipewire-module-spa-device-factory";}
+        {name = "libpipewire-module-spa-node-factory";}
+        {name = "libpipewire-module-client-node";}
+        {name = "libpipewire-module-client-device";}
         {
           name = "libpipewire-module-portal";
-          flags = [ "ifexists" "nofail" ];
+          flags = ["ifexists" "nofail"];
         }
         {
           name = "libpipewire-module-access";
-          args = { };
+          args = {};
         }
-        { name = "libpipewire-module-adapter"; }
-        { name = "libpipewire-module-link-factory"; }
-        { name = "libpipewire-module-session-manager"; }
+        {name = "libpipewire-module-adapter";}
+        {name = "libpipewire-module-link-factory";}
+        {name = "libpipewire-module-session-manager";}
 
         {
           name = "libpipewire-module-loopback";
@@ -124,10 +130,10 @@
             "node.description" = "Behringer Input 8";
             "playback.props" = {
               "media.class" = "Audio/Source";
-              "audio.position" = [ "MONO" ];
+              "audio.position" = ["MONO"];
             };
             "capture.props" = {
-              "audio.position" = [ "AUX7" ];
+              "audio.position" = ["AUX7"];
               "stream.dont-mix" = true;
               "node.target" = "alsa_input.usb-BEHRINGER_UMC1820_A4F5966D-00.pro-input-0";
               "node.passive" = true;
@@ -141,10 +147,10 @@
             "node.description" = "UMC Headphones";
             "capture.props" = {
               "media.class" = "Audio/Sink";
-              "audio.position" = [ "FL" "FR" ];
+              "audio.position" = ["FL" "FR"];
             };
             "playback.props" = {
-              "audio.position" = [ "AUX0" "AUX1" ];
+              "audio.position" = ["AUX0" "AUX1"];
               "stream.dont-mix" = true;
               "node.target" = "alsa_output.usb-BEHRINGER_UMC1820_A4F5966D-00.pro-output-0";
               "node.passive" = true;

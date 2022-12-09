@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
-let domain = "muehml.eu";
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  domain = "muehml.eu";
+in {
   services.nginx.virtualHosts = {
     "mail.${domain}" = {
       forceSSL = true;
@@ -25,7 +28,7 @@ in
     hostname = "mail.${domain}";
     origin = "mail.${domain}";
     domain = domain;
-    destination = [ "mail.${domain}" domain "localhost" ];
+    destination = ["mail.${domain}" domain "localhost"];
     extraConfig = ''
       smtpd_tls_cert_file=/var/lib/acme/mail.${domain}/cert.pem
       smtpd_tls_key_file=/var/lib/acme/mail.${domain}/key.pem
@@ -37,7 +40,7 @@ in
       smtpd_sasl_path = private/auth
       smtpd_sasl_auth_enable = yes
       smtpd_milters = local:/run/opendkim/opendkim.sock
-      non_smtpd_milters = $smtpd_milters milter_default_action = accept 
+      non_smtpd_milters = $smtpd_milters milter_default_action = accept
     '';
     postmasterAlias = "lars";
     rootAlias = "lars";
@@ -71,8 +74,8 @@ in
     '';
   };
 
-  users.users.postfix.extraGroups = [ "opendkim" ];
-  networking.firewall.allowedTCPPorts = [ 25 143 465 587 993 ];
-  users.users.lars = { isNormalUser = true; };
-  environment.systemPackages = [ pkgs.file ];
+  users.users.postfix.extraGroups = ["opendkim"];
+  networking.firewall.allowedTCPPorts = [25 143 465 587 993];
+  users.users.lars = {isNormalUser = true;};
+  environment.systemPackages = [pkgs.file];
 }

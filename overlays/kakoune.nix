@@ -1,5 +1,4 @@
-self: super:
-{
+self: super: {
   kak-surround = self.stdenv.mkDerivation {
     name = "kakoune-surround";
     version = "2018-09-17";
