@@ -33,6 +33,26 @@
     }: {
       systems = ["x86_64-linux"];
 
+      imports = [
+        ({flake-parts-lib, ...}: {
+          options.perSystem = flake-parts-lib.mkPerSystemOption ({
+            config,
+            pkgs,
+            lib,
+            ...
+          }: {
+            options.treefmt =
+              lib.mkOption
+              {
+                type = lib.types.submoduleWith {
+                  modules = [treefmt-nix.lib.module-options] ++ treefmt-nix.lib.programs.modules;
+                  specialArgs = {inherit pkgs;};
+                };
+                default = {};
+              };
+          });
+        })
+      ];
       perSystem = {
         config,
         pkgs,
@@ -79,24 +99,6 @@
           packages = [pkgs.agenix];
           RULES = "${self}/secrets/secrets.nix";
         };
-        imports = [
-          ({
-            lib,
-            flake-parts-lib,
-            pkgs,
-            ...
-          }: {
-            options.treefmt =
-              lib.mkOption
-              {
-                type = lib.types.submoduleWith {
-                  modules = [treefmt-nix.lib.module-options] ++ treefmt-nix.lib.programs.modules;
-                  specialArgs = {inherit pkgs;};
-                };
-                default = {};
-              };
-          })
-        ];
 
         treefmt = {
           projectRootFile = "flake.nix";
