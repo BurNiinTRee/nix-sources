@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-db = {
+      url = "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux";
+      flake = false;
+    };
+
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 

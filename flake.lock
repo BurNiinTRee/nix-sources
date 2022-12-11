@@ -58,6 +58,18 @@
         "type": "github"
       }
     },
+    "nix-index-db": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-SbFO6djTbfkZEj46/JaIRZZDL6KlGUtO4NKSsq6Jc20=",
+        "type": "file",
+        "url": "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1670525689,
@@ -113,6 +125,7 @@
         "agenix": "agenix",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "nix-index-db": "nix-index-db",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "treefmt-nix": "treefmt-nix"
