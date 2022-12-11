@@ -21,6 +21,8 @@
     fd
     nil
     ripgrep
+    # the manpages include configuration.nix(5) which I care about
+    ((pkgs.nixos {}).config.system.build.manual.manpages)
   ];
 
   home.sessionVariables = {
