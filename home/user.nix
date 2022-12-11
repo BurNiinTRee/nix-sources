@@ -27,6 +27,7 @@
 
   home.sessionVariables = {
     EDITOR = "${config.programs.vscode.package}/bin/codium -w";
+    NIXOS_OZONE_WL = 1;
   };
 
   nix = {
