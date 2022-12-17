@@ -19,6 +19,12 @@
     };
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    # impermanence test
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
@@ -29,6 +35,9 @@
     nixpkgs-stable,
     flake-parts,
     treefmt-nix,
+    # impermanence test
+    nixos-generators,
+    impermanence,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit self;} ({
@@ -68,6 +77,15 @@
         nixpkgs.overlays = [agenix.overlay];
 
         packages = {
+          impermanence-test = nixos-generators.nixosGenerate {
+            inherit system;
+            format = "iso";
+            modules = [
+              ./impermanence-test/iso.nix
+            ];
+            specialArgs.installedSystem = self.nixosConfigurations.impermanence-test;
+          };
+
           update = pkgs.writeShellApplication {
             name = "update";
             runtimeInputs = [pkgs.nix config.packages.deploy];
@@ -101,7 +119,7 @@
         };
 
         devShells.default = pkgs.mkShell {
-          packages = [pkgs.agenix];
+          packages = [pkgs.agenix pkgs.nixos-rebuild];
           RULES = "${self}/secrets/secrets.nix";
         };
 
@@ -137,6 +155,13 @@
             specialArgs = {nixpkgs = nixpkgs;};
             modules = [
               ./rpi
+            ];
+          };
+          impermanence-test = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./impermanence-test/configuration.nix
+              impermanence.nixosModule
             ];
           };
         };
