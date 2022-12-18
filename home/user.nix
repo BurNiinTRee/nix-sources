@@ -35,8 +35,7 @@
   };
   programs.nix-index.enable = true;
   # Download index
-  home.file.nix-index-db = {
-    target = "./.cache/nix-index/files";
+  home.file.".cache/nix-index/files" = {
     source = flakeInputs.nix-index-db;
   };
   home.packages = with pkgs; [
