@@ -118,7 +118,7 @@
           };
         };
 
-        devShells.default = pkgs.mkShell {
+        devShells.default = pkgs.mkShellNoCC {
           packages = [pkgs.agenix pkgs.nixos-rebuild];
           RULES = "${self}/secrets/secrets.nix";
         };
