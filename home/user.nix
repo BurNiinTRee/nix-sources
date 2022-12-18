@@ -49,9 +49,10 @@
 
   home.sessionVariables = {
     EDITOR = "codium -w";
-    # Wayland for Elecron apps
-    NIXOS_OZONE_WL = 1;
-    # Rust and Rustup in $XDG_DATA_HOME
+    ## Wayland for Elecron apps
+    ## broken as of 22-12-18
+    # NIXOS_OZONE_WL = 1;
+    ## Rust and Rustup in $XDG_DATA_HOME
     RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
     CARGO_HOME = "${config.xdg.dataHome}/cargo";
   };
