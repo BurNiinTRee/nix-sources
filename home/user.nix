@@ -2,6 +2,7 @@
   config,
   pkgs,
   flakeInputs,
+  selfLocation,
   ...
 }: {
   programs.home-manager.enable = true;
@@ -66,7 +67,7 @@
       nixpkgs.flake = flakeInputs.nixpkgs;
 
       pkgs.to = {
-        path = "/var/home/user/nix-sources";
+        path = selfLocation;
         type = "path";
       };
       flake-parts.to = {

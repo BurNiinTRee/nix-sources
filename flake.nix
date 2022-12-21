@@ -44,7 +44,9 @@
       flake-parts-lib,
       withSystem,
       ...
-    }: {
+    }: let
+      selfLocation = "/var/home/user/nix-sources";
+    in {
       systems = ["x86_64-linux"];
 
       imports = [
@@ -90,7 +92,7 @@
             name = "update";
             runtimeInputs = [pkgs.nix config.packages.deploy];
             text = ''
-              nix flake update --commit-lock-file /var/home/user/nix-sources
+              nix flake update --commit-lock-file ${selfLocation}
               deploy
             '';
           };
@@ -106,7 +108,7 @@
             name = "home";
             runtimeInputs = [pkgs.home-manager];
             text = ''
-              home-manager switch --flake pkgs
+              home-manager switch
             '';
           };
           muehml = pkgs.writeShellApplication {
@@ -136,7 +138,7 @@
             home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               modules = [./home/user.nix];
-              extraSpecialArgs = {flakeInputs = inputs;};
+              extraSpecialArgs = {flakeInputs = inputs; inherit selfLocation;};
             });
         };
 
