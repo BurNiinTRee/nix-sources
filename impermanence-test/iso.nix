@@ -43,21 +43,23 @@
 
       ${config.system.build.nixos-install}/bin/nixos-install \
         --system ${
-        (installedSystem)
+        installedSystem
         .config
         .system
         .build
         .toplevel
-        } \
+      } \
         --no-root-passwd
 
       echo Shutting off...
       ${systemd}/bin/shutdown now
     '';
-    environment = config.nix.envVars // {
-      HOME = "/root";
-    };
-    serviceConfig = { Type = "oneshot"; };
+    environment =
+      config.nix.envVars
+      // {
+        HOME = "/root";
+      };
+    serviceConfig = {Type = "oneshot";};
   };
   system.stateVersion = "23.05";
   users.users.root.initialHashedPassword = "";

@@ -3,8 +3,7 @@
   config,
   ...
 }: {
-  
-  imports = [ ./hardware-configuration.nix ];
+  imports = [./hardware-configuration.nix];
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -27,7 +26,7 @@
   users.users.user = {
     description = "Lars Mühmel";
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
     hashedPassword = "$y$j9T$LP.5L.1fORt5St50tloRb/$gLjp0QteG7YMGpsPjQY/tMtjhVBEhf1lD844Mk3/.SD";
   };
   services.qemuGuest.enable = true;

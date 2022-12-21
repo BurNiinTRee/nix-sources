@@ -138,7 +138,10 @@
             home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               modules = [./home/user.nix];
-              extraSpecialArgs = {flakeInputs = inputs; inherit selfLocation;};
+              extraSpecialArgs = {
+                flakeInputs = inputs;
+                inherit selfLocation;
+              };
             });
         };
 
