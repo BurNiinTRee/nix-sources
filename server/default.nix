@@ -25,9 +25,9 @@
       id = "nixpkgs";
       type = "indirect";
     };
-    flake = flakeInputs.nixpkgs;
+    flake = flakeInputs.nixpkgs-stable;
   };
-  environment.etc."nixpkgs".source = flakeInputs.nixpkgs;
+  environment.etc."nixpkgs".source = flakeInputs.nixpkgs-stable;
 
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;
