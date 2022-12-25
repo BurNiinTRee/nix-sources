@@ -25,6 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
+    disko.url = "github:nix-community/disko";
   };
 
   outputs = {
@@ -38,6 +39,7 @@
     # impermanence test
     nixos-generators,
     impermanence,
+    disko,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit self;} ({
@@ -81,9 +83,13 @@
         packages = {
           impermanence-test = nixos-generators.nixosGenerate {
             inherit system;
-            format = "iso";
+            format = "install-iso";
             modules = [
               ./impermanence-test/iso.nix
+              disko.nixosModules.disko
+              ({config, lib, ...}: {
+                isoImage.compressImage = lib.mkForce false;
+              })
             ];
             specialArgs.installedSystem = self.nixosConfigurations.impermanence-test;
           };
@@ -167,6 +173,7 @@
             modules = [
               ./impermanence-test/configuration.nix
               impermanence.nixosModule
+              disko.nixosModules.disko
             ];
           };
         };
