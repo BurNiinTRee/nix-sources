@@ -99,6 +99,7 @@
     };
   };
   targets.genericLinux.enable = true;
+  xdg.configFile."nixpkgs/flake.nix".source = config.lib.file.mkOutOfStoreSymlink (selfLocation + "/flake.nix");
   home = {
     username = "user";
     homeDirectory = "/var/home/user";
