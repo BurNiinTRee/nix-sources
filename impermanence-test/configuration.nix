@@ -4,22 +4,17 @@
   modulesPath,
   ...
 }: {
-  networking.hostName = "impermanent";
+  networking.hostName = "impermanence-test";
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
-  boot.initrd.availableKernelModules = [
-    "ahci"
-    "xhci_pci"
-    "sr_mod"
-  ];
-  boot.supportedFilesystems = ["ext4" "vfat"];
-
   imports = [
     ./disko.nix
     (modulesPath + "/profiles/qemu-guest.nix")
+    # replace this with hardware-configuration.nix after rebooting into the installed system
+    (modulesPath + "/profiles/all-hardware.nix")
   ];
 
   environment.persistence."/nix/persist" = {

@@ -87,11 +87,15 @@
             modules = [
               ./impermanence-test/iso.nix
               disko.nixosModules.disko
-              ({config, lib, ...}: {
+              ({
+                config,
+                lib,
+                ...
+              }: {
                 isoImage.compressImage = lib.mkForce false;
               })
             ];
-            specialArgs.installedSystem = self.nixosConfigurations.impermanence-test;
+            specialArgs = {inherit self;};
           };
 
           update = pkgs.writeShellApplication {

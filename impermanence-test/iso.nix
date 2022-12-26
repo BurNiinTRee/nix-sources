@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  installedSystem,
+  self,
   ...
 }: {
   imports = [./disko.nix];
@@ -24,38 +24,17 @@
       wipefs --all /dev/vda
       ${config.system.build.disko} --mode zap_create_mount
 
-      mkdir -p /mnt/nix/persist
+      mkdir -p /mnt/nix/persist/etc/
 
 
-      install -D ${./configuration.nix} /mnt/nix/persist/etc/nixos/configuration.nix
-      install -D ${./disko.nix} /mnt/nix/persist/etc/nixos/disko.nix
-      nixos-generate-config --no-filesystems --show-hardware-config --root /mnt > /mnt/nix/persist/etc/nixos/hardware-configuration.nix
-      cat > /mnt/nix/persist/etc/nixos/flake.nix <<EOF
-      {
-        inputs = {
-          nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-          impermanence.url = "github:nix-community/impermanence";
-          disko = {
-            url = "github:nix-community/disko";
-            inputs.nixpkgs.follows = "nixpkgs";
-          };
-        };
-        outputs = {self, nixpkgs, disko, impermanence}: {
-          nixosConfigurations.impermanent = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              ./configuration.nix
-              disko.nixosModules.disko
-              impermanence.nixosModule
-            ];
-          };
-        };
-      }
-      EOF
+      cp -r ${self} /mnt/nix/persist/etc/nixos
+      nixos-generate-config --no-filesystems --show-hardware-config --root /mnt > /mnt/nix/persist/etc/nixos/impermanence-test/hardware-configuration.nix
 
       ${config.system.build.nixos-install}/bin/nixos-install \
         --system ${
-        installedSystem
+        self
+        .nixosConfigurations
+        .impermanence-test
         .config
         .system
         .build
@@ -66,7 +45,7 @@
 
 
       echo Syncing filesystems
-      sync 
+      sync
       echo Shutting off...
       ${systemd}/bin/shutdown now
     '';

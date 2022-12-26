@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   disko.devices = {
     disk.vda = {
       device = "/dev/vda";
