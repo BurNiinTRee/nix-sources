@@ -42,7 +42,7 @@
     disko,
     ...
   } @ inputs:
-    flake-parts.lib.mkFlake {inherit self;} ({
+    flake-parts.lib.mkFlake {inherit inputs;} ({
       flake-parts-lib,
       withSystem,
       ...
