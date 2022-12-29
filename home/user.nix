@@ -67,7 +67,7 @@
     registry = {
       nixpkgs.flake = flakeInputs.nixpkgs;
 
-      pkgs.to = {
+      bntr.to = {
         path = selfLocation;
         type = "path";
       };
