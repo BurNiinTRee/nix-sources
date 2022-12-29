@@ -44,7 +44,6 @@
     flake-parts.lib.mkFlake {inherit inputs;} ({
       flake-parts-lib,
       withSystem,
-      modulesPath,
       ...
     }: let
       selfLocation = "/var/home/user/nix-sources";
