@@ -52,24 +52,7 @@
 
       imports = [
         ./flake-modules/nixpkgs.nix
-        ({flake-parts-lib, ...}: {
-          options.perSystem = flake-parts-lib.mkPerSystemOption ({
-            config,
-            pkgs,
-            lib,
-            ...
-          }: {
-            options.treefmt =
-              lib.mkOption
-              {
-                type = lib.types.submoduleWith {
-                  modules = [treefmt-nix.lib.module-options] ++ treefmt-nix.lib.programs.modules;
-                  specialArgs = {inherit pkgs;};
-                };
-                default = {};
-              };
-          });
-        })
+        treefmt-nix.flakeModule
       ];
       perSystem = {
         config,
