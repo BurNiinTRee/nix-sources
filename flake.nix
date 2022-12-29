@@ -17,7 +17,6 @@
       url = "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux";
       flake = false;
     };
-
     treefmt-nix.url = "github:numtide/treefmt-nix";
     # impermanence test
     nixos-generators = {
@@ -45,6 +44,7 @@
     flake-parts.lib.mkFlake {inherit inputs;} ({
       flake-parts-lib,
       withSystem,
+      modulesPath,
       ...
     }: let
       selfLocation = "/var/home/user/nix-sources";
@@ -52,6 +52,7 @@
       systems = ["x86_64-linux"];
 
       imports = [
+        ./flake-modules/nixpkgs.nix
         ({flake-parts-lib, ...}: {
           options.perSystem = flake-parts-lib.mkPerSystemOption ({
             config,
@@ -173,6 +174,11 @@
               disko.nixosModules.disko
             ];
           };
+        };
+        flakeModules = {
+          nixpkgs = ./flake-modules/nixpkgs.nix;
+          nixpkgsCross = ./flake-modules/nixpkgsCross.nix;
+          default = {import = [./flake-modules/nixpkgs.nix ./flake-modules/nixpkgsCross.nix];};
         };
       };
     });

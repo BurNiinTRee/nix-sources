@@ -73,7 +73,7 @@
       };
       flake-parts.to = {
         type = "github";
-        owner = "BurNiinTRee";
+        owner = "hercules-ci";
         repo = "flake-parts";
       };
     };
