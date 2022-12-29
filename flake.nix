@@ -160,7 +160,9 @@
         flakeModules = {
           nixpkgs = ./flake-modules/nixpkgs.nix;
           nixpkgsCross = ./flake-modules/nixpkgsCross.nix;
-          default = {import = [./flake-modules/nixpkgs.nix ./flake-modules/nixpkgsCross.nix];};
+          default = {
+            import = [./flake-modules/nixpkgs.nix ./flake-modules/nixpkgsCross.nix];
+          };
         };
       };
     });
