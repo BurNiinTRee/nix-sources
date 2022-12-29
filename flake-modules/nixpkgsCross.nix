@@ -1,4 +1,5 @@
 # Taken almost verbatim from Idesgoui at https://github.com/hercules-ci/flake-parts/issues/35
+# and upstream flake-parts at https://github.com/hercules-ci/flake-parts/blob/main/modules/nixpkgs.nix
 {
   flake-parts-lib,
   config,
