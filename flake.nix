@@ -165,13 +165,6 @@
             ];
           };
 
-          rpi = nixpkgs-stable.lib.nixosSystem {
-            system = "aarch64-linux";
-            specialArgs = {nixpkgs = nixpkgs;};
-            modules = [
-              ./rpi
-            ];
-          };
           impermanence-test = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
