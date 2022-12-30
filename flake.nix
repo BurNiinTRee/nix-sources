@@ -158,8 +158,8 @@
           };
         };
         flakeModules = {
-          nixpkgsCross = ./flake-modules/nixpkgsCross.nix;
-          default = self.flakeModules.nixpkgsCross;
+          nixpkgs = ./flake-modules/nixpkgs.nix;
+          default = self.flakeModules.nixpkgs;
         };
       };
     });
