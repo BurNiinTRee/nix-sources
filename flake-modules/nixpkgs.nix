@@ -60,7 +60,7 @@ in {
       };
       crossSystems = mkOption {
         type = types.listOf (types.oneOf [types.str types.attrs]);
-        default = builtins.filter (c: system != c && config.selectCrossSystem c) (map lib.elaborate rootConfig.systems);
+        default = builtins.filter (c: system != c && config.selectCrossSystem c) (map lib.systems.elaborate rootConfig.systems);
 
         apply = systems: builtins.map lib.systems.elaborate systems;
       };
