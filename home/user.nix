@@ -89,7 +89,7 @@
         version = 2;
       });
     in {
-      experimental-features = ["nix-command" "flakes" "repl-flake" "ca-derivations"];
+      experimental-features = ["nix-command" "flakes" "repl-flake"];
       sandbox = true;
       connect-timeout = 5;
       log-lines = 25;
