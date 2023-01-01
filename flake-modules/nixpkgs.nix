@@ -59,10 +59,10 @@ in {
         };
       };
       crossSystems = mkOption {
-        type = types.listOf (types.oneOf [types.str types.attrs]);
+        type = types.attrsOf (types.oneOf [types.str types.attrs]);
         default = builtins.filter (c: system != c && config.selectCrossSystem c) (map lib.systems.elaborate rootConfig.systems);
 
-        apply = systems: builtins.map lib.systems.elaborate systems;
+        apply = systems: builtins.mapAttrs (_: lib.systems.elaborate) systems;
       };
 
       selectCrossSystem = mkOption {
@@ -103,12 +103,9 @@ in {
 
       x =
         lib.mkIf (!(config ? _module.args.crossSystem))
-        (lib.listToAttrs (builtins.map
-          (c: {
-            name = c.system;
-            value = {_module.args.crossSystem = c;};
-          })
-          config.crossSystems));
+        (builtins.mapAttrs
+          (_: c: {_module.args.crossSystem = c;})
+          config.crossSystems);
     };
   });
 }
