@@ -25,11 +25,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1672163301,
-        "narHash": "sha256-ClIIPeY0SyZjlc9b1+EorH5DiCyYBSsUOOu9dXEwrXE=",
+        "lastModified": 1672526278,
+        "narHash": "sha256-QpebSMK5vrA5tE4xT0WpcP84MRETydL6NCotIXPVvGw=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "df3a607ad7ee431f4831a51af2c464aa8a8813f4",
+        "rev": "981160e9cfb73a9fc9f7eddfe193953fc784cdfb",
         "type": "github"
       },
       "original": {
@@ -94,7 +94,7 @@
     "nix-index-db": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-77F5PAJKpyL4uq0cb6NRmdVXyjuGRg7U9lrYyVn1Mto=",
+        "narHash": "sha256-Rl0uzpZsGnOV8k6FxoEhxSFp6xRd4Jlc7ZzwYe2I3/w=",
         "type": "file",
         "url": "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux"
       },
