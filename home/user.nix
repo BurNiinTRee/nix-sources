@@ -63,7 +63,6 @@
     "${config.home.sessionVariables.CARGO_HOME}/bin"
   ];
 
-
   home.file.".nixpkgs".source = flakeInputs.nixpkgs;
   home.sessionVariables.NIX_PATH = "nixpkgs=${config.home.homeDirectory}/.nixpkgs";
   nix = {
