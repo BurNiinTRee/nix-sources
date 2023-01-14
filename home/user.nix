@@ -80,8 +80,8 @@
       nixpkgs.flake = flakeInputs.nixpkgs;
 
       bntr.to = {
-        path = selfLocation;
-        type = "path";
+        url = "file://" + selfLocation;
+        type = "git";
       };
       flake-parts.to = {
         type = "github";
