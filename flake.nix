@@ -70,13 +70,6 @@
             modules = [
               ./impermanence-test/iso.nix
               disko.nixosModules.disko
-              ({
-                config,
-                lib,
-                ...
-              }: {
-                isoImage.compressImage = lib.mkForce false;
-              })
             ];
             specialArgs = {inherit self;};
           };
