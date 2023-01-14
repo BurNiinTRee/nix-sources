@@ -30,6 +30,16 @@
   programs.starship.enable = true;
   programs.skim.enable = true;
   programs.htop.enable = true;
+  programs.helix = {
+    enable = true;
+    languages = [
+      {
+        name = "nix";
+        formatter.command = "alejandra";
+      }
+    ];
+    settings.theme = "onelight";
+  };
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
@@ -50,7 +60,7 @@
   ];
 
   home.sessionVariables = {
-    EDITOR = "codium -w";
+    EDITOR = "hx";
     ## Wayland for Elecron apps
     ## broken as of 22-12-18
     # NIXOS_OZONE_WL = 1;
