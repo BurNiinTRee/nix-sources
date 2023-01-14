@@ -74,6 +74,17 @@
             specialArgs = {inherit self;};
           };
 
+          bcachefsIso = nixos-generators.nixosGenerate {
+            inherit system;
+            format = "install-iso";
+            modules = [
+              ({lib, ...}: {
+                boot.supportedFilesystems = lib.mkForce ["vfat" "bcachefs"];
+                # isoImage.squashfsCompression = "zstd -Xcompression-level 1";
+              })
+            ];
+          };
+
           update = pkgs.writeShellApplication {
             name = "update";
             runtimeInputs = [pkgs.nix config.packages.deploy];
