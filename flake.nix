@@ -121,7 +121,7 @@
 
         devShells.default = pkgs.mkShellNoCC {
           packages = [pkgs.agenix pkgs.nixos-rebuild];
-          RULES = "${self}/secrets/secrets.nix";
+          RULES = "${selfLocation}/secrets/secrets.nix";
         };
 
         treefmt = {
