@@ -40,6 +40,9 @@
     ];
     settings.theme = "onelight";
   };
+
+  programs.nushell.enable = true;
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
@@ -58,6 +61,38 @@
     # the manpages include configuration.nix(5) which I care about
     ((pkgs.nixos {}).config.system.build.manual.manpages)
   ];
+
+  ## EMAIL
+
+  programs.offlineimap = {
+    enable = true;
+    pythonFile = ''
+      from subprocess import check_output
+
+      def get_pass(password):
+        return check_output(["pass", "show", password], shell=True).splitlines()[0]
+
+    '';
+  };
+  accounts.email.accounts = {
+    "muehml.eu" = {
+      address = "lars@muehml.eu";
+      primary = true;
+      realName = "Lars Mühmel";
+      userName = "lars@muehml.eu";
+      imap.host = "mail.muehml.eu";
+      offlineimap.enable = true;
+      offlineimap.extraConfig.remote.remotepasseval = ''get_pass("mail.muehml.eu/lars@muehml.eu")'';
+    };
+    "web.de" = {
+      address = "larsmuehmel@web.de";
+      realName = "Lars Mühmel";
+      userName = "larsmuehmel@web.de";
+      imap.host = "imap.web.de";
+      offlineimap.enable = true;
+      offlineimap.extraConfig.remote.remotepasseval = ''get_pass("web.de/larsmuehmel@web.de")'';
+    };
+  };
 
   home.sessionVariables = {
     EDITOR = "hx";
