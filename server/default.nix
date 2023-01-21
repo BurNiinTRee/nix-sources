@@ -38,7 +38,6 @@
     ./hardware-configuration.nix
     ./mail-server.nix
     ./nextcloud-server.nix
-    # ./pleroma.nix
   ];
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;

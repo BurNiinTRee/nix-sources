@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     agenix = {
       url = "github:ryantm/agenix";
@@ -33,6 +34,7 @@
     agenix,
     home-manager,
     nixpkgs-stable,
+    simple-nixos-mailserver,
     flake-parts,
     treefmt-nix,
     # impermanence test
@@ -147,6 +149,7 @@
             system = "x86_64-linux";
             specialArgs = {flakeInputs = inputs;};
             modules = [
+              simple-nixos-mailserver.nixosModules.mailserver
               ./server
               agenix.nixosModule
             ];

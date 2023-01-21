@@ -5,4 +5,5 @@ let
 in {
   "nx-initial-admin-pass.age".publicKeys = [larstop2 muehml];
   "pleroma-secrets.age".publicKeys = [larstop2 muehml];
+  "emailHashedPassword.age".publicKeys = [larstop2 muehml];
 }
