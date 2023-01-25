@@ -75,31 +75,54 @@
 
   programs.offlineimap = {
     enable = true;
-    pythonFile = ''
-      from subprocess import check_output
-
-      def get_pass(password):
-        return check_output(["pass", "show", password], shell=True).splitlines()[0]
-
-    '';
   };
-  accounts.email.accounts = {
+  accounts.email.accounts = let
+    pass = acc: "pass show ${acc}";
+  in {
     "muehml.eu" = {
       address = "lars@muehml.eu";
       primary = true;
       realName = "Lars Mühmel";
       userName = "lars@muehml.eu";
       imap.host = "mail.muehml.eu";
+      passwordCommand = pass "mail.muehml.eu/lars@muehml.eu";
       offlineimap.enable = true;
-      offlineimap.extraConfig.remote.remotepasseval = ''get_pass("mail.muehml.eu/lars@muehml.eu")'';
     };
     "web.de" = {
       address = "larsmuehmel@web.de";
       realName = "Lars Mühmel";
       userName = "larsmuehmel@web.de";
+      passwordCommand = pass "web.de/larsmuehmel@web.de";
       imap.host = "imap.web.de";
       offlineimap.enable = true;
-      offlineimap.extraConfig.remote.remotepasseval = ''get_pass("web.de/larsmuehmel@web.de")'';
+    };
+    "gmail.com" = {
+      address = "lukas.lukas2511@googlemail.com";
+      realName = "Lars Mühmel";
+      userName = "lukas.lukas2511@googlemail.com";
+      imap.host = "imap.gmail.com";
+      flavor = "gmail.com";
+      offlineimap.enable = true;
+      offlineimap.extraConfig.remote = {
+        oauth2_client_id_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-id"]).decode()'';
+        oauth2_client_secret_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-secret"]).decode()'';
+        oauth2_refresh_token_eval = ''get_pass(0,["pass", "show", "google.com/lukas.lukas2511@googlemail.com-email-refresh-token"]).decode()'';
+        oauth2_request_url = "https://accounts.google.com/o/oauth2/token";
+      };
+    };
+    "lnu.se" = {
+      address = "lm222ux@student.lnu.se";
+      realName = "Lars Mühmel";
+      userName = "lm222ux@student.lnu.se";
+      imap.host = "imap.gmail.com";
+      flavor = "gmail.com";
+      offlineimap.enable = true;
+      offlineimap.extraConfig.remote = {
+        oauth2_client_id_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-id"]).decode()'';
+        oauth2_client_secret_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-secret"]).decode()'';
+        oauth2_refresh_token_eval = ''get_pass(0,["pass", "show", "lnu.se/lm222ux-email-refresh-token"]).decode()'';
+        oauth2_request_url = "https://accounts.google.com/o/oauth2/token";
+      };
     };
   };
 
