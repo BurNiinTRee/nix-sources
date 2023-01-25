@@ -27,6 +27,14 @@
   '';
 
   programs.bash.enable = true;
+  programs.password-store = {
+    enable = true;
+    package = pkgs.pass.withExtensions (exts: [exts.pass-otp]);
+  };
+  programs.git = {
+    enable = true;
+    package = pkgs.gitAndTools.gitFull;
+  };
   programs.starship.enable = true;
   programs.skim.enable = true;
   programs.htop.enable = true;
@@ -58,6 +66,7 @@
     nil
     nixUnstable
     ripgrep
+    wl-clipboard
     # the manpages include configuration.nix(5) which I care about
     ((pkgs.nixos {}).config.system.build.manual.manpages)
   ];
