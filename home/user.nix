@@ -29,14 +29,13 @@
   programs.bash.enable = true;
   programs.password-store = {
     enable = true;
-    package =
-      (pkgs.pass.override {
-        git = config.programs.git.package;
-        openssh = pkgs.empty;
-        waylandSupport = true;
-      });
-      # FIXME this ignores the override we just applied
-      # .withExtensions (exts: [exts.pass-otp]);
+    package = pkgs.pass.override {
+      git = config.programs.git.package;
+      openssh = pkgs.empty;
+      waylandSupport = true;
+    };
+    # FIXME this ignores the override we just applied
+    # .withExtensions (exts: [exts.pass-otp]);
   };
   programs.git = {
     enable = true;
@@ -78,9 +77,13 @@
 
   ## EMAIL
 
-  programs.offlineimap = {
-    enable = true;
-  };
+  programs.offlineimap.enable = true;
+  programs.msmtp.enable = true;
+
+  programs.aerc.enable = true;
+  xdg.configFile."aerc/binds.conf".enable = false;
+  xdg.configFile."aerc/aerc.conf".enable = false;
+
   accounts.email.accounts = let
     pass = acc: "pass show ${acc}";
   in {
@@ -90,8 +93,11 @@
       realName = "Lars Mühmel";
       userName = "lars@muehml.eu";
       imap.host = "mail.muehml.eu";
+      smtp.host = "mail.muehml.eu";
       passwordCommand = pass "mail.muehml.eu/lars@muehml.eu";
       offlineimap.enable = true;
+      msmtp.enable = true;
+      aerc.enable = true;
     };
     "web.de" = {
       address = "larsmuehmel@web.de";
@@ -99,13 +105,15 @@
       userName = "larsmuehmel@web.de";
       passwordCommand = pass "web.de/larsmuehmel@web.de";
       imap.host = "imap.web.de";
+      smtp.host = "smtp.web.de";
+      aerc.enable = true;
       offlineimap.enable = true;
+      msmtp.enable = true;
     };
     "gmail.com" = {
       address = "lukas.lukas2511@googlemail.com";
       realName = "Lars Mühmel";
       userName = "lukas.lukas2511@googlemail.com";
-      imap.host = "imap.gmail.com";
       flavor = "gmail.com";
       offlineimap.enable = true;
       offlineimap.extraConfig.remote = {
@@ -114,12 +122,12 @@
         oauth2_refresh_token_eval = ''get_pass(0,["pass", "show", "google.com/lukas.lukas2511@googlemail.com-email-refresh-token"]).decode()'';
         oauth2_request_url = "https://accounts.google.com/o/oauth2/token";
       };
+      aerc.enable = true;
     };
     "lnu.se" = {
       address = "lm222ux@student.lnu.se";
       realName = "Lars Mühmel";
       userName = "lm222ux@student.lnu.se";
-      imap.host = "imap.gmail.com";
       flavor = "gmail.com";
       offlineimap.enable = true;
       offlineimap.extraConfig.remote = {
@@ -128,6 +136,7 @@
         oauth2_refresh_token_eval = ''get_pass(0,["pass", "show", "lnu.se/lm222ux-email-refresh-token"]).decode()'';
         oauth2_request_url = "https://accounts.google.com/o/oauth2/token";
       };
+      aerc.enable = true;
     };
   };
 

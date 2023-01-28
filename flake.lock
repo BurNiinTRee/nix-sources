@@ -79,14 +79,17 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1674720437,
-        "narHash": "sha256-1Bn5r0lPjJ2nNpnDcTnY8kOln1XxhgE+DNhA1IFlNiQ=",
-        "type": "git",
-        "url": "file:///var/home/user/packages/home-manager"
+        "lastModified": 1674771519,
+        "narHash": "sha256-U0W3S1nX6yEvLh3Vq70EORbmXecAKXfmEfCfaA4A+I8=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "bb4b25b302dbf0f527f190461b080b5262871756",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///var/home/user/packages/home-manager"
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "impermanence": {
