@@ -29,16 +29,7 @@
   programs.bash.enable = true;
   programs.password-store = {
     enable = true;
-    package = pkgs.pass.override {
-      git = config.programs.git.package;
-      openssh = pkgs.empty;
-      waylandSupport = true;
-    };
-    # FIXME this ignores the override we just applied
-    # .withExtensions (exts: [exts.pass-otp]);
-  };
-  programs.git = {
-    enable = true;
+    package = pkgs.empty;
   };
   programs.starship.enable = true;
   programs.skim.enable = true;
@@ -80,7 +71,10 @@
   programs.offlineimap.enable = true;
   programs.msmtp.enable = true;
 
-  programs.aerc.enable = true;
+  programs.aerc = {
+    enable = true;
+    extraConfig.general.unsafe-accounts-conf = true;
+  };
   xdg.configFile."aerc/binds.conf".enable = false;
   xdg.configFile."aerc/aerc.conf".enable = false;
 
