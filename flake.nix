@@ -63,7 +63,7 @@
         ...
       }: {
         legacyPackages = pkgs;
-        nixpkgs.overlays = [agenix.overlay];
+        nixpkgs.overlays = [agenix.overlays.default];
 
         packages = {
           impermanence-test = nixos-generators.nixosGenerate {
@@ -151,7 +151,7 @@
             modules = [
               simple-nixos-mailserver.nixosModules.mailserver
               ./server
-              agenix.nixosModule
+              agenix.nixosModules.default
             ];
           };
 
