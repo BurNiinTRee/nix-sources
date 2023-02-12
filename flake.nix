@@ -5,6 +5,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    attic.url = "github:zhaofengli/attic";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +32,7 @@
   outputs = {
     self,
     nixpkgs,
+    attic,
     agenix,
     home-manager,
     nixpkgs-stable,
@@ -60,12 +62,27 @@
         config,
         pkgs,
         system,
+        self',
         ...
       }: {
         legacyPackages = pkgs;
         nixpkgs.overlays = [agenix.overlays.default];
 
-        packages = {
+        packages = let
+          ShellApplicationNoCheck = {
+            name,
+            text,
+            runtimeInputs ? [],
+          }:
+            pkgs.writeShellApplication {
+              inherit name text runtimeInputs;
+              checkPhase = ''
+                runHook preCheck
+                ${pkgs.stdenv.shellDryRun} "$target"
+                runHook postCheck
+              '';
+            };
+        in {
           impermanence-test = nixos-generators.nixosGenerate {
             inherit system;
             format = "install-iso";
@@ -87,7 +104,7 @@
             ];
           };
 
-          update = pkgs.writeShellApplication {
+          update = ShellApplicationNoCheck {
             name = "update";
             runtimeInputs = [pkgs.nix config.packages.deploy];
             text = ''
@@ -95,7 +112,7 @@
               deploy
             '';
           };
-          deploy = pkgs.writeShellApplication {
+          deploy = ShellApplicationNoCheck {
             name = "deploy";
             runtimeInputs = [config.packages.home config.packages.muehml];
             text = ''
@@ -103,14 +120,14 @@
               muehml # deploy to muehml.eu
             '';
           };
-          home = pkgs.writeShellApplication {
+          home = ShellApplicationNoCheck {
             name = "home";
             runtimeInputs = [pkgs.home-manager];
             text = ''
               home-manager switch
             '';
           };
-          muehml = pkgs.writeShellApplication {
+          muehml = ShellApplicationNoCheck {
             name = "muehml";
             runtimeInputs = [pkgs.nixos-rebuild];
             text = ''
@@ -120,7 +137,7 @@
         };
 
         devShells.default = pkgs.mkShellNoCC {
-          packages = [pkgs.agenix pkgs.nixos-rebuild];
+          packages = [pkgs.agenix pkgs.nixos-rebuild] ++ (with self'.packages; [update deploy muehml home]);
           RULES = "${selfLocation}/secrets/secrets.nix";
         };
 
@@ -152,6 +169,7 @@
               simple-nixos-mailserver.nixosModules.mailserver
               ./server
               agenix.nixosModules.default
+              attic.nixosModules.atticd
             ];
           };
 
@@ -170,4 +188,6 @@
         };
       };
     });
+  nixConfig.extra-substituters = "https://staging.attic.rs/attic-ci";
+  nixConfig.extra-trusted-public-keys = "attic-ci:U5Sey4mUxwBXM3iFapmP0/ogODXywKLRNgRPQpEXxbo=";
 }

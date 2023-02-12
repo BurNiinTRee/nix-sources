@@ -5,6 +5,7 @@
   selfLocation,
   ...
 }: {
+  imports = [./email.nix];
   programs.home-manager.enable = true;
   programs.direnv = {
     enable = true;
@@ -29,7 +30,10 @@
   programs.bash.enable = true;
   programs.password-store = {
     enable = true;
-    package = pkgs.empty;
+    # We use fedoras password-store
+    # but we still want home-managers configuration
+    # in particular $PASSWORD_STORE_DIR
+    package = pkgs.empty; 
   };
   programs.starship.enable = true;
   programs.skim.enable = true;
@@ -62,77 +66,10 @@
     nil
     nixUnstable
     ripgrep
+    flakeInputs.attic.packages.x86_64-linux.attic
     # the manpages include configuration.nix(5) which I care about
     ((pkgs.nixos {}).config.system.build.manual.manpages)
   ];
-
-  ## EMAIL
-
-  programs.offlineimap.enable = true;
-  programs.msmtp.enable = true;
-
-  programs.aerc = {
-    enable = true;
-    extraConfig.general.unsafe-accounts-conf = true;
-  };
-  xdg.configFile."aerc/binds.conf".enable = false;
-  xdg.configFile."aerc/aerc.conf".enable = false;
-
-  accounts.email.accounts = let
-    pass = acc: "pass show ${acc}";
-  in {
-    "muehml.eu" = {
-      address = "lars@muehml.eu";
-      primary = true;
-      realName = "Lars Mühmel";
-      userName = "lars@muehml.eu";
-      imap.host = "mail.muehml.eu";
-      smtp.host = "mail.muehml.eu";
-      passwordCommand = pass "mail.muehml.eu/lars@muehml.eu";
-      offlineimap.enable = true;
-      msmtp.enable = true;
-      aerc.enable = true;
-    };
-    "web.de" = {
-      address = "larsmuehmel@web.de";
-      realName = "Lars Mühmel";
-      userName = "larsmuehmel@web.de";
-      passwordCommand = pass "web.de/larsmuehmel@web.de";
-      imap.host = "imap.web.de";
-      smtp.host = "smtp.web.de";
-      aerc.enable = true;
-      offlineimap.enable = true;
-      msmtp.enable = true;
-    };
-    "gmail.com" = {
-      address = "lukas.lukas2511@googlemail.com";
-      realName = "Lars Mühmel";
-      userName = "lukas.lukas2511@googlemail.com";
-      flavor = "gmail.com";
-      offlineimap.enable = true;
-      offlineimap.extraConfig.remote = {
-        oauth2_client_id_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-id"]).decode()'';
-        oauth2_client_secret_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-secret"]).decode()'';
-        oauth2_refresh_token_eval = ''get_pass(0,["pass", "show", "google.com/lukas.lukas2511@googlemail.com-email-refresh-token"]).decode()'';
-        oauth2_request_url = "https://accounts.google.com/o/oauth2/token";
-      };
-      aerc.enable = true;
-    };
-    "lnu.se" = {
-      address = "lm222ux@student.lnu.se";
-      realName = "Lars Mühmel";
-      userName = "lm222ux@student.lnu.se";
-      flavor = "gmail.com";
-      offlineimap.enable = true;
-      offlineimap.extraConfig.remote = {
-        oauth2_client_id_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-id"]).decode()'';
-        oauth2_client_secret_eval = ''get_pass(0,["pass", "show", "cloud.google.com/offline-imap-lars-secret"]).decode()'';
-        oauth2_refresh_token_eval = ''get_pass(0,["pass", "show", "lnu.se/lm222ux-email-refresh-token"]).decode()'';
-        oauth2_request_url = "https://accounts.google.com/o/oauth2/token";
-      };
-      aerc.enable = true;
-    };
-  };
 
   home.sessionVariables = {
     EDITOR = "hx";
@@ -147,6 +84,10 @@
   home.sessionPath = [
     "${config.home.sessionVariables.CARGO_HOME}/bin"
   ];
+
+  home.file.".latexmkrc".text = ''
+    $pdf_previewer = 'flatpak run org.gnome.Evince';
+  '';
 
   home.file.".nixpkgs".source = flakeInputs.nixpkgs;
   home.sessionVariables.NIX_PATH = "nixpkgs=${config.home.homeDirectory}/.nixpkgs";
@@ -183,6 +124,7 @@
       auto-optimise-store = true;
       max-jobs = 6;
       flake-registry = emptyFlakeRegistry;
+      netrc-file = "/var/home/user/.config/nix/netrc";
     };
   };
   targets.genericLinux.enable = true;

@@ -38,6 +38,7 @@
     ./hardware-configuration.nix
     ./mail-server.nix
     ./nextcloud-server.nix
+    ./atticd.nix
   ];
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
