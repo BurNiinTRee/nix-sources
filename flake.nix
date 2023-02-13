@@ -50,7 +50,7 @@
       withSystem,
       ...
     }: let
-      selfLocation = "/var/home/user/nix-sources";
+      selfLocation = "/home/user/bntr";
     in {
       systems = ["x86_64-linux"];
 
@@ -104,6 +104,18 @@
             ];
           };
 
+          larstop2Iso = nixos-generators.nixosGenerate {
+            inherit system;
+            format = "install-iso";
+            modules = [
+              ./larstop2/installer.nix
+              disko.nixosModules.disko
+              {
+                _module.args.self = self;
+              }
+            ];
+          };
+
           update = ShellApplicationNoCheck {
             name = "update";
             runtimeInputs = [pkgs.nix config.packages.deploy];
@@ -124,7 +136,7 @@
             name = "home";
             runtimeInputs = [pkgs.home-manager];
             text = ''
-              home-manager switch
+              home-manager switch --flake ${selfLocation}
             '';
           };
           muehml = ShellApplicationNoCheck {
@@ -153,15 +165,45 @@
           user = withSystem "x86_64-linux" ({pkgs, ...}:
             home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
-              modules = [./home/user.nix];
-              extraSpecialArgs = {
-                flakeInputs = inputs;
-                inherit selfLocation;
-              };
+              modules = [
+                ./home/user
+                {
+                  targets.genericLinux.enable = true;
+                  home = {
+                    homeDirectory = "/var/home/user";
+                    username = "user";
+                  };
+                  nix.package = pkgs.nixUnstable;
+                  _module.args = {
+                    inherit selfLocation;
+                    flakeInputs = inputs;
+                  };
+                }
+              ];
             });
         };
 
         nixosConfigurations = {
+          larstop2 = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./larstop2
+              home-manager.nixosModules.home-manager
+              impermanence.nixosModules.impermanence
+              disko.nixosModules.disko
+              ({lib, ...}: {
+                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+                home-manager.users.user = {
+                  imports = [
+                    ./home/user
+                    impermanence.nixosModules.home-manager.impermanence
+                  ];
+                  _module.args.flakeInputs = inputs;
+                  _module.args.selfLocation = selfLocation;
+                };
+              })
+            ];
+          };
           "muehml" = nixpkgs-stable.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = {flakeInputs = inputs;};

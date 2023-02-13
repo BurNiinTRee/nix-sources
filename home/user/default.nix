@@ -1,11 +1,15 @@
 {
   config,
   pkgs,
+  lib,
   flakeInputs,
   selfLocation,
   ...
 }: {
-  imports = [./email.nix];
+  imports = [
+    ./email.nix
+    # ./impermanence.nix
+  ];
   programs.home-manager.enable = true;
   programs.direnv = {
     enable = true;
@@ -33,7 +37,7 @@
     # We use fedoras password-store
     # but we still want home-managers configuration
     # in particular $PASSWORD_STORE_DIR
-    package = pkgs.empty; 
+    package = pkgs.empty;
   };
   programs.starship.enable = true;
   programs.skim.enable = true;
@@ -66,10 +70,19 @@
     nil
     nixUnstable
     ripgrep
-    flakeInputs.attic.packages.x86_64-linux.attic
+    # flakeInputs.attic.packages.x86_64-linux.attic
     # the manpages include configuration.nix(5) which I care about
     ((pkgs.nixos {}).config.system.build.manual.manpages)
   ];
+
+  dconf.settings = {
+    "org/gnome/desktop/input-sources" = {
+      sources = [
+        (lib.hm.gvariant.mkTuple ["xkb" "us+altgr-intl"])
+      ];
+      xkb-options = ["caps:escape"];
+    };
+  };
 
   home.sessionVariables = {
     EDITOR = "hx";
@@ -106,8 +119,6 @@
       };
     };
 
-    package = pkgs.nixUnstable;
-
     settings = let
       emptyFlakeRegistry = pkgs.writeText "flake-registry.json" (builtins.toJSON {
         flakes = [];
@@ -124,15 +135,11 @@
       auto-optimise-store = true;
       max-jobs = 6;
       flake-registry = emptyFlakeRegistry;
-      netrc-file = "/var/home/user/.config/nix/netrc";
+      netrc-file = "/home/user/.config/nix/netrc";
     };
   };
-  targets.genericLinux.enable = true;
   xdg.configFile."nixpkgs/flake.nix".source = config.lib.file.mkOutOfStoreSymlink (selfLocation + "/flake.nix");
   home = {
-    username = "user";
-    homeDirectory = "/var/home/user";
-
-    stateVersion = "22.11";
+    stateVersion = "23.05";
   };
 }
