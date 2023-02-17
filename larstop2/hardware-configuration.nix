@@ -8,8 +8,6 @@
   modulesPath,
   ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
-
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -23,7 +21,11 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
-  swapDevices = [{device = "/dev/disk/by-uuid/d58df9c1-1749-4092-89f2-e8e751456cc6";}];
+  hardware.tuxedo-keyboard.enable = true;
+  boot.kernelParams = [
+    "tuxedo_keyboard.state=0"
+  ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.steam-hardware.enable = true;
+  hardware.enableRedistributableFirmware = true;
 }

@@ -12,6 +12,12 @@
     ./sound.nix
     ./disko.nix
     ./impermanence.nix
+    ./gnome.nix
+    ./nix.nix
+    # ./gl.nix
+    # ./virtualisation.nix
+    # ./networking.nix
+    # ./power.nix
   ];
   nix = {
     package = pkgs.nixUnstable;

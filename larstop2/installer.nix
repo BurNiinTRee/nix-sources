@@ -23,18 +23,14 @@
       ]}
       set -eux
 
-      wipefs --all /dev/vda
-      # wipefs --all /dev/nvme0n1
+      # wipefs --all /dev/vda
+      wipefs --all /dev/nvme0n1
 
       echo Creating Filesystems
-      ${config.system.build.disko} --mode zap_create_mount
-
-      echo Creating empty snapshots
-      mkdir -p /mnt/home/user
-      btrfs subvolume snapshot -r /mnt/home/ /mnt/empty/home
-      btrfs subvolume snapshot -r /mnt /mnt/empty/root
+      ${config.system.build.diskoNoDeps}
 
       mkdir -p /mnt/persist/home/user
+      chmod 777 /mnt/persist/home/user
       cp -r ${self} /mnt/persist/home/user/bntr
 
       nixos-install --system ${self
@@ -46,6 +42,8 @@
         .toplevel} \
         --root /mnt \
         --no-root-passwd
+
+      systemctl reboot
     '')
   ];
 }

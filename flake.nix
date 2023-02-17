@@ -116,6 +116,18 @@
             ];
           };
 
+          iso = ShellApplicationNoCheck {
+            name = "iso";
+            runtimeInputs = [pkgs.nix];
+            text = ''
+              isoPath=$(nix build ${selfLocation}#larstop2Iso --no-link --print-out-paths)
+              if [ -e nixos.iso ]; then
+                rm -f nixos.iso
+              fi
+              cp $isoPath/iso/*.iso nixos.iso
+            '';
+          };
+
           update = ShellApplicationNoCheck {
             name = "update";
             runtimeInputs = [pkgs.nix config.packages.deploy];
@@ -149,7 +161,7 @@
         };
 
         devShells.default = pkgs.mkShellNoCC {
-          packages = [pkgs.agenix pkgs.nixos-rebuild] ++ (with self'.packages; [update deploy muehml home]);
+          packages = [pkgs.agenix pkgs.nixos-rebuild] ++ (with self'.packages; [update deploy muehml home iso]);
           RULES = "${selfLocation}/secrets/secrets.nix";
         };
 
@@ -168,6 +180,7 @@
               modules = [
                 ./home/user
                 {
+                  programs.home-manager.enable = true;
                   targets.genericLinux.enable = true;
                   home = {
                     homeDirectory = "/var/home/user";
@@ -197,6 +210,8 @@
                   imports = [
                     ./home/user
                     impermanence.nixosModules.home-manager.impermanence
+                    # import here as to not affect home-manager on fedora
+                    ./home/user/impermanence.nix
                   ];
                   _module.args.flakeInputs = inputs;
                   _module.args.selfLocation = selfLocation;

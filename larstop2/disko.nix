@@ -3,7 +3,8 @@
     disk = {
       nvme0n1 = {
         type = "disk";
-        device = "/dev/vda";
+        # device = "/dev/vda";
+        device = /dev/nvme0n1;
         content = {
           type = "table";
           format = "gpt";
@@ -37,14 +38,12 @@
                     "/root" = {
                       mountpoint = "/";
                     };
-                    "/home" = {};
                     "/nix" = {
                       mountOptions = ["compress=zstd" "noatime"];
                     };
                     "/persist" = {
                       mountOptions = ["compress=zstd" "noatime"];
                     };
-                    "/empty" = {};
                   };
                 };
               };
@@ -64,15 +63,4 @@
       };
     };
   };
-  # Reset root and home to empty partitions
-  # hopefully
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    mkdir volumes
-    mount /dev/mapper/crypted volumes
-    btrfs subvolume delete volumes/home
-    btrfs subvolume delete volumes/root
-    btrfs subvolume snapshot volumes/empty/home volumes/home
-    btrfs subvolume snapshot volumes/empty/root volumes/root
-    umount volumes
-  '';
 }

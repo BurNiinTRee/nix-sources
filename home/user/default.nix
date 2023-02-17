@@ -8,7 +8,6 @@
 }: {
   imports = [
     ./email.nix
-    # ./impermanence.nix
   ];
   programs.home-manager.enable = true;
   programs.direnv = {
@@ -55,10 +54,6 @@
 
   programs.nushell.enable = true;
 
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-  };
   programs.nix-index.enable = true;
   # Download index
   home.file.".cache/nix-index/files" = {
@@ -70,7 +65,6 @@
     nil
     nixUnstable
     ripgrep
-    # flakeInputs.attic.packages.x86_64-linux.attic
     # the manpages include configuration.nix(5) which I care about
     ((pkgs.nixos {}).config.system.build.manual.manpages)
   ];
@@ -102,11 +96,19 @@
     $pdf_previewer = 'flatpak run org.gnome.Evince';
   '';
 
-  home.file.".nixpkgs".source = flakeInputs.nixpkgs;
-  home.sessionVariables.NIX_PATH = "nixpkgs=${config.home.homeDirectory}/.nixpkgs";
+  home.file.".nixpkgs".source = pkgs.path;
+  home.sessionVariables.NIX_PATH = "nixpkgs=${config.home.homeDirectory}/.nixpkgs:bntr=${selfLocation}";
   nix = {
     registry = {
-      nixpkgs.flake = flakeInputs.nixpkgs;
+      nixpkgs = {
+        exact = false;
+        to = {
+          type = "github";
+          owner = "nixos";
+          repo = "nixpkgs";
+          rev = flakeInputs.nixpkgs.rev;
+        };
+      };
 
       bntr.to = {
         url = "file://" + selfLocation;
@@ -135,7 +137,7 @@
       auto-optimise-store = true;
       max-jobs = 6;
       flake-registry = emptyFlakeRegistry;
-      netrc-file = "/home/user/.config/nix/netrc";
+      netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
     };
   };
   xdg.configFile."nixpkgs/flake.nix".source = config.lib.file.mkOutOfStoreSymlink (selfLocation + "/flake.nix");
