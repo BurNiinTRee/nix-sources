@@ -63,7 +63,6 @@
     alejandra
     fd
     nil
-    nixUnstable
     ripgrep
     # the manpages include configuration.nix(5) which I care about
     ((pkgs.nixos {}).config.system.build.manual.manpages)
@@ -96,8 +95,6 @@
     $pdf_previewer = 'flatpak run org.gnome.Evince';
   '';
 
-  home.file.".nixpkgs".source = pkgs.path;
-  home.sessionVariables.NIX_PATH = "nixpkgs=${config.home.homeDirectory}/.nixpkgs:bntr=${selfLocation}";
   nix = {
     registry = {
       nixpkgs = {
