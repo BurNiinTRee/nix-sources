@@ -8,8 +8,8 @@
 }: {
   imports = [
     ./email.nix
+    ./git.nix
   ];
-  programs.home-manager.enable = true;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -33,10 +33,6 @@
   programs.bash.enable = true;
   programs.password-store = {
     enable = true;
-    # We use fedoras password-store
-    # but we still want home-managers configuration
-    # in particular $PASSWORD_STORE_DIR
-    package = pkgs.empty;
   };
   programs.starship.enable = true;
   programs.skim.enable = true;

@@ -138,17 +138,17 @@
           };
           deploy = ShellApplicationNoCheck {
             name = "deploy";
-            runtimeInputs = [config.packages.home config.packages.muehml];
+            runtimeInputs = [config.packages.larstop2 config.packages.muehml];
             text = ''
-              home # home-manager switch
+              larstop2 # home-manager switch
               muehml # deploy to muehml.eu
             '';
           };
-          home = ShellApplicationNoCheck {
-            name = "home";
+          larstop2 = ShellApplicationNoCheck {
+            name = "larstop2";
             runtimeInputs = [pkgs.home-manager];
             text = ''
-              home-manager switch --flake ${selfLocation}
+              sudo nixos-rebuild switch --flake ${selfLocation}
             '';
           };
           muehml = ShellApplicationNoCheck {
@@ -161,7 +161,7 @@
         };
 
         devShells.default = pkgs.mkShellNoCC {
-          packages = [pkgs.agenix pkgs.nixos-rebuild] ++ (with self'.packages; [update deploy muehml home iso]);
+          packages = [pkgs.agenix pkgs.nixos-rebuild] ++ (with self'.packages; [update deploy muehml larstop2 iso]);
           RULES = "${selfLocation}/secrets/secrets.nix";
         };
 
@@ -245,6 +245,6 @@
         };
       };
     });
-  nixConfig.extra-substituters = "https://staging.attic.rs/attic-ci";
-  nixConfig.extra-trusted-public-keys = "attic-ci:U5Sey4mUxwBXM3iFapmP0/ogODXywKLRNgRPQpEXxbo=";
+  # nixConfig.extra-substituters = "https://staging.attic.rs/attic-ci";
+  # nixConfig.extra-trusted-public-keys = "attic-ci:U5Sey4mUxwBXM3iFapmP0/ogODXywKLRNgRPQpEXxbo=";
 }

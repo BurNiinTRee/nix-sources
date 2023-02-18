@@ -13,6 +13,7 @@
     ./disko.nix
     ./impermanence.nix
     ./gnome.nix
+    ./gsconnect.nix
     ./nix.nix
     ./gl.nix
     ./virtualisation.nix

@@ -10,20 +10,6 @@
   networking.useDHCP = false;
   networking.interfaces.enp57s0f1.useDHCP = true;
   networking.interfaces.wlp58s0.useDHCP = true;
-  # Open ports in the firewall.
-  # for gsconnect
-  networking.firewall.allowedTCPPortRanges = [
-    {
-      from = 1714;
-      to = 1764;
-    }
-  ];
-  networking.firewall.allowedUDPPortRanges = [
-    {
-      from = 1714;
-      to = 1764;
-    }
-  ];
 
   networking.wireguard.enable = true;
 
