@@ -10,10 +10,16 @@
     ./email.nix
     ./git.nix
   ];
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    pinentryFlavor = "gnome3";
+  };
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
+
 
   # We move the direnv cache to the ~/.cache directory
   # This predominantly helps with .envrc:s in rclone mounts, as these

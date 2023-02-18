@@ -5,7 +5,8 @@
       "bntr"
       "projects"
       ".ssh"
-      "${config.programs.password-store.settings.PASSWORD_STORE_DIR}"
+      ".local/share/password-store"
+      ".gnupg"
     ];
     files = [
       ".config/monitors.xml"
