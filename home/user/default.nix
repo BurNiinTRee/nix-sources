@@ -8,18 +8,21 @@
 }: {
   imports = [
     ./email.nix
+    ./firefox.nix
     ./git.nix
+    ./gnome.nix
+    ./gpg.nix
+    ./ssh.nix
   ];
-  programs.gpg.enable = true;
-  services.gpg-agent = {
-    enable = true;
-    pinentryFlavor = "gnome3";
-  };
+  persist.directories = [
+    "bntr"
+    "projects"
+    ".local/share/password-store"
+  ];
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
-
 
   # We move the direnv cache to the ~/.cache directory
   # This predominantly helps with .envrc:s in rclone mounts, as these
@@ -66,18 +69,8 @@
     fd
     nil
     ripgrep
-    # the manpages include configuration.nix(5) which I care about
-    ((pkgs.nixos {}).config.system.build.manual.manpages)
+    wl-clipboard
   ];
-
-  dconf.settings = {
-    "org/gnome/desktop/input-sources" = {
-      sources = [
-        (lib.hm.gvariant.mkTuple ["xkb" "us+altgr-intl"])
-      ];
-      xkb-options = ["caps:escape"];
-    };
-  };
 
   home.sessionVariables = {
     EDITOR = "hx";

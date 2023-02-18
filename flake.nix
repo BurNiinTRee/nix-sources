@@ -155,7 +155,7 @@
             name = "muehml";
             runtimeInputs = [pkgs.nixos-rebuild];
             text = ''
-              nixos-rebuild switch --target-host muehml --flake bntr#muehml
+              nixos-rebuild switch --target-host root@muehml.eu --flake bntr#muehml
             '';
           };
         };
