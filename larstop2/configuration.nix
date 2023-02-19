@@ -9,6 +9,13 @@
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.plymouth.enable = true;
+  boot.initrd.systemd.enable = true;
+
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "wasm32-wasi"
+    "x86_64-windows"
+  ];
 
   time.timeZone = "Europe/Stockholm";
 

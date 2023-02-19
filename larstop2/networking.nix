@@ -13,7 +13,7 @@
 
 
   persist.directories = [
-    "/var/lib/NetworkManager"
+    "/etc/NetworkManager/system-connections"
   ];
   networking.wireguard.enable = true;
 

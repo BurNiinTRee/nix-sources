@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676599101,
-        "narHash": "sha256-CKS6UsOGhoNxGDBt9wyFiWHvtng/+BMAJ4G8ahhe1DE=",
+        "lastModified": 1676785837,
+        "narHash": "sha256-Uit2UXSwc27Gs+4Hrmpwh9YHRQhFrrf8OoEBBL8y+7g=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "de657061b13cf329c57a1a9730a5049a971b40b3",
+        "rev": "2c56a93426107da97751a752da94ee55b5f6efe5",
         "type": "github"
       },
       "original": {
@@ -217,7 +217,7 @@
     "nix-index-db": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-go5yRG3oeOL5Dbh0QiI/nuZxSrpcDJZ0adurl0SzY88=",
+        "narHash": "sha256-k5VvEW0hv/4BNCmb7hG4l2q5khk1O+C/IkAsrBULZ+k=",
         "type": "file",
         "url": "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux"
       },
@@ -361,11 +361,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1676569297,
-        "narHash": "sha256-2n4C4H3/U+3YbDrQB6xIw7AaLdFISCCFwOkcETAigqU=",
+        "lastModified": 1676721149,
+        "narHash": "sha256-mN2EpTGxxVNnFZLoLWRwh6f7UWhXy4qE+wO2CZyrXps=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac1f5b72a9e95873d1de0233fddcb56f99884b37",
+        "rev": "5f4e07deb7c44f27d498f8df9c5f34750acf52d2",
         "type": "github"
       },
       "original": {

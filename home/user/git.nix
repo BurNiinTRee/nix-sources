@@ -4,5 +4,8 @@
     [user]
     email = "lars@muehml.eu"
     name = "Lars Mühmel"
+
+    [init]
+    defaultBranch = "main"
   '';
 }
