@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   persist.files = [
     ".config/monitors.xml"
   ];
@@ -25,13 +29,16 @@
       custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
     };
     "org/gnome/mutter" = {
-      attach-dialogs = false;
+      attach-modal-dialogs = false;
     };
     "org/gnome/desktop/wm/preferences" = {
       resize-with-right-button = true;
     };
     "org/gnome/desktop/peripherals/keyboard" = {
       numlock-state = true;
+    };
+    "org/gnome/desktop/peripherals/mouse" = {
+      accel-profile = "flat";
     };
     "org/gnome/desktop/session" = {
       idle-delay = lib.hm.gvariant.mkUint32 0;
@@ -41,6 +48,21 @@
     };
     "org/gnome/Console" = {
       theme = "auto";
+    };
+    "org/gnome/desktop/calender" = {
+      show-weekdate = true;
+    };
+    "org/gnome/desktop/interface" = {
+      clock-show-seconds = true;
+      clock-show-weekday = true;
+      monospace-font-name = "Fira Code 10";
+    };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///run/current-system/sw/share/backgraounds/adwaita-l.webp";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgraounds/adwaita-d.webp";
+    };
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = config.dconf.settings."org/gnome/desktop/background".picture-uri;
     };
   };
 }

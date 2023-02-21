@@ -21,6 +21,8 @@
     "projects"
   ];
 
+  fonts.fontconfig.enable = true;
+
   programs.bash.enable = true;
   programs.starship.enable = true;
   programs.skim.enable = true;
@@ -46,6 +48,7 @@
   home.packages = with pkgs; [
     alejandra
     fd
+    fira-code
     nil
     ripgrep
     wl-clipboard

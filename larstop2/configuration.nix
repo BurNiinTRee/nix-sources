@@ -4,24 +4,21 @@
   lib,
   ...
 }: {
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.plymouth.enable = true;
-  boot.initrd.systemd.enable = true;
 
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
     "wasm32-wasi"
-    "x86_64-windows"
+    # "x86_64-windows"
   ];
 
   time.timeZone = "Europe/Stockholm";
 
   environment.systemPackages = with pkgs; [file helix wget];
-  environment.variables.EDITOR = "helix";
-
+  environment.variables.EDITOR = "hx";
 
   users.users.user = {
     description = "Lars Mühmel";

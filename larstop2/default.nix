@@ -2,10 +2,11 @@
   config,
   pkgs,
   lib,
-  modulesPath,
+  # modulesPath,
   ...
 }: {
   imports = [
+    ./compat.nix
     ./configuration.nix
     ./hardware-configuration.nix
     # (modulesPath + "/profiles/qemu-guest.nix")
@@ -16,6 +17,7 @@
     ./gsconnect.nix
     ./nix.nix
     ./gl.nix
+    ./steam.nix
     ./virtualisation.nix
     ./networking.nix
     ./power.nix

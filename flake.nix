@@ -5,6 +5,9 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs = {
+    #   url = "path:///home/user/projects/nixpkgs";
+    # };
     attic.url = "github:zhaofengli/attic";
     agenix = {
       url = "github:ryantm/agenix";
@@ -69,99 +72,34 @@
         nixpkgs.overlays = [agenix.overlays.default];
 
         packages = let
-          ShellApplicationNoCheck = {
-            name,
-            text,
-            runtimeInputs ? [],
-          }:
-            pkgs.writeShellApplication {
-              inherit name text runtimeInputs;
-              checkPhase = ''
-                runHook preCheck
-                ${pkgs.stdenv.shellDryRun} "$target"
-                runHook postCheck
-              '';
+          scripts = pkgs.callPackages ./scripts {inherit scripts selfLocation;};
+        in
+          scripts
+          // {
+            larstop2Iso = nixos-generators.nixosGenerate {
+              inherit system;
+              format = "install-iso";
+              modules = [
+                ./larstop2/installer.nix
+                disko.nixosModules.disko
+                {
+                  _module.args.self = self;
+                }
+              ];
             };
-        in {
-          impermanence-test = nixos-generators.nixosGenerate {
-            inherit system;
-            format = "install-iso";
-            modules = [
-              ./impermanence-test/iso.nix
-              disko.nixosModules.disko
-            ];
-            specialArgs = {inherit self;};
           };
-
-          bcachefsIso = nixos-generators.nixosGenerate {
-            inherit system;
-            format = "install-iso";
-            modules = [
-              ({lib, ...}: {
-                boot.supportedFilesystems = lib.mkForce ["vfat" "bcachefs"];
-                # isoImage.squashfsCompression = "zstd -Xcompression-level 1";
-              })
-            ];
-          };
-
-          larstop2Iso = nixos-generators.nixosGenerate {
-            inherit system;
-            format = "install-iso";
-            modules = [
-              ./larstop2/installer.nix
-              disko.nixosModules.disko
-              {
-                _module.args.self = self;
-              }
-            ];
-          };
-
-          iso = ShellApplicationNoCheck {
-            name = "iso";
-            runtimeInputs = [pkgs.nix];
-            text = ''
-              isoPath=$(nix build ${selfLocation}#larstop2Iso --no-link --print-out-paths)
-              if [ -e nixos.iso ]; then
-                rm -f nixos.iso
-              fi
-              cp $isoPath/iso/*.iso nixos.iso
-            '';
-          };
-
-          update = ShellApplicationNoCheck {
-            name = "update";
-            runtimeInputs = [pkgs.nix config.packages.deploy];
-            text = ''
-              nix flake update --commit-lock-file ${selfLocation}
-              deploy
-            '';
-          };
-          deploy = ShellApplicationNoCheck {
-            name = "deploy";
-            runtimeInputs = [config.packages.larstop2 config.packages.muehml];
-            text = ''
-              larstop2 # home-manager switch
-              muehml # deploy to muehml.eu
-            '';
-          };
-          larstop2 = ShellApplicationNoCheck {
-            name = "larstop2";
-            runtimeInputs = [pkgs.home-manager];
-            text = ''
-              sudo nixos-rebuild switch --flake ${selfLocation}
-            '';
-          };
-          muehml = ShellApplicationNoCheck {
-            name = "muehml";
-            runtimeInputs = [pkgs.nixos-rebuild];
-            text = ''
-              nixos-rebuild switch --target-host root@muehml.eu --flake bntr#muehml
-            '';
-          };
-        };
 
         devShells.default = pkgs.mkShellNoCC {
-          packages = [pkgs.agenix pkgs.nixos-rebuild] ++ (with self'.packages; [update deploy muehml larstop2 iso]);
+          packages =
+            [pkgs.agenix pkgs.nixos-rebuild]
+            ++ (with self'.packages; [
+              update
+              deploy
+              larstop2
+              muehml
+              htpc
+              iso
+            ]);
           RULES = "${selfLocation}/secrets/secrets.nix";
         };
 
@@ -219,7 +157,7 @@
               })
             ];
           };
-          "muehml" = nixpkgs-stable.lib.nixosSystem {
+          muehml = nixpkgs-stable.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = {flakeInputs = inputs;};
             modules = [
@@ -230,12 +168,10 @@
             ];
           };
 
-          impermanence-test = nixpkgs.lib.nixosSystem {
+          htpc = nixpkgs-stable.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
-              ./impermanence-test/configuration.nix
-              impermanence.nixosModule
-              disko.nixosModules.disko
+              ./htpc
             ];
           };
         };
@@ -245,6 +181,4 @@
         };
       };
     });
-  # nixConfig.extra-substituters = "https://staging.attic.rs/attic-ci";
-  # nixConfig.extra-trusted-public-keys = "attic-ci:U5Sey4mUxwBXM3iFapmP0/ogODXywKLRNgRPQpEXxbo=";
 }

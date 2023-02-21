@@ -1,6 +1,10 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   powerManagement.cpuFreqGovernor = "powersave";
-  
+
   programs.gamemode = {
     enable = true;
     settings.custom = {
@@ -9,5 +13,4 @@
     };
   };
   services.power-profiles-daemon.enable = true;
-
 }
