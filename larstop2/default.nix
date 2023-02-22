@@ -10,8 +10,9 @@
     ./configuration.nix
     ./hardware-configuration.nix
     # (modulesPath + "/profiles/qemu-guest.nix")
-    ./sound.nix
     ./disko.nix
+    ./evolution.nix
+    ./sound.nix
     ./impermanence.nix
     ./gnome.nix
     ./gsconnect.nix

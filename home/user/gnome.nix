@@ -6,6 +6,11 @@
   persist.files = [
     ".config/monitors.xml"
   ];
+  persist.directories = [
+    ".config/goa-1.0"
+    ".local/share/keyrings"
+  ];
+
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
       sources = [
@@ -58,8 +63,8 @@
       monospace-font-name = "Fira Code 10";
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///run/current-system/sw/share/backgraounds/adwaita-l.webp";
-      picture-uri-dark = "file:///run/current-system/sw/share/backgraounds/adwaita-d.webp";
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.webp";
     };
     "org/gnome/desktop/screensaver" = {
       picture-uri = config.dconf.settings."org/gnome/desktop/background".picture-uri;

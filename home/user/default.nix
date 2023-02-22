@@ -114,7 +114,11 @@
       netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
     };
   };
-  xdg.configFile."nixpkgs/flake.nix".source = config.lib.file.mkOutOfStoreSymlink (selfLocation + "/flake.nix");
+  persist.files = [
+    ".config/nix/netrc"
+    ".config/attic/config.toml"
+  ];
+
   home = {
     stateVersion = "23.05";
   };
