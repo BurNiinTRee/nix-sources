@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   services.xserver.enable = true;
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -23,5 +23,8 @@
   };
 
   programs.geary.enable = false;
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.appindicator
+  ];
   services.flatpak.enable = true;
 }

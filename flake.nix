@@ -58,7 +58,7 @@
       systems = ["x86_64-linux"];
 
       imports = [
-        ./flake-modules/nixpkgs.nix
+        ./modules/flake-parts/nixpkgs.nix
         treefmt-nix.flakeModule
       ];
       perSystem = {
@@ -80,7 +80,7 @@
               inherit system;
               format = "install-iso";
               modules = [
-                ./larstop2/installer.nix
+                ./nixos-configurations/larstop2/installer.nix
                 disko.nixosModules.disko
                 {
                   _module.args.self = self;
@@ -111,34 +111,11 @@
         formatter = config.treefmt.build.wrapper;
       };
       flake = {
-        homeConfigurations = {
-          user = withSystem "x86_64-linux" ({pkgs, ...}:
-            home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              modules = [
-                ./home/user
-                {
-                  programs.home-manager.enable = true;
-                  targets.genericLinux.enable = true;
-                  home = {
-                    homeDirectory = "/var/home/user";
-                    username = "user";
-                  };
-                  nix.package = pkgs.nixUnstable;
-                  _module.args = {
-                    inherit selfLocation;
-                    flakeInputs = inputs;
-                  };
-                }
-              ];
-            });
-        };
-
         nixosConfigurations = {
           larstop2 = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
-              ./larstop2
+              ./nixos-configurations/larstop2
               home-manager.nixosModules.home-manager
               impermanence.nixosModules.impermanence
               disko.nixosModules.disko
@@ -162,7 +139,7 @@
             specialArgs = {flakeInputs = inputs;};
             modules = [
               simple-nixos-mailserver.nixosModules.mailserver
-              ./server
+              ./nixos-configurations/server
               agenix.nixosModules.default
               attic.nixosModules.atticd
             ];
@@ -171,12 +148,12 @@
           htpc = nixpkgs-stable.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
-              ./htpc
+              ./nixos-configurations/htpc
             ];
           };
         };
         flakeModules = {
-          nixpkgs = ./flake-modules/nixpkgs.nix;
+          nixpkgs = ./modules/flake-parts/nixpkgs.nix;
           default = self.flakeModules.nixpkgs;
         };
       };
