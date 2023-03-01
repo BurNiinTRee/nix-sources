@@ -30,6 +30,11 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     disko.url = "github:nix-community/disko";
+
+    nix-ld = {
+      url = "git+file:///home/user/projects/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -46,6 +51,8 @@
     nixos-generators,
     impermanence,
     disko,
+
+    nix-ld,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} ({
@@ -116,6 +123,7 @@
             system = "x86_64-linux";
             modules = [
               ./nixos-configurations/larstop2
+              nix-ld.nixosModules.nix-ld
               home-manager.nixosModules.home-manager
               impermanence.nixosModules.impermanence
               disko.nixosModules.disko

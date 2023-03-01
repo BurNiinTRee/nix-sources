@@ -14,5 +14,5 @@
     certificateScheme = 3;
   };
 
-  age.secrets.emailHashedPassword.file = ../secrets/emailHashedPassword.age;
+  age.secrets.emailHashedPassword.file = ../../secrets/emailHashedPassword.age;
 }

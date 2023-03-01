@@ -5,6 +5,7 @@
 }: {
   persist.files = [
     ".config/monitors.xml"
+    ".config/gnome-initial-setup-done"
   ];
   persist.directories = [
     ".config/goa-1.0"
@@ -35,6 +36,7 @@
     };
     "org/gnome/mutter" = {
       attach-modal-dialogs = false;
+      workspaces-only-on-primary = false;
     };
     "org/gnome/desktop/wm/preferences" = {
       resize-with-right-button = true;
@@ -54,7 +56,7 @@
     "org/gnome/Console" = {
       theme = "auto";
     };
-    "org/gnome/desktop/calender" = {
+    "org/gnome/desktop/calendar" = {
       show-weekdate = true;
     };
     "org/gnome/desktop/interface" = {

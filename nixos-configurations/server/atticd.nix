@@ -40,5 +40,5 @@ in {
     locations."/".proxyPass = "http://127.0.0.1:${builtins.toString localAtticPort}";
     extraConfig = "client_max_body_size 512M;";
   };
-  age.secrets."atticd.env".file = ../secrets/atticd.env.age;
+  age.secrets."atticd.env".file = ../../secrets/atticd.env.age;
 }

@@ -27,7 +27,7 @@ in {
   age.secrets.nx-initial-admin-pass = {
     owner = "nextcloud";
     group = "nextcloud";
-    file = ../secrets/nx-initial-admin-pass.age;
+    file = ../../secrets/nx-initial-admin-pass.age;
   };
 
   services.postgresql = {

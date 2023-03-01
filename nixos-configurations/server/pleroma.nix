@@ -7,7 +7,7 @@
   age.secrets.pleroma-secrets = {
     owner = "pleroma";
     group = "pleroma";
-    file = ../secrets/pleroma-secrets.age;
+    file = ../../secrets/pleroma-secrets.age;
   };
   nixpkgs.overlays = [(import ../overlays/pleroma.nix)];
   services.pleroma = {

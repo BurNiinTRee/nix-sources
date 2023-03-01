@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./direnv.nix
+    ./eduroam.nix
     ./email.nix
     ./firefox.nix
     ./git.nix
@@ -47,6 +48,7 @@
   };
   home.packages = with pkgs; [
     alejandra
+    distrobox
     fd
     fira-code
     nil
@@ -68,8 +70,8 @@
     "${config.home.sessionVariables.CARGO_HOME}/bin"
   ];
 
-  home.file.".latexmkrc".text = ''
-    $pdf_previewer = 'flatpak run org.gnome.Evince';
+  xdg.configFile."latexmk/latexmkrc".text = ''
+    $pdf_previewer = 'xdg-open';
   '';
 
   nix = {
