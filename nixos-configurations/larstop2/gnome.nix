@@ -22,6 +22,10 @@
     desktopManager.gnome.enable = true;
   };
 
+  services.gnome = {
+    gnome-initial-setup.enable = false;
+  };
+
   programs.geary.enable = false;
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator

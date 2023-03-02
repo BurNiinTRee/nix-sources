@@ -20,6 +20,7 @@
   persist.directories = [
     "bntr"
     "projects"
+    ".cache/nix"
   ];
 
   fonts.fontconfig.enable = true;

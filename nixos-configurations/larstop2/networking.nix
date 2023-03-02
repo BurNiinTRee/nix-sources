@@ -20,7 +20,7 @@
   ];
   networking.wireguard.enable = true;
 
-  services.mullvad-vpn.enable = true;
+  # services.mullvad-vpn.enable = true;
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 }
