@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   persist.files = [
@@ -55,6 +56,7 @@
     };
     "org/gnome/Console" = {
       theme = "auto";
+      shell = ["${pkgs.nushell}/bin/nu"];
     };
     "org/gnome/desktop/calendar" = {
       show-weekdate = true;

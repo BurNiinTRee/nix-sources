@@ -8,4 +8,5 @@ in {
   "pleroma-secrets.age".publicKeys = [larstop2 muehml];
   "emailHashedPassword.age".publicKeys = [larstop2 muehml];
   "atticd.env.age".publicKeys = [larstop2 muehml];
+  "vaultwarden.env.age".publicKeys = [larstop2 muehml];
 }

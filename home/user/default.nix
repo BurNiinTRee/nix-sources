@@ -14,8 +14,10 @@
     ./git.nix
     ./gnome.nix
     ./gpg.nix
+    ./nushell.nix
     ./password-store.nix
     ./ssh.nix
+    ./reaper.nix
   ];
   persist.directories = [
     "bntr"
@@ -40,7 +42,6 @@
     settings.theme = "onelight";
   };
 
-  programs.nushell.enable = true;
 
   programs.nix-index.enable = true;
   # Download index
@@ -119,6 +120,7 @@
   };
   persist.files = [
     ".config/nix/netrc"
+    ".local/share/nix/trusted-settings.json"
     ".config/attic/config.toml"
   ];
 
