@@ -14,7 +14,6 @@
 
       ROCKET_LOG = "critical";
 
-
       SMTP_HOST = "127.0.0.1";
       SMTP_PORT = 25;
       SMTP_SSL = false;

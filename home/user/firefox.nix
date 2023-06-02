@@ -17,9 +17,7 @@
     StartWithLastProfile=1
     Version=2
   '';
-  home.persistence."/persist/home/user" = {
-    directories = [
-      ".mozilla/firefox/e0b6u9y0.default"
-    ];
-  };
+  persist.directories = [
+    ".mozilla/firefox/e0b6u9y0.default"
+  ];
 }

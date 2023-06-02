@@ -1,3 +1,2 @@
 with import <nixpkgs> {};
-
-callPackage ./wrapper.nix {}
+  callPackage ./wrapper.nix {}

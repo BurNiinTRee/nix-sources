@@ -15,7 +15,6 @@
   nixpkgs.config.allowUnfree = true;
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -52,7 +51,7 @@
   services.avahi = {
     enable = true;
     nssmdns = true;
-    interfaces = ["wlp1s0"];
+    allowInterfaces = ["wlp1s0"];
     publish = {
       enable = true;
       addresses = true;
@@ -84,18 +83,10 @@
   environment.systemPackages = with pkgs; [
     dua
     htop
-    vim
+    helix
   ];
   environment.sessionVariables = {
-    EDITOR = "vim";
-  };
-
-  system.autoUpgrade = {
-    enable = true;
-    flake = "path:/etc/nixos";
-    flags = ["--update-input" "nixpkgs"];
-    allowReboot = false;
-    dates = "04:30";
+    EDITOR = "hx";
   };
 
   nix.gc = {

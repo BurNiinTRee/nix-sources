@@ -2,8 +2,9 @@
   description = "My Nixos System";
 
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
-    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-22.11";
+    # nixpkgs-staging.url = "github:NixOS/nixpkgs/staging-next";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs = {
     #   url = "path:///home/user/projects/nixpkgs";
@@ -51,7 +52,6 @@
     nixos-generators,
     impermanence,
     disko,
-
     nix-ld,
     ...
   } @ inputs:
@@ -129,6 +129,7 @@
               disko.nixosModules.disko
               ({lib, ...}: {
                 system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+                _module.args.flakeInputs = inputs;
                 home-manager.users.user = {
                   imports = [
                     ./home/user
@@ -144,19 +145,25 @@
           };
           muehml = nixpkgs-stable.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = {flakeInputs = inputs;};
+            # specialArgs = {flakeInputs = inputs;};
             modules = [
               simple-nixos-mailserver.nixosModules.mailserver
               ./nixos-configurations/server
               agenix.nixosModules.default
               attic.nixosModules.atticd
+              {
+                _module.args.flakeInputs = inputs;
+              }
             ];
           };
 
-          htpc = nixpkgs-stable.lib.nixosSystem {
+          htpc = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
               ./nixos-configurations/htpc
+              {
+                _module.args.flakeInputs = inputs;
+              }
             ];
           };
         };

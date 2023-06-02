@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  flakeInputs,
   ...
 }: {
   # Realtime stuff
@@ -18,8 +19,9 @@
     };
     jack.enable = true;
     wireplumber.enable = true;
-    media-session.enable = !config.services.pipewire.wireplumber.enable;
 
     pulse.enable = true;
   };
+  networking.firewall.allowedTCPPorts = [9875 9876];
+  networking.firewall.allowedUDPPorts = [9875 9876];
 }

@@ -5,14 +5,13 @@
   pkgsi686Linux,
   writers,
 }: let
-  wrapper =
-    writers.writeBash "nix-ld32" ''
-      export NIX_LD_LIBRARY_PATH="$NIX_LD32_LIBRARY_PATH"
-      export NIX_LD="$NIX_LD32"
-      echo NIX_LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH
-      echo NIX_LD=$NIX_LD
-      exec ${nix-ld}/libexec/nix-ld
-    '';
+  wrapper = writers.writeBash "nix-ld32" ''
+    export NIX_LD_LIBRARY_PATH="$NIX_LD32_LIBRARY_PATH"
+    export NIX_LD="$NIX_LD32"
+    echo NIX_LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH
+    echo NIX_LD=$NIX_LD
+    exec ${nix-ld}/libexec/nix-ld
+  '';
 in
   stdenv.mkDerivation {
     pname = "nix-ld32";

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver.enable = true;
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -23,7 +27,8 @@
   };
 
   services.gnome = {
-    gnome-initial-setup.enable = false;
+    gnome-initial-setup.enable = lib.mkForce false;
+    gnome-keyring.enable = lib.mkForce false;
   };
 
   programs.geary.enable = false;

@@ -33,7 +33,7 @@ in {
   };
 
   update = ShellApplicationNoCheck {
-    name = "update";
+    name = "up";
     runtimeInputs = [scripts.deploy];
     text = ''
       nix flake update --commit-lock-file ${selfLocation}
@@ -53,7 +53,7 @@ in {
     name = "larstop2";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      sudo nixos-rebuild switch --flake ${selfLocation}
+      sudo nixos-rebuild switch --flake ${selfLocation} $@
     '';
   };
   muehml = ShellApplicationNoCheck {

@@ -29,8 +29,33 @@
   };
   environment.etc."nixpkgs".source = flakeInputs.nixpkgs-stable;
 
+  services.fail2ban = {
+    enable = true;
+    jails = {
+      dovecot = ''
+        enabled = true
+        filter = dovecot[mode=aggressive]
+        maxretry = 5
+      '';
+      nextcloud = ''
+        enabled = true
+        filter = nextcloud
+        maxretry = 5
+        logpath = /var/lib/nextcloud/data/nextcloud.log
+      '';
+    };
+  };
+
+  environment.etc."fail2ban/filter.d/nextcloud.conf".text = ''
+    [Definition]
+    _groupsre = (?:(?:,?\s*"\w+":(?:"[^"]+"|\w+))*)
+    failregex = ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Login failed:
+                ^\{%(_groupsre)s,?\s*"remoteAddr":"<HOST>"%(_groupsre)s,?\s*"message":"Trusted domain error.
+    datepattern = ,?\s*"time"\s*:\s*"%%Y-%%m-%%d[T ]%%H:%%M:%%S(%%z)?"
+  '';
+
   services.openssh.enable = true;
-  services.openssh.passwordAuthentication = false;
+  services.openssh.settings.PasswordAuthentication = false;
 
   users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5s+IKT2XS2IpsKLXhhBydhBXVbfY3k2Ep8yhPqtB2z user@larstop2
 "];
@@ -43,7 +68,6 @@
     ./vaultwarden.nix
   ];
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
   environment.systemPackages = [pkgs.htop pkgs.dua pkgs.nix-du];

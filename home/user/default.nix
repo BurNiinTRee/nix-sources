@@ -7,6 +7,7 @@
   ...
 }: {
   imports = [
+    ./bitwarden.nix
     ./direnv.nix
     ./eduroam.nix
     ./email.nix
@@ -33,15 +34,95 @@
   programs.htop.enable = true;
   programs.helix = {
     enable = true;
-    languages = [
+    languages.language = [
       {
         name = "nix";
         formatter.command = "alejandra";
       }
+      {
+        name = "rust";
+        config.check.command = "clippy";
+      }
     ];
     settings.theme = "onelight";
   };
+  programs.zellij = {
+    enable = true;
+    settings = {
+      default_shell = "nu";
+      theme = "catppuccin-latte";
+      themes = {
+        gruvbox-light = {
+          fg = [60 56 54];
+          bg = [251 82 75];
+          black = [40 40 40];
+          red = [205 75 69];
+          green = [152 151 26];
+          yellow = [215 153 33];
+          blue = [69 133 136];
+          magenta = [177 98 134];
+          cyan = [104 157 106];
+          white = [213 196 161];
+          orange = [214 93 14];
+        };
+        catppuccin-latte = {
+          bg = "#acb0be"; # Surface2
+          fg = "#acb0be"; # Surface2
+          red = "#d20f39";
+          green = "#40a02b";
+          blue = "#1e66f5";
+          yellow = "#df8e1d";
+          magenta = "#ea76cb"; # Pink
+          orange = "#fe640b"; # Peach
+          cyan = "#04a5e5"; # Sky
+          black = "#4c4f69"; # Text
+          white = "#dce0e8"; # Crust
+        };
 
+        catppuccin-frappe = {
+          bg = "#626880"; # Surface2
+          fg = "#c6d0f5";
+          red = "#e78284";
+          green = "#a6d189";
+          blue = "#8caaee";
+          yellow = "#e5c890";
+          magenta = "#f4b8e4"; # Pink
+          orange = "#ef9f76"; # Peach
+          cyan = "#99d1db"; # Sky
+          black = "#292c3c"; # Mantle
+          white = "#c6d0f5";
+        };
+
+        catppuccin-macchiato = {
+          bg = "#5b6078"; # Surface2
+          fg = "#cad3f5";
+          red = "#ed8796";
+          green = "#a6da95";
+          blue = "#8aadf4";
+          yellow = "#eed49f";
+          magenta = "#f5bde6"; # Pink
+          orange = "#f5a97f"; # Peach
+          cyan = "#91d7e3"; # Sky
+          black = "#1e2030"; # Mantle
+          white = "#cad3f5";
+        };
+
+        catppuccin-mocha = {
+          bg = "#585b70"; # Surface2
+          fg = "#cdd6f4";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          blue = "#89b4fa";
+          yellow = "#f9e2af";
+          magenta = "#f5c2e7"; # Pink
+          orange = "#fab387"; # Peach
+          cyan = "#89dceb"; # Sky
+          black = "#181825"; # Mantle
+          white = "#cdd6f4";
+        };
+      };
+    };
+  };
 
   programs.nix-index.enable = true;
   # Download index
@@ -50,10 +131,12 @@
   };
   home.packages = with pkgs; [
     alejandra
+    bottles
     distrobox
     fd
     fira-code
     nil
+    qpwgraph
     ripgrep
     wl-clipboard
   ];

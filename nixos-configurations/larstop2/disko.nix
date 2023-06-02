@@ -10,7 +10,6 @@
           format = "gpt";
           partitions = [
             {
-              type = "partition";
               name = "ESP";
               start = "1MiB";
               end = "512MiB";
@@ -25,7 +24,6 @@
               };
             }
             {
-              type = "partition";
               name = "luks";
               start = "512MiB";
               end = "-32GiB";
@@ -50,7 +48,6 @@
             }
             {
               name = "swap";
-              type = "partition";
               start = "-32GiB";
               end = "100%";
               content = {

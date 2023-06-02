@@ -11,7 +11,7 @@
         catchAll = ["muehml.eu"];
       };
     };
-    certificateScheme = 3;
+    certificateScheme = "acme-nginx";
   };
 
   age.secrets.emailHashedPassword.file = ../../secrets/emailHashedPassword.age;

@@ -15,26 +15,26 @@
     };
   };
   config = {
-    environment.persistence."/persist/root" = {
-      inherit (config.persist) directories files;
-    };
-    programs.fuse.userAllowOther = true;
+    # environment.persistence."/persist/root" = {
+    #   inherit (config.persist) directories files;
+    # };
+    # programs.fuse.userAllowOther = true;
 
-    # Reset root to empty partitions
-    boot.initrd.postDeviceCommands = lib.mkAfter ''
-      set -x
-      waitDevice /dev/mapper/crypted
-      mkdir /mnt
-      mount /dev/mapper/crypted /mnt
-      btrfs subvolume delete /mnt/root/var/lib/portables
-      btrfs subvolume delete /mnt/root/tmp
-      btrfs subvolume delete /mnt/root/srv
-      btrfs subvolume delete /mnt/root/var/lib/machines
-      btrfs subvolume delete /mnt/root
-      btrfs subvolume create /mnt/root
-      umount /mnt
-      rmdir /mnt
-      set +x
-    '';
+    # # Reset root to empty partitions
+    # boot.initrd.postDeviceCommands = lib.mkAfter ''
+    #   set -x
+    #   waitDevice /dev/mapper/crypted
+    #   mkdir /mnt
+    #   mount /dev/mapper/crypted /mnt
+    #   btrfs subvolume delete /mnt/root/var/lib/portables
+    #   btrfs subvolume delete /mnt/root/tmp
+    #   btrfs subvolume delete /mnt/root/srv
+    #   btrfs subvolume delete /mnt/root/var/lib/machines
+    #   btrfs subvolume delete /mnt/root
+    #   btrfs subvolume create /mnt/root
+    #   umount /mnt
+    #   rmdir /mnt
+    #   set +x
+    # '';
   };
 }

@@ -8,9 +8,9 @@
     files = (options.home.persistence.type.getSubOptions []).files;
   };
   config = {
-    home.persistence."/persist/home/user" = {
-      allowOther = true;
-      inherit (config.persist) files directories;
-    };
+    # home.persistence."/persist/home/user" = {
+    #   allowOther = true;
+    #   inherit (config.persist) files directories;
+    # };
   };
 }

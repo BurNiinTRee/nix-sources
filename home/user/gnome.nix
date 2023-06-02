@@ -10,7 +10,6 @@
   ];
   persist.directories = [
     ".config/goa-1.0"
-    ".local/share/keyrings"
   ];
 
   dconf.settings = {
@@ -56,7 +55,7 @@
     };
     "org/gnome/Console" = {
       theme = "auto";
-      shell = ["${pkgs.nushell}/bin/nu"];
+      shell = ["zellij" "attach" "-c"];
     };
     "org/gnome/desktop/calendar" = {
       show-weekdate = true;

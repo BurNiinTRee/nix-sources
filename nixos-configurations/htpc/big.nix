@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  flakeInputs,
   ...
 }: {
   services.xserver.enable = true;
@@ -37,6 +38,7 @@
     firefox
     intel-gpu-tools
     libva-utils
+    pulseaudio
   ];
 
   programs.kdeconnect.enable = true;
@@ -71,8 +73,8 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [1234 9875];
-  networking.firewall.allowedUDPPorts = [1234 9875];
+  networking.firewall.allowedTCPPorts = [1234 4713 64000];
+  networking.firewall.allowedUDPPorts = [1234 4713 64000];
 
   environment.systemPackages = with pkgs; [
     sc-controller
