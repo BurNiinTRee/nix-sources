@@ -148,7 +148,7 @@
             # specialArgs = {flakeInputs = inputs;};
             modules = [
               simple-nixos-mailserver.nixosModules.mailserver
-              ./nixos-configurations/server
+              ./nixos-configurations/muehml
               agenix.nixosModules.default
               attic.nixosModules.atticd
               {
