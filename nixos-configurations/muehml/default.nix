@@ -61,7 +61,6 @@
 "];
 
   imports = [
-    ./akkoma.nix
     ./atticd.nix
     ./hardware-configuration.nix
     ./mail-server.nix
