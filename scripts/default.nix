@@ -46,7 +46,8 @@ in {
     text = ''
       larstop2 # home-manager switch
       muehml # deploy to muehml.eu
-      htpc # deploy to chromebook
+      # I'm On Vacation
+      # htpc # deploy to chromebook
     '';
   };
   larstop2 = ShellApplicationNoCheck {
