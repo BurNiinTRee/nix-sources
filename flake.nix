@@ -68,6 +68,10 @@
         ./modules/flake-parts/nixpkgs.nix
         treefmt-nix.flakeModule
       ];
+      flake.templates.rust = {
+        path = ./templates/rust;
+        description = "Rust Template using fenix, devenv, and flake-parts";
+      };
       perSystem = {
         config,
         pkgs,

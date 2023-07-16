@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -9,5 +9,9 @@
       enable = true;
     };
   };
+
+  environment.systemPackages = [
+    pkgs.virt-manager
+  ];
   home-manager.users.user.persist.directories = [".local/share/containers/storage"];
 }

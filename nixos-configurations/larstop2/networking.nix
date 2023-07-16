@@ -20,7 +20,6 @@
   ];
   networking.wireguard.enable = true;
 
-  networking.nftables.enable = true;
 
   services.mullvad-vpn.enable = true;
   environment.systemPackages = [
