@@ -15,6 +15,7 @@
     ./git.nix
     ./gnome.nix
     ./gpg.nix
+    ./impermanence.nix
     ./nushell.nix
     ./password-store.nix
     ./ssh.nix
@@ -171,9 +172,13 @@
         };
       };
 
-      bntr.to = {
+      bntr-outer.to = {
         url = "file://" + selfLocation;
         type = "git";
+      };
+      bntr.to = {
+        url = "file://" + selfLocation + "/inner";
+        type = "path";
       };
       flake-parts.to = {
         type = "github";

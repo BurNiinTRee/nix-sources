@@ -54,21 +54,21 @@ in {
     name = "larstop2";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      sudo nixos-rebuild switch --flake ${selfLocation} $@
+      sudo nixos-rebuild switch --update-input my-modules --flake ${selfLocation} $@
     '';
   };
   muehml = ShellApplicationNoCheck {
     name = "muehml";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      nixos-rebuild switch --target-host root@muehml.eu --flake ${selfLocation}#muehml
+      nixos-rebuild switch --target-host root@muehml.eu --update-input my-modules --flake ${selfLocation}#muehml
     '';
   };
   htpc = ShellApplicationNoCheck {
     name = "htpc";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      nixos-rebuild switch --target-host root@htpc.local --flake ${selfLocation}#htpc
+      nixos-rebuild switch --target-host root@htpc.local --update-input my-modules --flake ${selfLocation}#htpc
     '';
   };
 }

@@ -2,7 +2,7 @@
   description = "My Nixos System";
 
   inputs = {
-    # nixpkgs-staging.url = "github:NixOS/nixpkgs/staging-next";
+    my-modules.url = "path:./inner";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -32,146 +32,15 @@
     disko.url = "github:nix-community/disko";
 
     nix-ld = {
-      url = "git+file:///home/user/projects/nix-ld";
+      url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = {
-    self,
-    nixpkgs,
-    agenix,
-    home-manager,
-    nixpkgs-stable,
-    simple-nixos-mailserver,
+    my-modules,
     flake-parts,
-    treefmt-nix,
-    # impermanence test
-    nixos-generators,
-    impermanence,
-    disko,
-    nix-ld,
     ...
   } @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} ({
-      flake-parts-lib,
-      withSystem,
-      ...
-    }: let
-      selfLocation = "/home/user/bntr";
-    in {
-      systems = ["x86_64-linux"];
-
-      imports = [
-        ./modules/flake-parts/nixpkgs.nix
-        treefmt-nix.flakeModule
-      ];
-      flake.templates.rust = {
-        path = ./templates/rust;
-        description = "Rust Template using fenix, devenv, and flake-parts";
-      };
-      perSystem = {
-        config,
-        pkgs,
-        system,
-        self',
-        ...
-      }: {
-        legacyPackages = pkgs;
-        nixpkgs.overlays = [agenix.overlays.default];
-
-        packages = let
-          scripts = pkgs.callPackages ./scripts {inherit scripts selfLocation;};
-        in
-          scripts
-          // {
-            larstop2Iso = nixos-generators.nixosGenerate {
-              inherit system;
-              format = "install-iso";
-              modules = [
-                ./nixos-configurations/larstop2/installer.nix
-                disko.nixosModules.disko
-                {
-                  _module.args.self = self;
-                }
-              ];
-            };
-          };
-
-        devShells.default = pkgs.mkShellNoCC {
-          packages =
-            [pkgs.agenix pkgs.nixos-rebuild]
-            ++ (with self'.packages; [
-              update
-              deploy
-              larstop2
-              muehml
-              htpc
-              iso
-            ]);
-          RULES = "${selfLocation}/secrets/secrets.nix";
-        };
-
-        treefmt = {
-          projectRootFile = "flake.nix";
-          programs.alejandra.enable = true;
-        };
-
-        formatter = config.treefmt.build.wrapper;
-      };
-      flake = {
-        nixosConfigurations = {
-          larstop2 = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              ./nixos-configurations/larstop2
-              nix-ld.nixosModules.nix-ld
-              home-manager.nixosModules.home-manager
-              impermanence.nixosModules.impermanence
-              disko.nixosModules.disko
-              ({lib, ...}: {
-                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-                _module.args.flakeInputs = inputs;
-                home-manager.users.user = {
-                  imports = [
-                    ./home/user
-                    impermanence.nixosModules.home-manager.impermanence
-                    # import here as to not affect home-manager on fedora
-                    ./home/user/impermanence.nix
-                  ];
-                  _module.args.flakeInputs = inputs;
-                  _module.args.selfLocation = selfLocation;
-                };
-              })
-            ];
-          };
-          muehml = nixpkgs-stable.lib.nixosSystem {
-            system = "x86_64-linux";
-            # specialArgs = {flakeInputs = inputs;};
-            modules = [
-              simple-nixos-mailserver.nixosModules.mailserver
-              ./nixos-configurations/muehml
-              agenix.nixosModules.default
-              {
-                _module.args.flakeInputs = inputs;
-              }
-            ];
-          };
-
-          htpc = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              ./nixos-configurations/htpc
-              {
-                _module.args.flakeInputs = inputs;
-              }
-            ];
-          };
-        };
-        flakeModules = {
-          nixpkgs = ./modules/flake-parts/nixpkgs.nix;
-          default = self.flakeModules.nixpkgs;
-        };
-      };
-    });
+    flake-parts.lib.mkFlake {inherit inputs;} (my-modules.modules.flake.default);
 }
