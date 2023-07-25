@@ -9,7 +9,6 @@
     # nixpkgs = {
     #   url = "path:///home/user/projects/nixpkgs";
     # };
-    attic.url = "github:zhaofengli/attic";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,7 +40,6 @@
   outputs = {
     self,
     nixpkgs,
-    attic,
     agenix,
     home-manager,
     nixpkgs-stable,
@@ -154,7 +152,6 @@
               simple-nixos-mailserver.nixosModules.mailserver
               ./nixos-configurations/muehml
               agenix.nixosModules.default
-              attic.nixosModules.atticd
               {
                 _module.args.flakeInputs = inputs;
               }

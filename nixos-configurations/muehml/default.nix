@@ -61,7 +61,6 @@
 "];
 
   imports = [
-    ./atticd.nix
     ./hardware-configuration.nix
     ./mail-server.nix
     ./nextcloud-server.nix

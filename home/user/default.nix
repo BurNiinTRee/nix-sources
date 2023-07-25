@@ -204,7 +204,6 @@
   persist.files = [
     ".config/nix/netrc"
     ".local/share/nix/trusted-settings.json"
-    ".config/attic/config.toml"
   ];
 
   home = {

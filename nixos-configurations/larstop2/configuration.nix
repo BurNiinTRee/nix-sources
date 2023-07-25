@@ -11,11 +11,6 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-    "wasm32-wasi"
-    # "x86_64-windows"
-  ];
 
   time.timeZone = "Europe/Stockholm";
 

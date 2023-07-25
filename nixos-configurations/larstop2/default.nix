@@ -11,7 +11,6 @@
     ./hardware-configuration.nix
     # (modulesPath + "/profiles/qemu-guest.nix")
     ./disko.nix
-    ./evolution.nix
     ./sound.nix
     ./impermanence.nix
     ./gnome.nix
