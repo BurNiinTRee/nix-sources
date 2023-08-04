@@ -177,7 +177,7 @@
         type = "git";
       };
       bntr.to = {
-        url = "file://" + selfLocation + "/inner";
+        path = selfLocation + "/inner";
         type = "path";
       };
       flake-parts.to = {

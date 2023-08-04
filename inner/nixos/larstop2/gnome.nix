@@ -4,8 +4,6 @@
   ...
 }: {
   services.xserver.enable = true;
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
 
   xdg.portal = {
     enable = true;
@@ -27,7 +25,7 @@
   };
 
   services.gnome = {
-    gnome-initial-setup.enable = lib.mkForce false;
+    # gnome-initial-setup.enable = lib.mkForce false;
     gnome-keyring.enable = lib.mkForce false;
   };
 

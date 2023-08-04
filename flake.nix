@@ -3,6 +3,7 @@
 
   inputs = {
     my-modules.url = "path:./inner";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

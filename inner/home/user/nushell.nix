@@ -9,7 +9,7 @@
       let carapace_completer = {|spans|
           carapace $spans.0 nushell $spans | from json
       }
-      let-env config = {
+      $env.config = {
         completions: {
           external: {
             enable:  true
