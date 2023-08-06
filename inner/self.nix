@@ -1,6 +1,4 @@
 {
-  flake-parts-lib,
-  withSystem,
   inputs,
   ...
 }: let
@@ -13,6 +11,7 @@
     impermanence
     my-modules
     nix-ld
+    nix-index-db
     nixos-generators
     nixpkgs
     nixpkgs-stable
@@ -92,11 +91,11 @@ in {
           disko.nixosModules.disko
           ({lib, ...}: {
             system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-            _module.args.flakeInputs = inputs;
             home-manager.users.user = {
               imports = [
                 my-modules.modules.home.user
                 impermanence.nixosModules.home-manager.impermanence
+                nix-index-db.hmModules.nix-index
               ];
               _module.args.flakeInputs = inputs;
               _module.args.selfLocation = selfLocation;

@@ -20,8 +20,8 @@
     };
 
     nix-index-db = {
-      url = "https://github.com/nix-community/nix-index-database/releases/latest/download/index-x86_64-linux";
-      flake = false;
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
     # impermanence test

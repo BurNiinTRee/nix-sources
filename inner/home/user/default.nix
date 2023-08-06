@@ -126,10 +126,7 @@
   };
 
   programs.nix-index.enable = true;
-  # Download index
-  home.file.".cache/nix-index/files" = {
-    source = flakeInputs.nix-index-db;
-  };
+  programs.nix-index-database.comma.enable = true;
   home.packages = with pkgs; [
     alejandra
     bottles
