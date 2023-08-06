@@ -171,7 +171,7 @@
     "my-modules": {
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-hngs5MqsUSkJkq5JLr4aDuEVQ4NF2+k80qaA7BKU17A=",
+        "narHash": "sha256-JYSQ1HJ7PNzcBgm/8MGfa3WvQR74eqOj0FyTlSEuJd8=",
         "path": "./inner",
         "type": "path"
       },
