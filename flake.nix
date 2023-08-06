@@ -20,7 +20,7 @@
     };
 
     nix-index-db = {
-      url = "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux";
+      url = "https://github.com/nix-community/nix-index-database/releases/latest/download/index-x86_64-linux";
       flake = false;
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";

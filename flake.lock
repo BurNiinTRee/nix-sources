@@ -185,11 +185,11 @@
       "locked": {
         "narHash": "sha256-PH8H6XxE576pcDVrECoLrt9haVjJ4QW7l+wJr571Oks=",
         "type": "file",
-        "url": "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux"
+        "url": "https://github.com/nix-community/nix-index-database/releases/latest/download/index-x86_64-linux"
       },
       "original": {
         "type": "file",
-        "url": "https://github.com/Mic92/nix-index-database/releases/latest/download/index-x86_64-linux"
+        "url": "https://github.com/nix-community/nix-index-database/releases/latest/download/index-x86_64-linux"
       }
     },
     "nix-ld": {
