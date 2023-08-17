@@ -11,7 +11,6 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-
   time.timeZone = "Europe/Stockholm";
 
   environment.systemPackages = with pkgs; [file helix wget];

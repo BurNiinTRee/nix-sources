@@ -20,7 +20,6 @@
   ];
   networking.wireguard.enable = true;
 
-
   services.mullvad-vpn.enable = true;
   environment.systemPackages = [
     pkgs.gnomeExtensions.mullvad-indicator

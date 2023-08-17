@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}: let
+{inputs, ...}: let
   selfLocation = "/home/user/bntr";
   inherit
     (inputs)
@@ -9,7 +6,6 @@
     disko
     home-manager
     impermanence
-    my-modules
     nix-ld
     nix-index-db
     nixos-generators
@@ -23,7 +19,7 @@ in {
   systems = ["x86_64-linux"];
 
   imports = [
-    my-modules.modules.flake.nixpkgs
+    ./flake/nixpkgs.nix
     treefmt-nix.flakeModule
   ];
   flake.templates.rust = {
@@ -49,7 +45,7 @@ in {
           inherit system;
           format = "install-iso";
           modules = [
-            (my-modules + /nixos/larstop2/installer.nix)
+            ./nixos/larstop2/installer.nix
             disko.nixosModules.disko
             {
               _module.args.self = self;
@@ -84,7 +80,7 @@ in {
       larstop2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          my-modules.modules.nixos.larstop2
+          ./nixos/larstop2
           nix-ld.nixosModules.nix-ld
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
@@ -93,7 +89,7 @@ in {
             system.configurationRevision = lib.mkIf (self ? rev) self.rev;
             home-manager.users.user = {
               imports = [
-                my-modules.modules.home.user
+                ./home/user
                 impermanence.nixosModules.home-manager.impermanence
                 nix-index-db.hmModules.nix-index
               ];
@@ -106,7 +102,7 @@ in {
       muehml = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          my-modules.modules.nixos.muehml
+          ./nixos/muehml
           simple-nixos-mailserver.nixosModules.mailserver
           agenix.nixosModules.default
           {
@@ -118,16 +114,12 @@ in {
       htpc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          my-modules.modules.nixos.htpc
+          ./nixos/htpc
           {
             _module.args.flakeInputs = inputs;
           }
         ];
       };
-    };
-    flakeModules = {
-      nixpkgs = my-modules.modules.flake.nixpkgs;
-      default = self.flakeModules.nixpkgs;
     };
   };
 }
