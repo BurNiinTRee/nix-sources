@@ -12,6 +12,7 @@
 
   environment.systemPackages = [
     pkgs.virt-manager
+    pkgs.virt-viewer
   ];
   home-manager.users.user.persist.directories = [".local/share/containers/storage"];
 }

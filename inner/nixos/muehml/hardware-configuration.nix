@@ -39,5 +39,7 @@
 
   swapDevices = [{device = "/dev/disk/by-uuid/8d34a338-6040-47ca-8e56-d6bc7be80c7a";}];
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   nix.settings.max-jobs = lib.mkDefault 1;
 }

@@ -6,7 +6,6 @@
     disko
     home-manager
     impermanence
-    nix-ld
     nix-index-db
     nixos-generators
     nixpkgs
@@ -22,9 +21,15 @@ in {
     ./flake/nixpkgs.nix
     treefmt-nix.flakeModule
   ];
-  flake.templates.rust = {
-    path = ./templates/rust;
-    description = "Rust Template using fenix, devenv, and flake-parts";
+  flake.templates = {
+    rust = {
+      path = ./templates/rust;
+      description = "Rust Template using fenix, devenv, and flake-parts";
+    };
+    empty = {
+      path = ./templates/empty;
+      description = "Empty Template using devenv and flake-parts";
+    };
   };
   perSystem = {
     config,
@@ -63,6 +68,7 @@ in {
           larstop2
           muehml
           htpc
+          rpi
           iso
         ]);
       RULES = "${selfLocation}/secrets/secrets.nix";
@@ -78,10 +84,8 @@ in {
   flake = {
     nixosConfigurations = {
       larstop2 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./nixos/larstop2
-          nix-ld.nixosModules.nix-ld
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
           disko.nixosModules.disko
@@ -100,7 +104,6 @@ in {
         ];
       };
       muehml = nixpkgs-stable.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./nixos/muehml
           simple-nixos-mailserver.nixosModules.mailserver
@@ -111,8 +114,18 @@ in {
         ];
       };
 
+      rpi = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./nixos/rpi
+          (
+            {lib, ...}: {
+              _module.args.flakeInputs = inputs;
+            }
+          )
+        ];
+      };
+
       htpc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./nixos/htpc
           {

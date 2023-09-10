@@ -30,11 +30,6 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     disko.url = "github:nix-community/disko";
-
-    nix-ld = {
-      url = "github:Mic92/nix-ld";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {flake-parts, ...} @ inputs:

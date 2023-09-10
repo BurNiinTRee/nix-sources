@@ -15,7 +15,7 @@
     ./impermanence.nix
     ./gnome.nix
     ./gsconnect.nix
-    ./nix.nix
+    ../nix.nix
     ./gl.nix
     ./steam.nix
     ./virtualisation.nix

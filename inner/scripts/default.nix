@@ -42,12 +42,11 @@ in {
   };
   deploy = ShellApplicationNoCheck {
     name = "deploy";
-    runtimeInputs = [scripts.larstop2 scripts.muehml scripts.htpc];
+    runtimeInputs = [scripts.larstop2 scripts.muehml scripts.rpi];
     text = ''
       larstop2 # home-manager switch
       muehml # deploy to muehml.eu
-      # I'm On Vacation
-      # htpc # deploy to chromebook
+      rpi # deploy to rpi3
     '';
   };
   larstop2 = ShellApplicationNoCheck {
@@ -62,6 +61,13 @@ in {
     runtimeInputs = [nixos-rebuild];
     text = ''
       nixos-rebuild switch --target-host root@muehml.eu --flake ${selfLocation}#muehml
+    '';
+  };
+  rpi = ShellApplicationNoCheck {
+    name = "rpi";
+    runtimeInputs = [nixos-rebuild];
+    text = ''
+      nixos-rebuild switch --target-host root@rpi.local --flake ${selfLocation}#rpi
     '';
   };
   htpc = ShellApplicationNoCheck {

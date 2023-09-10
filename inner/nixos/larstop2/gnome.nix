@@ -32,6 +32,7 @@
   programs.geary.enable = false;
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator
+    gnomeExtensions.paperwm
   ];
   services.flatpak.enable = true;
 }
