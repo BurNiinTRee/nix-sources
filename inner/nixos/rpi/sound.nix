@@ -1,4 +1,17 @@
-{...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  rtp-source-connect = pkgs.writeScriptBin "rtp-source-connect" ''
+    #!${pkgs.nushell}/bin/nu
+    $env.PATH = '${lib.makeBinPath [pkgs.pipewire]}'
+    sleep 5sec
+    let sourcePorts = pw-link -Io | lines | parse -r '^\s*(?<id>\d+)\s+(?<name>\S+):(?<port>\S+)$' | where name == "rtp-source" | sort-by -n port
+    let sinkPorts = pw-link -Ii | lines | parse -r '^\s*(?<id>\d+)\s+(?<name>\S+):(?<port>\S+)$' | where name =~ "UMC1820" | sort-by -n port | first 4
+    $sourcePorts | zip $sinkPorts | each {|e| print $'Connecting ($e.0.name):($e.0.port) ($e.0.id) -> ($e.1.name):($e.1.port) ($e.1.id)'; pw-link $e.0.id $e.1.id}
+  '';
+in {
   sound.enable = true;
 
   services.pipewire = {
@@ -31,7 +44,19 @@
           }
       }
     ]
+    context.exec = [
+      {
+        path = "${rtp-source-connect}/bin/rtp-source-connect"
+      }
+    ]
   '';
+
+  environment.systemPackages = [
+    pkgs.nushell
+    rtp-source-connect
+  ];
+
+  security.rtkit.enable = true;
 
   services.spotifyd = {
     enable = true;
