@@ -33,5 +33,5 @@
   };
 
   outputs = {flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} ./inner;
+    flake-parts.lib.mkFlake {inherit inputs;} ./modules;
 }

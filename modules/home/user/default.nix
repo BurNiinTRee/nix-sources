@@ -191,7 +191,7 @@
         type = "git";
       };
       bntr.to = {
-        path = selfLocation + "/inner";
+        path = selfLocation + "/modules";
         type = "path";
       };
       flake-parts.to = {
