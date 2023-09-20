@@ -26,13 +26,12 @@
 
   services.gnome = {
     # gnome-initial-setup.enable = lib.mkForce false;
-    gnome-keyring.enable = lib.mkForce false;
+    # gnome-keyring.enable = lib.mkForce false;
   };
 
   programs.geary.enable = false;
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator
-    gnomeExtensions.paperwm
   ];
   services.flatpak.enable = true;
 }

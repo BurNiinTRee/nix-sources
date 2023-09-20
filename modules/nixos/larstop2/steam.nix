@@ -1,13 +1,31 @@
-{pkgs,...}: {
+{pkgs, config, ...}: {
   programs.steam = {
     enable = true;
-    package = pkgs.steam.override {
-      extraPkgs = pkgs: with pkgs; [
-        gamescope
-        mangohud
+    gamescopeSession = {
+      enable = true;
+      args = [
+        "--rt"
       ];
     };
+    package = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          config.programs.gamescope.package
+          mangohud
+        ];
+    };
     remotePlay.openFirewall = true;
+  };
+
+  programs.gamescope = {
+    enable = true;
+    args = [
+      "--rt"
+    ];
+    env = {
+      INTEL_DEBUG = "noccs";
+    };
+    capSysNice = true;
   };
 
   home-manager.users.user = {
