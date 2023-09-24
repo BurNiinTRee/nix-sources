@@ -21,7 +21,8 @@ in {
     };
     # We don't use SSE
     enableBrokenCiphersForSSE = false;
-    enableImagemagick = false;
+    enableImagemagick = true;
+    configureRedis = true;
   };
 
   age.secrets.nx-initial-admin-pass = {
