@@ -288,6 +288,20 @@
         "type": "github"
       }
     },
+    "nixpkgs-mine": {
+      "locked": {
+        "dirtyRev": "e556540620ebf01df3cc7a117bc72726ab9cae28-dirty",
+        "dirtyShortRev": "e556540620eb-dirty",
+        "lastModified": 1695540850,
+        "narHash": "sha256-8NhB81DDlEzy374iR7r1i5vvGjd6b3y/xZRnOn3XYfk=",
+        "type": "git",
+        "url": "file:///home/user/projects/nixpkgs"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/user/projects/nixpkgs"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1694937365,
@@ -361,6 +375,7 @@
         "nix-index-db": "nix-index-db",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-mine": "nixpkgs-mine",
         "nixpkgs-stable": "nixpkgs-stable",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
         "treefmt-nix": "treefmt-nix"

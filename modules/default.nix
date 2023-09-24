@@ -95,6 +95,7 @@ in {
           disko.nixosModules.disko
           ({lib, ...}: {
             system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+            _module.args.flakeInputs = inputs;
             home-manager.users.user = {
               imports = [
                 ./home/user
