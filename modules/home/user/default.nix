@@ -44,6 +44,7 @@
     distrobox
     fd
     fira-code
+    intel-gpu-tools
     nil
     qpwgraph
     ripgrep
