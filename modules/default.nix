@@ -30,6 +30,10 @@ in {
       path = ./templates/empty;
       description = "Empty Template using devenv and flake-parts";
     };
+    callPackage = {
+      path = ./templates/callPackage;
+      description = "Simply create a package via callPackage";
+    };
   };
   perSystem = {
     config,
