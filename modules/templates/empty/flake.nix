@@ -19,7 +19,13 @@
       imports = [(bntr + /flake/nixpkgs.nix) devenv.flakeModule];
 
       perSystem = {
-        devenv.shells.default = {pkgs, ...}: {
+        devenv.shells.default = {
+          lib,
+          pkgs,
+          ...
+        }: {
+          # https://github.com/cachix/devenv/issues/528
+          containers = lib.mkForce {};
           packages = [
           ];
         };

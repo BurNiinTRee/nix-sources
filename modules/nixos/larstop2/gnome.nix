@@ -35,7 +35,6 @@
     gnomeExtensions.appindicator
     gnome.nautilus-python
     flakeInputs.nixpkgs-mine.legacyPackages.x86_64-linux.turtle
-
   ];
   services.flatpak.enable = true;
 }

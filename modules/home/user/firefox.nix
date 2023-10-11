@@ -1,6 +1,9 @@
-{...}: {
+{pkgs, ...}: {
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox.override {
+      cfg.speechSynthesisSupport = true;
+    };
   };
   home.file.".mozilla/firefox/profiles.ini".text = ''
     [Profile0]

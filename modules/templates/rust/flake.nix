@@ -22,7 +22,13 @@
 
       perSystem = {
         nixpkgs.overlays = [fenix.overlays.default];
-        devenv.shells.default = {pkgs, ...}: {
+        devenv.shells.default = {
+          lib,
+          pkgs,
+          ...
+        }: {
+          # https://github.com/cachix/devenv/issues/528
+          containers = lib.mkForce {};
           languages.c.enable = true;
           packages = [
             pkgs.fenix.stable.toolchain

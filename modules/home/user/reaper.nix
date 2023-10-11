@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     reaper
-    setbfree
+    # setbfree
   ];
   persist.directories = [".config/REAPER"];
 }

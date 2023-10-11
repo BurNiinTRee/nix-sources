@@ -34,17 +34,22 @@
   programs.gh.enable = true;
 
   programs.bash.enable = true;
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = false;
+  };
   programs.htop.enable = true;
   programs.nix-index.enable = true;
   programs.nix-index-database.comma.enable = true;
   home.packages = with pkgs; [
     alejandra
     bottles
+    denaro
     distrobox
     fd
     fira-code
     intel-gpu-tools
+    lsof
     nil
     qpwgraph
     ripgrep
