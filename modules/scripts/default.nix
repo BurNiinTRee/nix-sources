@@ -20,18 +20,6 @@
       '';
     };
 in {
-  iso = ShellApplicationNoCheck {
-    name = "iso";
-    runtimeInputs = [nix];
-    text = ''
-      isoPath=$(nix build ${selfLocation}#larstop2Iso --no-link --print-out-paths)
-      if [ -e nixos.iso ]; then
-        rm -f nixos.iso
-      fi
-      cp $isoPath/iso/*.iso nixos.iso
-    '';
-  };
-
   update = ShellApplicationNoCheck {
     name = "up";
     runtimeInputs = [scripts.deploy];
@@ -53,7 +41,7 @@ in {
     name = "larstop2";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      sudo nixos-rebuild switch  --flake ${selfLocation} $@
+      sudo nixos-rebuild switch $@
     '';
   };
   muehml = ShellApplicationNoCheck {
@@ -68,13 +56,6 @@ in {
     runtimeInputs = [nixos-rebuild];
     text = ''
       nixos-rebuild switch --target-host root@rpi.local --flake ${selfLocation}#rpi
-    '';
-  };
-  htpc = ShellApplicationNoCheck {
-    name = "htpc";
-    runtimeInputs = [nixos-rebuild];
-    text = ''
-      nixos-rebuild switch --target-host root@htpc.local --flake ${selfLocation}#htpc
     '';
   };
 }

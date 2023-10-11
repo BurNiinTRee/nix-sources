@@ -1,40 +1,26 @@
-{inputs, ...}: let
-  selfLocation = "/home/user/bntr";
+{
+  inputs,
+  selfLocation,
+  ...
+}: let
   inherit
     (inputs)
     agenix
-    disko
-    home-manager
-    impermanence
-    nix-index-db
-    nixos-generators
-    nixpkgs
-    nixpkgs-stable
-    self
-    simple-nixos-mailserver
+    devenv
     treefmt-nix
     ;
 in {
   systems = ["x86_64-linux"];
+  _module.args.selfLocation = "/home/user/bntr";
 
   imports = [
     ./flake/nixpkgs.nix
+    ./nixos
+    ./templates
+    devenv.flakeModule
     treefmt-nix.flakeModule
   ];
-  flake.templates = {
-    rust = {
-      path = ./templates/rust;
-      description = "Rust Template using fenix, devenv, and flake-parts";
-    };
-    empty = {
-      path = ./templates/empty;
-      description = "Empty Template using devenv and flake-parts";
-    };
-    callPackage = {
-      path = ./templates/callPackage;
-      description = "Simply create a package via callPackage";
-    };
-  };
+
   perSystem = {
     config,
     pkgs,
@@ -42,28 +28,19 @@ in {
     self',
     ...
   }: {
-    legacyPackages = pkgs;
     nixpkgs.overlays = [agenix.overlays.default];
 
     packages = let
       scripts = pkgs.callPackages ./scripts {inherit scripts selfLocation;};
     in
-      scripts
-      // {
-        larstop2Iso = nixos-generators.nixosGenerate {
-          inherit system;
-          format = "install-iso";
-          modules = [
-            ./nixos/larstop2/installer.nix
-            disko.nixosModules.disko
-            {
-              _module.args.self = self;
-            }
-          ];
-        };
-      };
+      scripts;
 
-    devShells.default = pkgs.mkShellNoCC {
+    devenv.shells.default = {
+      lib,
+      pkgs,
+      ...
+    }: {
+      containers = lib.mkForce {};
       packages =
         [pkgs.agenix pkgs.nixos-rebuild]
         ++ (with self'.packages; [
@@ -71,11 +48,9 @@ in {
           deploy
           larstop2
           muehml
-          htpc
           rpi
-          iso
         ]);
-      RULES = "${selfLocation}/secrets/secrets.nix";
+      env.RULES = "${selfLocation}/secrets/secrets.nix";
     };
 
     treefmt = {
@@ -84,51 +59,5 @@ in {
     };
 
     formatter = config.treefmt.build.wrapper;
-  };
-  flake = {
-    nixosConfigurations = {
-      larstop2 = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./nixos/larstop2
-          home-manager.nixosModules.home-manager
-          impermanence.nixosModules.impermanence
-          disko.nixosModules.disko
-          ({lib, ...}: {
-            system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-            _module.args.flakeInputs = inputs;
-            _module.args.selfLocation = selfLocation;
-            home-manager.users.user = {
-              imports = [
-                ./home/user
-                impermanence.nixosModules.home-manager.impermanence
-                nix-index-db.hmModules.nix-index
-              ];
-              _module.args.flakeInputs = inputs;
-              _module.args.selfLocation = selfLocation;
-            };
-          })
-        ];
-      };
-      muehml = nixpkgs-stable.lib.nixosSystem {
-        modules = [
-          ./nixos/muehml
-          simple-nixos-mailserver.nixosModules.mailserver
-          agenix.nixosModules.default
-          {
-            _module.args.flakeInputs = inputs;
-          }
-        ];
-      };
-
-      rpi = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./nixos/rpi
-          {
-            _module.args.selfLocation = selfLocation;
-            _module.args.flakeInputs = inputs;
-          }
-        ];
-      };
-    };
   };
 }

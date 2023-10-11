@@ -1,4 +1,9 @@
-{lib, pkgs, selfLocation, ...}: {
+{
+  lib,
+  pkgs,
+  selfLocation,
+  ...
+}: {
   nix = {
     package = pkgs.nixUnstable;
     settings = {
