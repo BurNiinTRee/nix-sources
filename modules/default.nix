@@ -96,6 +96,7 @@ in {
           ({lib, ...}: {
             system.configurationRevision = lib.mkIf (self ? rev) self.rev;
             _module.args.flakeInputs = inputs;
+            _module.args.selfLocation = selfLocation;
             home-manager.users.user = {
               imports = [
                 ./home/user
@@ -122,18 +123,8 @@ in {
       rpi = nixpkgs.lib.nixosSystem {
         modules = [
           ./nixos/rpi
-          (
-            {lib, ...}: {
-              _module.args.flakeInputs = inputs;
-            }
-          )
-        ];
-      };
-
-      htpc = nixpkgs.lib.nixosSystem {
-        modules = [
-          ./nixos/htpc
           {
+            _module.args.selfLocation = selfLocation;
             _module.args.flakeInputs = inputs;
           }
         ];
