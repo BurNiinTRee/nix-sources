@@ -407,11 +407,11 @@
     },
     "nixpkgs-mine": {
       "locked": {
-        "lastModified": 1698246449,
-        "narHash": "sha256-CjujSzmCRCTNYEt0mvJSqRcRqoePgJvBT2UAZrjJpMM=",
-        "ref": "refs/heads/master",
-        "rev": "90727298f23aeb952c322b58225c8e25ca68e145",
-        "revCount": 540732,
+        "lastModified": 1698779139,
+        "narHash": "sha256-0cCfcFf3eqXmwtJ7TVvsDlu/3vGkvP1pBwW+Wbzi6nY=",
+        "ref": "refs/heads/turtlevcs",
+        "rev": "d1a0a333015e022bca71c2086bf78d658aa6816c",
+        "revCount": 542931,
         "type": "git",
         "url": "file:///home/user/projects/nixpkgs"
       },
