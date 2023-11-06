@@ -1,10 +1,12 @@
-{config, ...}: {
+{config, ...}: let
+  subdomain = "vault";
+in {
   services.vaultwarden = {
     enable = true;
     dbBackend = "postgresql";
     environmentFile = config.age.secrets.vaultwarden-env.path;
     config = {
-      DOMAIN = "https://vault.muehml.eu";
+      DOMAIN = "https://${subdomain}.${config.networking.fqdn}";
       SIGNUPS_ALLOWED = false;
 
       DATABASE_URL = "postgresql:///vaultwarden";
@@ -39,7 +41,7 @@
     file = ../../secrets/vaultwarden.env.age;
   };
 
-  services.nginx.virtualHosts."vault.muehml.eu" = {
+  services.nginx.virtualHosts."${subdomain}.${config.networking.fqdn}" = {
     enableACME = true;
     forceSSL = true;
     locations."/" = {

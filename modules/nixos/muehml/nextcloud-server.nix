@@ -3,7 +3,8 @@
   pkgs,
   ...
 }: let
-  domain = "cloud.muehml.eu";
+  subdomain = "cloud";
+  domain = "${subdomain}.${config.networking.fqdn}";
 in {
   services.nextcloud = {
     enable = true;
@@ -48,15 +49,15 @@ in {
   };
 
   services.nginx.virtualHosts = {
-    "cloud.muehml.eu" = {
+    ${domain} = {
       enableACME = true;
       forceSSL = true;
     };
-    "muehml.eu" = {
+    ${config.networking.fqdn} = {
       forceSSL = true;
       enableACME = true;
       locations = {
-        "/".return = "301 https://cloud.muehml.eu$request_uri";
+        "/".return = "301 https://${domain}$request_uri";
       };
     };
   };

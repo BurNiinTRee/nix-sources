@@ -1,8 +1,8 @@
 {config, ...}: {
   mailserver = {
     enable = true;
-    fqdn = "mail.muehml.eu";
-    domains = ["muehml.eu"];
+    fqdn = "mail.${config.networking.fqdn}";
+    domains = [config.networking.fqdn];
 
     loginAccounts = {
       "lars@muehml.eu" = {
