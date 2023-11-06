@@ -1,15 +1,15 @@
 {
   flake.templates = {
     rust = {
-      path = ./templates/rust;
+      path = ./rust;
       description = "Rust Template using fenix, devenv, and flake-parts";
     };
     empty = {
-      path = ./templates/empty;
+      path = ./empty;
       description = "Empty Template using devenv and flake-parts";
     };
     callPackage = {
-      path = ./templates/callPackage;
+      path = ./callPackage;
       description = "Simply create a package via callPackage";
     };
   };
