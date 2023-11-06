@@ -27,7 +27,7 @@
 
   services.gnome = {
     # gnome-initial-setup.enable = lib.mkForce false;
-    # gnome-keyring.enable = lib.mkForce false;
+    gnome-keyring.enable = lib.mkForce false;
   };
 
   programs.geary.enable = false;

@@ -21,6 +21,10 @@ in {
     treefmt-nix.flakeModule
   ];
 
+  flake.flakeModules = {
+    nixpgks = ./flake/nixpkgs.nix;
+  };
+
   perSystem = {
     config,
     pkgs,

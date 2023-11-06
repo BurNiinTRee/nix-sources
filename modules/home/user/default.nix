@@ -17,6 +17,7 @@
     ./gpg.nix
     ./helix.nix
     ./impermanence.nix
+    ./nextcloud.nix
     ./nushell.nix
     ./password-store.nix
     ./ssh.nix
@@ -49,6 +50,8 @@
     fd
     fira-code
     intel-gpu-tools
+    keepassxc
+    libreoffice-fresh
     lsof
     nil
     qpwgraph
