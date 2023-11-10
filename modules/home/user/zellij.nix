@@ -8,10 +8,10 @@
       NO_SESSIONS=$(echo "''${ZJ_SESSIONS}" | wc -l)
 
       if [ "''${NO_SESSIONS}" -ge 2 ]; then
-          zellij attach \
+          exec zellij attach \
           "$(echo "''${ZJ_SESSIONS}" | sk)"
       else
-         zellij attach -c
+         exec zellij attach -c
       fi
     '')
   ];
