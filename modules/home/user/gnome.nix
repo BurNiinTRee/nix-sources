@@ -56,7 +56,7 @@
     };
     "org/gnome/Console" = {
       theme = "auto";
-      shell = ["zellij" "attach" "-c"];
+      shell = ["zellij-attach"];
     };
     "org/gnome/desktop/calendar" = {
       show-weekdate = true;
