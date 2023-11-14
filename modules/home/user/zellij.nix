@@ -21,7 +21,6 @@
       default_shell = "nu";
       copy_command = "wl-copy";
       mirror_session = false;
-      ui.pane_frames.hide_session_name = true;
       simplified_ui = true;
       keybinds = {
         normal = {
