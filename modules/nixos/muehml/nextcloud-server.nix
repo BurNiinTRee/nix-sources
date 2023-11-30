@@ -20,8 +20,6 @@ in {
       dbname = "nextcloud";
       defaultPhoneRegion = "SE";
     };
-    # We don't use SSE
-    enableBrokenCiphersForSSE = false;
     enableImagemagick = true;
     configureRedis = true;
   };
@@ -38,7 +36,7 @@ in {
     ensureUsers = [
       {
         name = "nextcloud";
-        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+        ensureDBOwnership = true;
       }
     ];
   };
