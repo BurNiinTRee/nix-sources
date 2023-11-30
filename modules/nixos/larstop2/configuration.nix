@@ -23,5 +23,12 @@
     extraGroups = ["audio" "libvirtd" "kvm" "networkmanager" "video" "wheel"];
   };
 
+  system.fsPackages = [ pkgs.rclone ];
+
+  hardware.tuxedo-rs = {
+    enable = true;
+    tailor-gui.enable = true;
+  };
+
   system.stateVersion = "23.05";
 }

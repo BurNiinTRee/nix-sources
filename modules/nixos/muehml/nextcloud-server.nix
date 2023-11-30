@@ -53,12 +53,12 @@ in {
       enableACME = true;
       forceSSL = true;
     };
-    ${config.networking.fqdn} = {
-      forceSSL = true;
-      enableACME = true;
-      locations = {
-        "/".return = "301 https://${domain}$request_uri";
-      };
-    };
+    # ${config.networking.fqdn} = {
+    #   forceSSL = true;
+    #   enableACME = true;
+    #   locations = {
+    #     "/".return = "301 https://${domain}$request_uri";
+    #   };
+    # };
   };
 }

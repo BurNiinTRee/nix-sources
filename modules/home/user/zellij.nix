@@ -22,6 +22,7 @@
       copy_command = "wl-copy";
       mirror_session = false;
       simplified_ui = true;
+      session_serialization = false;
       keybinds = {
         normal = {
           unbind._args = ["Ctrl g"];

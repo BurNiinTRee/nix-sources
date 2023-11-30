@@ -8,9 +8,6 @@
           formatter.command = "alejandra";
         }
         {
-          name = "rust";
-        }
-        {
           name = "blueprint";
           file-types = ["blp"];
           indent = {
@@ -33,7 +30,15 @@
         };
       };
     };
-    settings.theme = "onelight";
+    settings = {
+      theme = "onelight";
+      editor = {
+        lsp = {
+          display-messages = true;
+          display-inlay-hints = true;
+        };
+      };
+    };
   };
 
   home.sessionVariables = {
