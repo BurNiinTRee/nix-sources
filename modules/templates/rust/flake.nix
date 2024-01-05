@@ -1,6 +1,6 @@
 {
   inputs = {
-    bntr.url = "github:BurNiinTRee/nix-sources";
+    bntr.url = "github:BurNiinTRee/nix-sources?dir=modules";
     devenv.url = "github:cachix/devenv";
     fenix.url = "github:nix-community/fenix";
     flake-parts.url = "github:hercules-ci/flake-parts";
