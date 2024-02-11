@@ -54,6 +54,7 @@
     libreoffice-fresh
     lsof
     nil
+    pijul
     qpwgraph
     ripgrep
     wl-clipboard

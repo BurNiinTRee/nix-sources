@@ -28,6 +28,9 @@
     flake = flakeInputs.nixpkgs-stable;
   };
   environment.etc."nixpkgs".source = flakeInputs.nixpkgs-stable;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "corefonts"
+  ];
 
   services.fail2ban = {
     enable = true;

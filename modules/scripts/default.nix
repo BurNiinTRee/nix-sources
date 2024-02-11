@@ -24,7 +24,7 @@ in {
     name = "up";
     runtimeInputs = [scripts.deploy];
     text = ''
-      nix flake update --commit-lock-file ${selfLocation}
+      nix flake update --commit-lock-file --flake ${selfLocation}
       deploy
     '';
   };
@@ -34,7 +34,7 @@ in {
     text = ''
       larstop2 # home-manager switch
       muehml # deploy to muehml.eu
-      rpi # deploy to rpi3
+      # rpi # deploy to rpi3
     '';
   };
   larstop2 = ShellApplicationNoCheck {

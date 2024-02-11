@@ -406,22 +406,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-mine": {
-      "locked": {
-        "lastModified": 1699001907,
-        "narHash": "sha256-f1rwRRA7kBphjiDBgB/PVZ2tr8/8wJ3EKRfuY32HfRQ=",
-        "ref": "turtlevcs",
-        "rev": "096980bd879c38edd948afcdb25715c2a9f8cc4f",
-        "revCount": 542928,
-        "type": "git",
-        "url": "file:///home/user/projects/nixpkgs"
-      },
-      "original": {
-        "ref": "turtlevcs",
-        "type": "git",
-        "url": "file:///home/user/projects/nixpkgs"
-      }
-    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -572,7 +556,6 @@
         "nix-index-db": "nix-index-db",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-mine": "nixpkgs-mine",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
         "treefmt-nix": "treefmt-nix"

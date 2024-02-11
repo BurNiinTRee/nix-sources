@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  flakeInputs,
   ...
 }: {
   services.xserver.enable = true;
@@ -33,8 +32,6 @@
   programs.geary.enable = false;
   environment.systemPackages = with pkgs; [
     gnomeExtensions.appindicator
-    gnome.nautilus-python
-    flakeInputs.nixpkgs-mine.legacyPackages.x86_64-linux.turtle
   ];
   services.flatpak.enable = true;
 }

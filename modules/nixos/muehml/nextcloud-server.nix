@@ -3,8 +3,7 @@
   pkgs,
   ...
 }: let
-  subdomain = "cloud";
-  domain = "${subdomain}.${config.networking.fqdn}";
+  domain = "cloud.${config.networking.fqdn}";
 in {
   services.nextcloud = {
     enable = true;

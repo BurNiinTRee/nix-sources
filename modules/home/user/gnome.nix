@@ -67,8 +67,8 @@
       monospace-font-name = "Fira Code 10";
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.webp";
-      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.webp";
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-l.jpg";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/adwaita-d.jpg";
     };
     "org/gnome/desktop/screensaver" = {
       picture-uri = config.dconf.settings."org/gnome/desktop/background".picture-uri;

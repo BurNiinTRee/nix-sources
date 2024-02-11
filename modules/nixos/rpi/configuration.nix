@@ -23,7 +23,7 @@
 
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     allowInterfaces = ["enu1u1"];
     publish = {
       enable = true;

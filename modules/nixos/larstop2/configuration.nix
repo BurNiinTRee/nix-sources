@@ -30,5 +30,7 @@
     tailor-gui.enable = true;
   };
 
+  services.sysprof.enable = true;
+
   system.stateVersion = "23.05";
 }
