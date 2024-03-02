@@ -23,6 +23,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
           echo "muehml.eu ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0uJlajpOA0p387s4n/XeY+oZWhuA6YCMWqRhaxBKc+" > ~/.ssh/known_hosts
       - name: Deploy!
         run: |
