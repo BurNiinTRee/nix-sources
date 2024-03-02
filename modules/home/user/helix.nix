@@ -38,6 +38,7 @@
           display-messages = true;
           display-inlay-hints = true;
         };
+        file-picker.hidden = false;
       };
     };
   };
