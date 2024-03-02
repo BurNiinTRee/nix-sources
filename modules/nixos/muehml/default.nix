@@ -65,12 +65,14 @@
 
   users.users.deploy = {
     isSystemUser = true;
+    group = "deploy";
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVa60eaPM/JIHMbIIZ5xzY/CJ8GuWzHsndgKp8nzlaf github"];
   };
+  users.groups.deploy = {};
   security.sudo.extraRules = [
     {
       users = ["deploy"];
-      options = ["NOPASSWD"];
+      commands = [ { command = "ALL"; options = ["NOPASSWD"]; } ];
     }
   ];
 
