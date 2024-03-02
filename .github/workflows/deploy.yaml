@@ -25,4 +25,4 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/id_ed25519
       - name: Deploy!
         run: |
-          nix shell nixpkgs#nixos-rebuild --command nixos-rebuild --target-host deploy@muehml.eu --use-substitutes --use-remote-sudo --flake .#muehml
+          nix run nixpkgs#nixos-rebuild -- switch --target-host deploy@muehml.eu --use-substitutes --use-remote-sudo --flake .#muehml
