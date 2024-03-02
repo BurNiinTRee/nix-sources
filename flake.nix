@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
-    disko.url = "github:nix-community/disko";
+    disko.url = "github:nix-community/disko/v1.3.0";
   };
 
   outputs = {flake-parts, ...} @ inputs:

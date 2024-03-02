@@ -28,9 +28,10 @@
     flake = flakeInputs.nixpkgs-stable;
   };
   environment.etc."nixpkgs".source = flakeInputs.nixpkgs-stable;
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "corefonts"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "corefonts"
+    ];
 
   services.fail2ban = {
     enable = true;
@@ -60,8 +61,18 @@
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
 
-  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5s+IKT2XS2IpsKLXhhBydhBXVbfY3k2Ep8yhPqtB2z user@larstop2
-"];
+  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5s+IKT2XS2IpsKLXhhBydhBXVbfY3k2Ep8yhPqtB2z user@larstop2"];
+
+  users.users.deploy = {
+    isSystemUser = true;
+    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVa60eaPM/JIHMbIIZ5xzY/CJ8GuWzHsndgKp8nzlaf github"];
+  };
+  security.sudo.extraRules = [
+    {
+      users = ["deploy"];
+      options = ["NOPASSWD"];
+    }
+  ];
 
   imports = [
     ./hardware-configuration.nix

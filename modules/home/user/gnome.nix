@@ -29,7 +29,7 @@
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "kgx";
+      command = "wezterm";
       name = "Launch Terminal";
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -56,7 +56,7 @@
     };
     "org/gnome/Console" = {
       theme = "auto";
-      shell = ["zellij-attach"];
+      shell = ["nu"];
     };
     "org/gnome/desktop/calendar" = {
       show-weekdate = true;

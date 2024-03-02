@@ -31,8 +31,9 @@
       };
     };
     settings = {
-      theme = "onelight";
+      theme = "nord_light";
       editor = {
+        color-modes = true;
         lsp = {
           display-messages = true;
           display-inlay-hints = true;

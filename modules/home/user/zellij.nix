@@ -1,19 +1,23 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = [
-    (pkgs.writeShellScriptBin "zellij-attach" 
-    ''
-      export PATH="${lib.makeBinPath [pkgs.skim]}:$PATH"
+    (pkgs.writeShellScriptBin "zellij-attach"
+      ''
+        export PATH="${lib.makeBinPath [pkgs.skim]}:$PATH"
 
-      ZJ_SESSIONS=$(zellij list-sessions)
-      NO_SESSIONS=$(echo "''${ZJ_SESSIONS}" | wc -l)
+        ZJ_SESSIONS=$(zellij list-sessions)
+        NO_SESSIONS=$(echo "''${ZJ_SESSIONS}" | wc -l)
 
-      if [ "''${NO_SESSIONS}" -ge 2 ]; then
-          exec zellij attach \
-          "$(echo "''${ZJ_SESSIONS}" | sk)"
-      else
-         exec zellij attach -c
-      fi
-    '')
+        if [ "''${NO_SESSIONS}" -ge 2 ]; then
+            exec zellij attach \
+            "$(echo "''${ZJ_SESSIONS}" | sk)"
+        else
+           exec zellij attach -c
+        fi
+      '')
   ];
   programs.zellij = {
     enable = true;
@@ -22,7 +26,6 @@
       copy_command = "wl-copy";
       mirror_session = false;
       simplified_ui = true;
-      session_serialization = false;
       keybinds = {
         normal = {
           unbind._args = ["Ctrl g"];

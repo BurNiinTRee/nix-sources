@@ -8,32 +8,6 @@
   # Realtime stuff
   security.rtkit.enable = true;
 
-  environment.etc."pipewire/pipewire.conf.d/rtkit.conf".text = ''
-    context.modules = [
-      { name = "libpipewire-module-rt"
-        args = {
-        }
-      }
-    ]
-  '';
-  environment.etc."pipewire/pipewire.conf.d/jack-dbus.conf".text = ''
-    context.modules = [
-      { name = "libpipewire-module-jackdbus-detect"
-        args = {
-          jack.library = ${pkgs.jack2}/lib/libjack.so.0
-        }
-      }
-    ]
-  '';
-  environment.etc."pipewire/jack.conf.d/rtkit.conf".text = ''
-    context.modules = [
-      { name = "libpipewire-module-rt"
-        args = {
-        }
-      }
-    ]
-  '';
-
   security.pam.loginLimits = [
     {
       domain = "@audio";

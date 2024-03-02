@@ -23,6 +23,7 @@
     ./password-store.nix
     ./ssh.nix
     ./reaper.nix
+    ./wezterm.nix
     ./zellij.nix
   ];
   persist.directories = [

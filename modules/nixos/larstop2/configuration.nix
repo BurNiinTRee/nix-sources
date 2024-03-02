@@ -23,7 +23,7 @@
     extraGroups = ["audio" "libvirtd" "kvm" "networkmanager" "video" "wheel"];
   };
 
-  system.fsPackages = [ pkgs.rclone ];
+  system.fsPackages = [pkgs.rclone];
 
   hardware.tuxedo-rs = {
     enable = true;

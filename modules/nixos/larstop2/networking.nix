@@ -23,7 +23,7 @@
   networking.hosts = {
     "192.168.122.76" = ["www.ister.local" "auth.ister.local" "forum.ister.local" "ister.local"];
   };
-  security.pki.certificateFiles = [ ../../../minica.pem ];
+  security.pki.certificateFiles = [../../../minica.pem];
 
   services.mullvad-vpn.enable = true;
   environment.systemPackages = [
