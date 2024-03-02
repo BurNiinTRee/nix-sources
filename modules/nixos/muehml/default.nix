@@ -66,6 +66,7 @@
   users.users.deploy = {
     isSystemUser = true;
     group = "deploy";
+    shell = pkgs.bashInteractive;
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVa60eaPM/JIHMbIIZ5xzY/CJ8GuWzHsndgKp8nzlaf github"];
   };
   users.groups.deploy = {};
