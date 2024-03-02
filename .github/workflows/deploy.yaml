@@ -27,4 +27,4 @@ jobs:
           echo "muehml.eu ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0uJlajpOA0p387s4n/XeY+oZWhuA6YCMWqRhaxBKc+" > ~/.ssh/known_hosts
       - name: Deploy!
         run: |
-          nix run nixpkgs#nixos-rebuild -- switch --flake .#muehml --target-host deploy@muehml.eu --no-build-nix --use-substitutes --use-remote-sudo
+          nix run --inputs-from . nixpkgs#nixos-rebuild -- switch --flake .#muehml --target-host deploy@muehml.eu --no-build-nix --use-substitutes --use-remote-sudo
