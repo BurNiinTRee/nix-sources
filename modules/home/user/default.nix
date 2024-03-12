@@ -51,6 +51,7 @@
     distrobox
     fd
     fira-code
+    guitarix
     intel-gpu-tools
     libreoffice-fresh
     lsof
