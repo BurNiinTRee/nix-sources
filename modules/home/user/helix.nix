@@ -31,7 +31,7 @@
       };
     };
     settings = {
-      theme = "nord_light";
+      theme = "onelight";
       editor = {
         color-modes = true;
         lsp = {
