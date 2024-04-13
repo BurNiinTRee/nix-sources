@@ -11,5 +11,9 @@
 
     [commit]
     gpgSign = true
+    verbose = true
+
+    [merge]
+    conflictStyle = "zdiff3"
   '';
 }
