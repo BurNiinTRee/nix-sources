@@ -18,10 +18,9 @@
     flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
       systems = ["x86_64-linux"];
 
-      imports = [bntr.flakeModules.nixpkgs devenv.flakeModule];
+      imports = [devenv.flakeModule];
 
       perSystem = {
-        nixpkgs.overlays = [fenix.overlays.default];
         devenv.shells.default = {
           lib,
           pkgs,
@@ -29,10 +28,9 @@
         }: {
           # https://github.com/cachix/devenv/issues/528
           containers = lib.mkForce {};
-          languages.c.enable = true;
+          languages.rust.enable = true;
           packages = [
             pkgs.fenix.stable.toolchain
-            pkgs.rust-analyzer
           ];
         };
       };
