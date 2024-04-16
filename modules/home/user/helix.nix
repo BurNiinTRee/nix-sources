@@ -32,8 +32,33 @@
     };
     settings = {
       theme = "onelight";
+      keys = {
+        normal = {
+          "A-," = "goto_previous_buffer";
+          "A-." = "goto_next_buffer";
+          "A-w" = ":buffer-close";
+          "A-/" = "repeat_last_motion";
+
+          "A-x" = "extend_to_line_bounds";
+          "X" = ["extend_line_up" "extend_to_line_bounds"];
+        };
+        select = {
+          "A-x" = "extend_to_line_bounds";
+          "X" = ["extend_line_up" "extend_to_line_bounds"];
+        };
+      };
       editor = {
         color-modes = true;
+        bufferline = "multiple";
+        cursorline = true;
+        line-number = "relative";
+        true-color = true;
+        cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "underline";
+        };
+        indent-guides.render = true;
         lsp = {
           display-messages = true;
           display-inlay-hints = true;
