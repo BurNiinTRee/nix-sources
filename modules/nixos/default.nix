@@ -43,6 +43,24 @@ in {
         }
       ];
     };
+    work-laptop = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./work-laptop
+        setup-inputs
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.users.user = {
+            imports = [
+              ../home/user
+              nix-index-db.hmModules.nix-index
+            ];
+            _module.args.flakeInputs = inputs;
+            _module.args.selfLocation = selfLocation;
+          };
+        }
+      ];
+    };
     muehml = nixpkgs-stable.lib.nixosSystem {
       modules = [
         ./muehml
