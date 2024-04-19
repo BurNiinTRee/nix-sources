@@ -14,6 +14,7 @@
     nixpkgs
     nixpkgs-stable
     simple-nixos-mailserver
+    nixos-wsl
     ;
 in {
   flake.nixosConfigurations = let
@@ -47,6 +48,7 @@ in {
       system = "x86_64-linux";
       modules = [
         ./work-laptop
+        nixos-wsl.nixosModules.wsl
         setup-inputs
         home-manager.nixosModules.home-manager
         {

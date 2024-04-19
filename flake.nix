@@ -28,6 +28,7 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     disko.url = "github:nix-community/disko/v1.3.0";
+    nixos-wsl.url = "github:nix-community/nixos-wsl?ref=main";
   };
 
   outputs = {flake-parts, ...} @ inputs:
