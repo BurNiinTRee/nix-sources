@@ -51,13 +51,13 @@ in {
         nixos-wsl.nixosModules.wsl
         setup-inputs
         home-manager.nixosModules.home-manager
-        # I should get rid of this
-        impermanence.nixosModules.impermanence
         {
           home-manager.users.user = {
             imports = [
               ../home/user
               nix-index-db.hmModules.nix-index
+              # I should get rid of this
+              impermanence.nixosModules.home-manager.impermanence
             ];
             _module.args.flakeInputs = inputs;
             _module.args.selfLocation = selfLocation;

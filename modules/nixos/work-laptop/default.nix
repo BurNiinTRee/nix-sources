@@ -5,5 +5,6 @@
   wsl.defaultUser = "user";
   imports = [
     ../user.nix
+    ../nix.nix
   ];
 }
