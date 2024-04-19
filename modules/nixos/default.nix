@@ -51,6 +51,8 @@ in {
         nixos-wsl.nixosModules.wsl
         setup-inputs
         home-manager.nixosModules.home-manager
+        # I should get rid of this
+        impermanence.nixosModules.impermanence
         {
           home-manager.users.user = {
             imports = [
