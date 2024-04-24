@@ -20,5 +20,4 @@ jobs:
             dependencies
             automated
           pr-reviewers: BurNiinTRee
-          pr-assignees: BurNiinTRee
-          
+          inputs: nixpkgs nixpkgs-stable
