@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ../comin.nix
     ./compat.nix
     ./configuration.nix
     ./hardware-configuration.nix

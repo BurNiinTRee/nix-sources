@@ -73,6 +73,7 @@ in {
         setup-inputs
         simple-nixos-mailserver.nixosModules.mailserver
         agenix.nixosModules.default
+        comin.nixosModules.comin
       ];
     };
 
