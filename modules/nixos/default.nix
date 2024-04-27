@@ -15,6 +15,7 @@
     nixpkgs-stable
     simple-nixos-mailserver
     nixos-wsl
+    comin
     ;
 in {
   flake.nixosConfigurations = let
@@ -31,6 +32,7 @@ in {
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
         disko.nixosModules.disko
+        comin.nixosModules.comin
         {
           home-manager.users.user = {
             imports = [
