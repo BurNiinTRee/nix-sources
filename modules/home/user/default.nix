@@ -92,12 +92,10 @@
       };
 
       bntr-outer.to = {
-        url = "file://" + selfLocation;
-        type = "git";
+        url = "github:BurNiinTRee/nix-sources";
       };
       bntr.to = {
-        path = selfLocation + "/modules";
-        type = "path";
+        url = "github:BurNiinTRee/nix-sources?dir=modules";
       };
       flake-parts.to = {
         type = "github";
