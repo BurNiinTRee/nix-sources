@@ -1,8 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
-  selfLocation,
   ...
 }: {
   boot.loader.systemd-boot.enable = true;
