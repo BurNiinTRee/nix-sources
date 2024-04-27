@@ -41,21 +41,21 @@ in {
     name = "larstop2";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      sudo nixos-rebuild switch $@
+      sudo nixos-rebuild switch --flake ${selfLocation}#larstop2 "$@"
     '';
   };
   muehml = ShellApplicationNoCheck {
     name = "muehml";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      nixos-rebuild switch --target-host root@muehml.eu --flake ${selfLocation}#muehml
+      nixos-rebuild switch --target-host root@muehml.eu --flake ${selfLocation}#muehml "$@"
     '';
   };
   rpi = ShellApplicationNoCheck {
     name = "rpi";
     runtimeInputs = [nixos-rebuild];
     text = ''
-      nixos-rebuild switch --target-host root@rpi.local --flake ${selfLocation}#rpi
+      nixos-rebuild switch --target-host root@rpi.local --flake ${selfLocation}#rpi "$@"
     '';
   };
 }

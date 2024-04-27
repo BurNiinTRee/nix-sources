@@ -110,7 +110,7 @@
         version = 2;
       });
     in {
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
+      experimental-features = ["nix-command" "flakes"];
       sandbox = true;
       connect-timeout = 5;
       log-lines = 25;
