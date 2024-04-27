@@ -41,6 +41,7 @@
       {
         name = "local";
         url = selfLocation;
+        poller.period = 2;
       }
     ];
   };
