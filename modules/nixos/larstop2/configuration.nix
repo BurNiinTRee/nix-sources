@@ -1,5 +1,6 @@
 {
   pkgs,
+  selfLocation,
   ...
 }: {
   boot.loader.systemd-boot.enable = true;
@@ -26,6 +27,21 @@
   hardware.tuxedo-rs = {
     enable = true;
     tailor-gui.enable = true;
+  };
+
+  services.comin = {
+    enable = true;
+    remotes = [
+      {
+        name = "origin";
+        url = "https://github.com/BurNiinTRee/nix-sources.git";
+      }
+      {
+        name = "local";
+        url = selfLocation;
+        poller.period = 2;
+      }
+    ];
   };
 
   services.sysprof.enable = true;

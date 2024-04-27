@@ -33,6 +33,16 @@
       "corefonts"
     ];
 
+  services.comin = {
+    enable = true;
+    remotes = [
+      {
+        name = "origin";
+        url = "https://github.com/BurNiinTRee/nix-sources.git";
+      }
+    ];
+  };
+
   services.fail2ban = {
     enable = true;
     jails = {
