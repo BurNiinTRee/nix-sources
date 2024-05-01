@@ -34,26 +34,13 @@ in {
   }: {
     nixpkgs.overlays = [agenix.overlays.default];
 
-    packages = let
-      scripts = pkgs.callPackages ./scripts {inherit scripts selfLocation;};
-    in
-      scripts;
-
     devenv.shells.default = {
       lib,
       pkgs,
       ...
     }: {
       containers = lib.mkForce {};
-      packages =
-        [pkgs.agenix pkgs.nixos-rebuild]
-        ++ (with self'.packages; [
-          update
-          deploy
-          larstop2
-          muehml
-          rpi
-        ]);
+      packages = [pkgs.agenix pkgs.nixos-rebuild];
       env.RULES = "${selfLocation}/secrets/secrets.nix";
     };
 
