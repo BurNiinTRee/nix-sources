@@ -29,6 +29,10 @@
     tailor-gui.enable = true;
   };
 
+  specilisation.no-comin.configuration = {
+    services.comin.enable = false;
+  };
+
   services.comin = {
     enable = true;
     remotes = [
