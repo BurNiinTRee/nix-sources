@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   selfLocation,
   ...
 }: {
@@ -30,7 +31,7 @@
   };
 
   specialisation.no-comin.configuration = {
-    services.comin.enable = false;
+    services.comin.enable = lib.mkForce false;
   };
 
   services.comin = {
