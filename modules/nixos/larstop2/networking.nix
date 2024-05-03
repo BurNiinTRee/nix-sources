@@ -25,10 +25,6 @@
   };
   security.pki.certificateFiles = [../../../minica.pem];
 
-  services.mullvad-vpn.enable = true;
-  environment.systemPackages = [
-    pkgs.gnomeExtensions.mullvad-indicator
-  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 }
