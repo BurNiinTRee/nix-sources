@@ -29,7 +29,7 @@
     tailor-gui.enable = true;
   };
 
-  specilisation.no-comin.configuration = {
+  specialisation.no-comin.configuration = {
     services.comin.enable = false;
   };
 
