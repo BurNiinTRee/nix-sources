@@ -10,7 +10,6 @@
   };
 
   services.xserver = {
-    libinput.enable = true;
     displayManager = {
       gdm = {
         enable = true;
@@ -19,6 +18,8 @@
     };
     desktopManager.gnome.enable = true;
   };
+
+  services.libinput.enable = true;
 
   services.displayManager.autoLogin = {
     enable = true;
