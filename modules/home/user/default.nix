@@ -17,7 +17,6 @@
     ./gpg.nix
     ./helix.nix
     ./impermanence.nix
-    ./keepass.nix
     ./nextcloud.nix
     ./nushell.nix
     ./password-store.nix
