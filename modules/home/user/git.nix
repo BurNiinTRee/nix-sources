@@ -1,6 +1,7 @@
 {...}: {
   programs.git = {
     enable = true;
+    delta.enable = true;
     signing = {
       signByDefault = true;
       key = "Lars Mühmel <larsmuehmel@web.de>";
