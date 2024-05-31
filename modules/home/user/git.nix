@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs.git = {
     enable = true;
     delta.enable = true;
@@ -16,4 +16,8 @@
       merge.conflictStyle = "zdiff3";
     };
   };
+
+  home.packages = [
+    pkgs.git-branchless
+  ];
 }
