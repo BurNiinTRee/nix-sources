@@ -1,19 +1,18 @@
 {...}: {
-  programs.git.enable = true;
-  xdg.configFile."git/config".text = ''
-    [user]
-    email = "larsmuehmel@web.de"
-    name = "Lars Mühmel"
-    signingKey = "Lars Mühmel <larsmuehmel@web.de>"
-
-    [init]
-    defaultBranch = "main"
-
-    [commit]
-    gpgSign = true
-    verbose = true
-
-    [merge]
-    conflictStyle = "zdiff3"
-  '';
+  programs.git = {
+    enable = true;
+    signing = {
+      signByDefault = true;
+      key = "Lars Mühmel <larsmuehmel@web.de>";
+    };
+    userName = "Lars Mühmel";
+    userEmail = "larsmuehmel@web.de";
+    extraConfig = {
+      init.defaultBranch = "main";
+      commit = {
+        verbose = true;
+      };
+      merge.conflictStyle = "zdiff3";
+    };
+  };
 }
