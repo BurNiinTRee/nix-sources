@@ -11,13 +11,15 @@ in {
     autoUpdateApps.enable = true;
     hostName = domain;
     https = true;
+    settings = {
+      default_phone_region = "SE";
+    };
     config = {
       adminpassFile = config.age.secrets.nx-initial-admin-pass.path;
       dbtype = "pgsql";
       dbuser = "nextcloud";
       dbhost = "/run/postgresql";
       dbname = "nextcloud";
-      defaultPhoneRegion = "SE";
     };
     enableImagemagick = true;
     configureRedis = true;
