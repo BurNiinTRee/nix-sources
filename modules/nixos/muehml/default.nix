@@ -4,6 +4,8 @@
   flakeInputs,
   ...
 }: {
+  services.journald.extraConfig = "SystemMaxUse=50M";
+
   nix = {
     gc = {
       automatic = true;
