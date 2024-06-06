@@ -3,7 +3,7 @@ on:
   pull_request:
 
 jobs:
-  lockfile:
+  flake-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
