@@ -17,7 +17,6 @@ in {
     ./flake/nixpkgs.nix
     ./nixos
     ./templates
-    devenv.flakeModule
     treefmt-nix.flakeModule
   ];
 
@@ -34,15 +33,19 @@ in {
   }: {
     nixpkgs.overlays = [agenix.overlays.default];
 
-    devenv.shells.default = {
-      lib,
-      pkgs,
-      ...
-    }: {
-      containers = lib.mkForce {};
+    devShells.default = pkgs.mkShell {
       packages = [pkgs.agenix pkgs.nixos-rebuild];
       env.RULES = "${selfLocation}/secrets/secrets.nix";
     };
+    # devenv.shells.default = {
+    #   lib,
+    #   pkgs,
+    #   ...
+    # }: {
+    #   containers = lib.mkForce {};
+    #   packages = [pkgs.agenix pkgs.nixos-rebuild];
+    #   env.RULES = "${selfLocation}/secrets/secrets.nix";
+    # };
 
     treefmt = {
       projectRootFile = "flake.nix";
