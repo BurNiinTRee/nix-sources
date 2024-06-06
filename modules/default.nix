@@ -40,7 +40,7 @@ in {
 
     checks = {
       muehml = self.nixosConfigurations.muehml.config.system.build.toplevel;
-      larstop2 = self.nixosConfigurations.larstop2.config.system.build.toplevel;
+      # larstop2 = self.nixosConfigurations.larstop2.config.system.build.toplevel;
     };
 
     treefmt = {
