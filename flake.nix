@@ -30,6 +30,7 @@
     disko.url = "github:nix-community/disko/v1.3.0";
     nixos-wsl.url = "github:nix-community/nixos-wsl?ref=main";
     comin.url = "github:nlewo/comin";
+    git-branchless.url = "github:arxanas/git-branchless";
   };
 
   outputs = {flake-parts, ...} @ inputs:
