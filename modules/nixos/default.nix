@@ -60,6 +60,9 @@ in {
               nix-index-db.hmModules.nix-index
               # I should get rid of this
               impermanence.nixosModules.home-manager.impermanence
+              {
+                muehml.reaper.enable = false;
+              }
             ];
             _module.args.flakeInputs = inputs;
             _module.args.selfLocation = selfLocation;
