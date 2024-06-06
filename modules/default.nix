@@ -1,4 +1,5 @@
 {
+  self,
   inputs,
   selfLocation,
   ...
@@ -6,7 +7,6 @@
   inherit
     (inputs)
     agenix
-    devenv
     treefmt-nix
     ;
 in {
@@ -37,15 +37,11 @@ in {
       packages = [pkgs.agenix pkgs.nixos-rebuild];
       env.RULES = "${selfLocation}/secrets/secrets.nix";
     };
-    # devenv.shells.default = {
-    #   lib,
-    #   pkgs,
-    #   ...
-    # }: {
-    #   containers = lib.mkForce {};
-    #   packages = [pkgs.agenix pkgs.nixos-rebuild];
-    #   env.RULES = "${selfLocation}/secrets/secrets.nix";
-    # };
+
+    checks = {
+      muehml = self.nixosConfigurations.muehml.config.system.build.toplevel;
+      larstop2 = self.nixosConfigurations.larstop2.config.system.build.toplevel;
+    };
 
     treefmt = {
       projectRootFile = "flake.nix";

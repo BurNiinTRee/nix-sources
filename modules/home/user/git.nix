@@ -1,4 +1,4 @@
-{pkgs, flakeInputs, ...}: {
+{flakeInputs, ...}: {
   programs.git = {
     enable = true;
     delta.enable = true;
