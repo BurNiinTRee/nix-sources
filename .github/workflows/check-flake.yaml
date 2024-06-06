@@ -8,9 +8,34 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Start check
+        run: |
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer {{ secrets.GH_TOKEN_FOR_CHECKS }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/BurNiinTRee/nix-sources/statuses/${GITHUB_SHA}" \
+            -d '{"state":"pending","target_url":"https://github.com/BurNiinTRee/nix-sources/actions/runs/'${GITHUB_RUN_ID}'","description":"Check started","context":"nix-flake-check"}'
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v11
       - name: Setup nix cache
         uses: DeterminateSystems/magic-nix-cache-action@v7
       - name: Check flake
-        run: nix flake check
+        run: |
+          nix flake check || \
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer {{ secrets.GH_TOKEN_FOR_CHECKS }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/BurNiinTRee/nix-sources/statuses/${GITHUB_SHA}" \
+            -d '{"state":"failure","target_url":"https://github.com/BurNiinTRee/nix-sources/actions/runs/'${GITHUB_RUN_ID}'","description":"Check failed","context":"nix-flake-check"}'
+
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer {{ secrets.GH_TOKEN_FOR_CHECKS }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/BurNiinTRee/nix-sources/statuses/${GITHUB_SHA}" \
+            -d '{"state":"success","target_url":"https://github.com/BurNiinTRee/nix-sources/actions/runs/'${GITHUB_RUN_ID}'","description":"Check succeded","context":"nix-flake-check"}'
