@@ -91,10 +91,15 @@
       };
 
       bntr-outer.to = {
-        url = "github:BurNiinTRee/nix-sources";
+        type = "github";
+        owner = "BurNiinTRee";
+        repo = "nix-sources";
       };
       bntr.to = {
-        url = "github:BurNiinTRee/nix-sources?dir=modules";
+        type = "github";
+        owner = "BurNiinTRee";
+        repo = "nix-sources";
+        dir = "modules";
       };
       flake-parts.to = {
         type = "github";
