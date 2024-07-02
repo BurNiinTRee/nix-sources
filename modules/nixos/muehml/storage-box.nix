@@ -6,7 +6,7 @@
   # For mount.cifs, required unless domain name resolution is not needed.
   environment.systemPackages = [pkgs.cifs-utils];
   fileSystems."/mnt/storage-box" = {
-    device = "//u412961.your-storagebox.de/backup";
+    device = "//u412961-sub1.your-storagebox.de/backup";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
