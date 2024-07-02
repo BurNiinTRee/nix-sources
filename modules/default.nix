@@ -35,7 +35,7 @@ in {
 
     devShells.default = pkgs.mkShell {
       packages = [pkgs.agenix pkgs.nixos-rebuild];
-      env.RULES = "${selfLocation}/secrets/secrets.nix";
+      env.RULES = "${selfLocation}/modules/secrets/secrets.nix";
     };
 
     checks = {

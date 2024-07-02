@@ -98,6 +98,7 @@
     ./hardware-configuration.nix
     ./mail-server.nix
     ./nextcloud-server.nix
+    ./storage-box.nix
     ./vaultwarden.nix
   ];
   boot.loader.grub.enable = true;
