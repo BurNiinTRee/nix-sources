@@ -52,12 +52,20 @@ in {
       enableACME = true;
       forceSSL = true;
     };
-    # ${config.networking.fqdn} = {
-    #   forceSSL = true;
-    #   enableACME = true;
-    #   locations = {
-    #     "/".return = "301 https://${domain}$request_uri";
-    #   };
-    # };
+  };
+
+  # For mount.cifs, required unless domain name resolution is not needed.
+  environment.systemPackages = [pkgs.cifs-utils];
+  fileSystems."/var/lib/nextcloud/data" = {
+    device = "//u412961-sub1.your-storagebox.de/u412961-sub1";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,seal,rw,uid=nextcloud,gid=nextcloud,dir_mode=0770";
+    in ["${automount_opts},credentials=${config.age.secrets.storage-box.path}"];
+  };
+
+  age.secrets.storage-box = {
+    file = ../../secrets/storage-box.age;
   };
 }
