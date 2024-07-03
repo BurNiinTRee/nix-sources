@@ -1,12 +1,9 @@
-{
-  config,
-  options,
-  ...
-}: {
-  options = {
-    impermanence.directories = (options.environment.persistence.type.getSubOptions []).directories;
-    impermanence.files = (options.environment.persistence.type.getSubOptions []).files;
-  };
+{lib, ...}: {
+  imports = [
+    (lib.mkAliasOptionModule ["impermanence" "directories"] ["environment" "persistence" "/mnt/persist" "directories"])
+    (lib.mkAliasOptionModule ["impermanence" "files"] ["environment" "persistence" "/mnt/persist" "files"])
+  ];
+
   config = {
     fileSystems."/mnt/persist" = {
       neededForBoot = true;
@@ -15,13 +12,6 @@
       options = ["discard,defaults,noatime"];
     };
 
-    environment.persistence."/mnt/persist" = {
-      files = config.impermanence.files;
-      directories =
-        [
-          "/var/lib/postgresql"
-        ]
-        ++ config.impermanence.files;
-    };
+    impermanence.directories = ["/var/lib/postgresql"];
   };
 }
