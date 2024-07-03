@@ -1,4 +1,8 @@
-{config, options, ...}: {
+{
+  config,
+  options,
+  ...
+}: {
   options = {
     impermanence.directories = (options.environment.persistence.type.getSubOptions []).directories;
     impermanence.files = (options.environment.persistence.type.getSubOptions []).files;
@@ -13,11 +17,11 @@
 
     environment.persistence."/mnt/persist" = {
       files = config.impermanence.files;
-      directories = config.impermanence.files;
+      directories =
+        [
+          "/var/lib/postgresql"
+        ]
+        ++ config.impermanence.files;
     };
-
-    impermanence.directories = [
-      "/var/lib/postgresql"
-    ];
   };
 }
