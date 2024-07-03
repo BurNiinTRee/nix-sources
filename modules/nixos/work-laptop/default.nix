@@ -6,4 +6,5 @@
     ../user.nix
     ../nix.nix
   ];
+  system.stateVersion = "24.11";
 }
