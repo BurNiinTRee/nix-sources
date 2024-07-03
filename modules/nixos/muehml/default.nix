@@ -96,6 +96,7 @@
 
   imports = [
     ./hardware-configuration.nix
+    ./impermanence.nix
     ./mail-server.nix
     ./nextcloud-server.nix
     ./vaultwarden.nix

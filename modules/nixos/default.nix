@@ -74,9 +74,10 @@ in {
       modules = [
         ./muehml
         setup-inputs
-        simple-nixos-mailserver.nixosModules.mailserver
         agenix.nixosModules.default
         comin.nixosModules.comin
+        impermanence.nixosModules.impermanence
+        simple-nixos-mailserver.nixosModules.mailserver
       ];
     };
 
