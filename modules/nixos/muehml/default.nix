@@ -96,6 +96,7 @@
 
   imports = [
     ./hardware-configuration.nix
+    ./impermanence.nix
     ./mail-server.nix
     ./nextcloud-server.nix
     ./vaultwarden.nix
@@ -108,12 +109,6 @@
   security.acme = {
     defaults.email = "lars@muehml.eu";
     acceptTerms = true;
-  };
-
-  fileSystems."/mnt/persist" = {
-    device = "/dev/disk/by-id/scsi-0HC_Volume_100964436";
-    fsType = "ext4";
-    options = ["discard,defaults,noatime"];
   };
 
   services.nginx = {
