@@ -1,7 +1,7 @@
 {config, options, ...}: {
   options = {
-    impermanence.directories = options.environment.persistence.type.getSubOptions.directories;
-    impermanence.files = options.environment.persistence.type.getSubOptions.files;
+    impermanence.directories = (options.environment.persistence.type.getSubOptions []).directories;
+    impermanence.files = (options.environment.persistence.type.getSubOptions []).files;
   };
   config = {
     fileSystems."/mnt/persist" = {
