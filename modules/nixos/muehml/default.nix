@@ -4,6 +4,15 @@
   flakeInputs,
   ...
 }: {
+  imports = [
+    ./hardware-configuration.nix
+    ./impermanence.nix
+    ./mail-server.nix
+    ./nextcloud-server.nix
+    ./paperless.nix
+    ./vaultwarden.nix
+  ];
+
   services.journald.extraConfig = "SystemMaxUse=50M";
 
   nix = {
@@ -94,13 +103,6 @@
     }
   ];
 
-  imports = [
-    ./hardware-configuration.nix
-    ./impermanence.nix
-    ./mail-server.nix
-    ./nextcloud-server.nix
-    ./vaultwarden.nix
-  ];
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
