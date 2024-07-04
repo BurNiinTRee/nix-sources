@@ -8,7 +8,7 @@ in {
   impermanence.directories = [config.services.paperless.dataDir];
 
   services.paperless = {
-    # enable = true;
+    enable = true;
     settings = {
       PAPERLESS_DBHOST = "/run/postgresql";
       PAPERLESS_OCR_LANGUAGE = "deu+eng+swe";
