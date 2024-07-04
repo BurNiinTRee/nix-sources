@@ -7,4 +7,5 @@ in {
   "emailHashedPassword.age".publicKeys = [larstop2 muehml];
   "vaultwarden.env.age".publicKeys = [larstop2 muehml];
   "storage-box.age".publicKeys = [larstop2 muehml];
+  "storage-box-paperless.age".publicKeys = [larstop2 muehml];
 }
