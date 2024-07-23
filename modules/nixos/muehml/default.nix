@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   flakeInputs,
@@ -15,6 +16,11 @@
   ];
 
   services.journald.extraConfig = "SystemMaxUse=50M";
+
+  age.secrets.netrc-muehml.file = ../../secrets/netrc-muehml;
+  nix.settings.netrc-file = config.age.secrets.netrc-muehml.path;
+  nix.settings.substituters = ["https://attic.muehml.eu/ci"];
+  nix.settings.trusted-public-keys = ["ci:pGN5GUIYtBiawlMyFIapGrGbUT8N1misYuS6iW90neU="];
 
   nix = {
     gc = {
