@@ -10,8 +10,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v12
-      - name: Setup nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@v7
       - name: Login to Attic
         run: nix shell nixpkgs#attic-client --command attic login muehml https://attic.muehml.eu ${{ secrets.ATTIC_TOKEN }}
       - name: Enable cache
