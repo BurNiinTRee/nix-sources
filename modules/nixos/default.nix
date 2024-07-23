@@ -7,6 +7,7 @@
     (inputs)
     self
     agenix
+    attic
     disko
     home-manager
     impermanence
@@ -75,6 +76,7 @@ in {
         ./muehml
         setup-inputs
         agenix.nixosModules.default
+        attic.nixosModules.atticd
         comin.nixosModules.comin
         impermanence.nixosModules.impermanence
         simple-nixos-mailserver.nixosModules.mailserver
