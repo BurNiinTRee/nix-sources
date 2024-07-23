@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./atticd.nix
     ./impermanence.nix
     ./mail-server.nix
     ./nextcloud-server.nix
