@@ -113,7 +113,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
-  environment.systemPackages = [pkgs.htop pkgs.dua pkgs.nix-du];
+  environment.systemPackages = [pkgs.htop pkgs.dua pkgs.nix-du pkgs.attic-client];
 
   security.acme = {
     defaults.email = "lars@muehml.eu";
