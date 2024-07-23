@@ -6,8 +6,14 @@ in {
     credentialsFile = config.age.secrets.attic-credentials.path;
     settings = {
       listen = "[::]:43234";
-      allowed-hosts = "${subdomain}.${config.networking.fqdn}";
-      database.url = "/run/postgresql";
+      allowed-hosts = ["${subdomain}.${config.networking.fqdn}"];
+      database.url = "postgresql:///?host=/run/postgresql";
+      chunking = {
+        nar-size-threshold = 64 * 1024; # 64KiB
+        min-size = 16 * 1024; # 16 KiB
+        avg-size = 64 * 1024; # 64 KiB
+        max-size = 256 * 1024; # 128 KiB
+      };
     };
   };
 
@@ -37,6 +43,7 @@ in {
     forceSSL = true;
     locations."/" = {
       proxyPass = "http://${toString config.services.atticd.settings.listen}";
+      extraConfig = "client_max_body_size 256M;";
     };
   };
 
