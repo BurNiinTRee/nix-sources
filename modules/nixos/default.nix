@@ -30,6 +30,7 @@ in {
       modules = [
         ./larstop2
         setup-inputs
+        agenix.nixosModules.default
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
         disko.nixosModules.disko
