@@ -3,7 +3,7 @@
 in {
   services.atticd = {
     enable = true;
-    credentialsFile = config.age.secrets.storage-box-attic.path;
+    credentialsFile = config.age.secrets.attic-credentials.path;
     settings = {
       listen = "[::]:43234";
       allowed-hosts = "${subdomain}.${config.networking.fqdn}";
@@ -47,8 +47,8 @@ in {
       group = config.services.atticd.group;
     };
 
-    storage-box-atticd = {
-      file = ../../secrets.attic-credentials.age;
+    storage-box-attic = {
+      file = ../../secrets/storage-box-attic.age;
     };
   };
 }
