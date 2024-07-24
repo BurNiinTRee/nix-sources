@@ -25,10 +25,10 @@
 
   system.fsPackages = [pkgs.rclone];
 
-  hardware.tuxedo-rs = {
-    enable = true;
-    tailor-gui.enable = true;
-  };
+  # hardware.tuxedo-rs = {
+  #   enable = true;
+  #   tailor-gui.enable = true;
+  # };
 
   specialisation.no-comin.configuration = {
     services.comin.enable = lib.mkForce false;

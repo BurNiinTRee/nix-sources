@@ -8,4 +8,8 @@ in {
   "vaultwarden.env.age".publicKeys = [larstop2 muehml];
   "storage-box.age".publicKeys = [larstop2 muehml];
   "storage-box-paperless.age".publicKeys = [larstop2 muehml];
+  "storage-box-attic.age".publicKeys = [larstop2 muehml];
+  "attic-credentials.age".publicKeys = [larstop2 muehml];
+  "netrc-larstop2.age".publicKeys = [larstop2];
+  "netrc-muehml.age".publicKeys = [larstop2 muehml];
 }

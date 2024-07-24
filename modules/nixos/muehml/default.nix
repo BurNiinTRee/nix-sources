@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   flakeInputs,
@@ -6,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./atticd.nix
     ./impermanence.nix
     ./mail-server.nix
     ./nextcloud-server.nix
@@ -14,6 +16,11 @@
   ];
 
   services.journald.extraConfig = "SystemMaxUse=50M";
+
+  age.secrets.netrc-muehml.file = ../../secrets/netrc-muehml.age;
+  nix.settings.netrc-file = config.age.secrets.netrc-muehml.path;
+  nix.settings.substituters = ["https://attic.muehml.eu/ci"];
+  nix.settings.trusted-public-keys = ["ci:pGN5GUIYtBiawlMyFIapGrGbUT8N1misYuS6iW90neU="];
 
   nix = {
     gc = {
@@ -106,7 +113,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
-  environment.systemPackages = [pkgs.htop pkgs.dua pkgs.nix-du];
+  environment.systemPackages = [pkgs.htop pkgs.dua pkgs.nix-du pkgs.attic-client];
 
   security.acme = {
     defaults.email = "lars@muehml.eu";
@@ -117,6 +124,7 @@
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedTlsSettings = true;
+    recommendedProxySettings = true;
   };
   networking.firewall.allowedTCPPorts = [80 443];
 

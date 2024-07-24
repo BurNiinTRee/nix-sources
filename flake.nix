@@ -28,6 +28,7 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     disko.url = "github:nix-community/disko/v1.3.0";
+    attic.url = "github:zhaofengli/attic";
     nixos-wsl.url = "github:nix-community/nixos-wsl?ref=main";
     comin.url = "github:nlewo/comin";
     git-branchless.url = "github:arxanas/git-branchless";

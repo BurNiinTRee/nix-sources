@@ -23,10 +23,10 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  hardware.tuxedo-keyboard.enable = true;
-  boot.kernelParams = [
-    "tuxedo_keyboard.state=0"
-  ];
+  # hardware.tuxedo-keyboard.enable = true;
+  # boot.kernelParams = [
+  #   "tuxedo_keyboard.state=0"
+  # ];
 
   hardware.steam-hardware.enable = true;
   hardware.enableRedistributableFirmware = true;
