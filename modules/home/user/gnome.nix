@@ -15,7 +15,8 @@
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
       sources = [
-        (lib.hm.gvariant.mkTuple ["xkb" "us+altgr-intl"])
+        (lib.hm.gvariant.mkTuple ["xkb" "eu"])
+        (lib.hm.gvariant.mkTuple ["xkb" "us+engram"])
       ];
       xkb-options = ["caps:escape"];
     };
