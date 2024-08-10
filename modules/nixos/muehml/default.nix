@@ -89,7 +89,7 @@
   services.openssh.settings.PasswordAuthentication = false;
   programs.mosh.enable = true;
 
-  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5s+IKT2XS2IpsKLXhhBydhBXVbfY3k2Ep8yhPqtB2z user@larstop2"];
+  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5s+IKT2XS2IpsKLXhhBydhBXVbfY3k2Ep8yhPqtB2z user@larstop2" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII3TXnbunXKZWodjSQPyaS5rFrhLdgMbJBBaBgfVIOIP u0_a71@localhost"];
 
   users.users.deploy = {
     isSystemUser = true;
