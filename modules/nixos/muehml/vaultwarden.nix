@@ -37,7 +37,6 @@ in {
 
   sops.secrets.vaultwarden-env = {
     owner = "vaultwarden";
-    group = "vaultwarden";
   };
 
   services.nginx.virtualHosts."${subdomain}.${config.networking.fqdn}" = {

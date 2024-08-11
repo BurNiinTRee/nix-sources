@@ -54,7 +54,6 @@ in {
   sops.secrets = {
     attic-credentials = {
       owner = config.services.atticd.user;
-      group = config.services.atticd.group;
     };
 
     storage-box-attic = {};

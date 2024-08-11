@@ -27,7 +27,6 @@ in {
 
   sops.secrets.nx-initial-admin-pass = {
     owner = "nextcloud";
-    group = "nextcloud";
   };
 
   services.postgresql = {
