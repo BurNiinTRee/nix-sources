@@ -5,10 +5,9 @@
 }: let
   subdomain = "attic";
 in {
-  systemd.services.atticd.serviceConfig.LoadCredentials = "credentials:${config.sops.secrets.attic-credentials.path}";
   services.atticd = {
     enable = true;
-    credentialsFile = "/run/credentials/atticd.service/credentials";
+    credentialsFile = config.sops.secrets.attic-credentials.path;
     settings = {
       listen = "[::]:43234";
       allowed-hosts = ["${subdomain}.${config.networking.fqdn}"];
@@ -19,6 +18,15 @@ in {
         avg-size = 64 * 1024; # 64 KiB
         max-size = 256 * 1024; # 128 KiB
       };
+    };
+  };
+
+  systemd.services.atticd = {
+    unitConfig = {
+      RequiresMountsFor = [config.services.atticd.settings.storage.path];
+    };
+    serviceConfig = {
+      LoadCredentials = "credentials:${config.sops.secrets.attic-credentials.path}";
     };
   };
 
