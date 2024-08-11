@@ -4,7 +4,7 @@ in {
   services.vaultwarden = {
     enable = true;
     dbBackend = "postgresql";
-    environmentFile = config.age.secrets.vaultwarden-env.path;
+    environmentFile = config.sops.secrets.vaultwarden-env.path;
     config = {
       DOMAIN = "https://${subdomain}.${config.networking.fqdn}";
       SIGNUPS_ALLOWED = false;
@@ -35,10 +35,9 @@ in {
     ];
   };
 
-  age.secrets.vaultwarden-env = {
+  sops.secrets.vaultwarden-env = {
     owner = "vaultwarden";
     group = "vaultwarden";
-    file = ../../secrets/vaultwarden.env.age;
   };
 
   services.nginx.virtualHosts."${subdomain}.${config.networking.fqdn}" = {

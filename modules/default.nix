@@ -6,7 +6,6 @@
 }: let
   inherit
     (inputs)
-    agenix
     treefmt-nix
     ;
 in {
@@ -31,11 +30,8 @@ in {
     self',
     ...
   }: {
-    nixpkgs.overlays = [agenix.overlays.default];
-
     devShells.default = pkgs.mkShell {
-      packages = [pkgs.agenix pkgs.nixos-rebuild];
-      env.RULES = "${selfLocation}/modules/secrets/secrets.nix";
+      packages = [pkgs.nixos-rebuild pkgs.sops];
     };
 
     checks = {

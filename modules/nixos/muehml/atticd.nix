@@ -7,7 +7,7 @@
 in {
   services.atticd = {
     enable = true;
-    credentialsFile = config.age.secrets.attic-credentials.path;
+    credentialsFile = config.sops.secrets.attic-credentials.path;
     settings = {
       listen = "[::]:43234";
       allowed-hosts = ["${subdomain}.${config.networking.fqdn}"];
@@ -28,7 +28,7 @@ in {
     options = let
       # this line prevents hanging on network split
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,seal,rw,uid=${config.services.atticd.user},gid=${config.services.atticd.group},dir_mode=0770";
-    in ["${automount_opts},credentials=${config.age.secrets.storage-box-attic.path}"];
+    in ["${automount_opts},credentials=${config.sops.secrets.storage-box-attic.path}"];
   };
 
   services.postgresql = {
@@ -51,15 +51,12 @@ in {
     };
   };
 
-  age.secrets = {
+  sops.secrets = {
     attic-credentials = {
-      file = ../../secrets/attic-credentials.age;
       owner = config.services.atticd.user;
       group = config.services.atticd.group;
     };
 
-    storage-box-attic = {
-      file = ../../secrets/storage-box-attic.age;
-    };
+    storage-box-attic = {};
   };
 }
