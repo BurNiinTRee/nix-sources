@@ -5,9 +5,10 @@
 }: let
   subdomain = "attic";
 in {
+  systemd.services.atticd.serviceConfig.LoadCredentials = "credentials:${config.sops.secrets.attic-credentials.path}";
   services.atticd = {
     enable = true;
-    credentialsFile = config.sops.secrets.attic-credentials.path;
+    credentialsFile = "/run/credentials/atticd.service/credentials";
     settings = {
       listen = "[::]:43234";
       allowed-hosts = ["${subdomain}.${config.networking.fqdn}"];
@@ -52,9 +53,7 @@ in {
   };
 
   sops.secrets = {
-    attic-credentials = {
-      owner = config.services.atticd.user;
-    };
+    attic-credentials = {};
 
     storage-box-attic = {};
   };
