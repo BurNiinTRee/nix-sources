@@ -17,8 +17,11 @@
 
   services.journald.extraConfig = "SystemMaxUse=50M";
 
-  age.secrets.netrc-muehml.file = ../../secrets/netrc-muehml.age;
-  nix.settings.netrc-file = config.age.secrets.netrc-muehml.path;
+  sops.defaultSopsFile = ../../secrets/muehml.eu.yaml;
+  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+
+  sops.secrets.netrc-muehml = {};
+  nix.settings.netrc-file = config.sops.secrets.netrc-muehml.path;
   nix.settings.substituters = ["https://attic.muehml.eu/ci"];
   nix.settings.trusted-public-keys = ["ci:pGN5GUIYtBiawlMyFIapGrGbUT8N1misYuS6iW90neU="];
 

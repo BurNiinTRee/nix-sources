@@ -3,12 +3,11 @@
   pkgs,
   ...
 }: {
-  age.identityPaths = ["/home/user/.ssh/id_ed25519"];
-  age.secrets.netrc-larstop2.file = ../secrets/netrc-larstop2.age;
+  sops.secrets.netrc-larstop2 = {};
   nix = {
     package = pkgs.nixVersions.stable;
     settings = {
-      netrc-file = config.age.secrets.netrc-larstop2.path;
+      netrc-file = config.sops.secrets.netrc-larstop2.path;
       experimental-features = ["nix-command" "flakes"];
       substituters = [
         "https://attic.muehml.eu/ci"

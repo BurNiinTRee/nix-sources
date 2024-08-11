@@ -6,7 +6,7 @@
 
     loginAccounts = {
       "lars@muehml.eu" = {
-        hashedPasswordFile = config.age.secrets.emailHashedPassword.path;
+        hashedPasswordFile = config.sops.secrets.emailHashedPassword.path;
         aliases = ["@muehml.eu"];
         catchAll = ["muehml.eu"];
       };
@@ -14,5 +14,5 @@
     certificateScheme = "acme-nginx";
   };
 
-  age.secrets.emailHashedPassword.file = ../../secrets/emailHashedPassword.age;
+  sops.secrets.emailHashedPassword = {};
 }

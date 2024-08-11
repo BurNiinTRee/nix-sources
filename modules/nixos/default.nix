@@ -6,7 +6,7 @@
   inherit
     (inputs)
     self
-    agenix
+    sops-nix
     attic
     disko
     home-manager
@@ -30,7 +30,7 @@ in {
       modules = [
         ./larstop2
         setup-inputs
-        agenix.nixosModules.default
+        sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
         disko.nixosModules.disko
@@ -76,7 +76,7 @@ in {
       modules = [
         ./muehml
         setup-inputs
-        agenix.nixosModules.default
+        sops-nix.nixosModules.sops
         attic.nixosModules.atticd
         comin.nixosModules.comin
         impermanence.nixosModules.impermanence

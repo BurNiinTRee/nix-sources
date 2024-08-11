@@ -15,7 +15,7 @@ in {
       default_phone_region = "SE";
     };
     config = {
-      adminpassFile = config.age.secrets.nx-initial-admin-pass.path;
+      adminpassFile = config.sops.secrets.nx-initial-admin-pass.path;
       dbtype = "pgsql";
       dbuser = "nextcloud";
       dbhost = "/run/postgresql";
@@ -25,10 +25,9 @@ in {
     configureRedis = true;
   };
 
-  age.secrets.nx-initial-admin-pass = {
+  sops.secrets.nx-initial-admin-pass = {
     owner = "nextcloud";
     group = "nextcloud";
-    file = ../../secrets/nx-initial-admin-pass.age;
   };
 
   services.postgresql = {
@@ -62,10 +61,8 @@ in {
     options = let
       # this line prevents hanging on network split
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,seal,rw,uid=nextcloud,gid=nextcloud,dir_mode=0770";
-    in ["${automount_opts},credentials=${config.age.secrets.storage-box.path}"];
+    in ["${automount_opts},credentials=${config.sops.secrets.storage-box-nc.path}"];
   };
 
-  age.secrets.storage-box = {
-    file = ../../secrets/storage-box.age;
-  };
+  sops.secrets.storage-box-nc = {};
 }
