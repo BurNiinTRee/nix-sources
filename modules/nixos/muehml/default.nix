@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./atticd.nix
     ./impermanence.nix
+    ./grafana.nix
     ./mail-server.nix
     ./nextcloud-server.nix
     ./paperless.nix
