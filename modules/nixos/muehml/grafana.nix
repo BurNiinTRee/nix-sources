@@ -11,7 +11,7 @@
     enableACME = true;
     # forceSSL = true;
     locations."/" = {
-      proxyPass = "${config.services.grafana.settings.server.root_url}";
+      proxyPass = "http://${config.services.grafana.settings.server.http_addr}:${toString config.services.grafana.settings.server.http_port}";
       proxyWebsockets = true;
     };
   };
