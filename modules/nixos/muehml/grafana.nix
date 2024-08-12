@@ -9,7 +9,7 @@
   };
   services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} = {
     enableACME = true;
-    forceSSL = true;
+    # forceSSL = true;
     locations."/" = {
       proxyPass = "${config.services.grafana.settings.server.root_url}";
       proxyWebsockets = true;
