@@ -17,4 +17,9 @@
   };
 
   sops.secrets.grafana-initial-password.owner = "grafana";
+
+  services.prometheus = {
+    enable = true;
+    port = 9001;
+  };
 }
