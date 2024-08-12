@@ -21,6 +21,15 @@ in {
     };
   };
 
+  systemd.services.atticd = {
+    unitConfig = {
+      RequiresMountsFor = [config.services.atticd.settings.storage.path];
+    };
+    serviceConfig = {
+      LoadCredentials = "credentials:${config.sops.secrets.attic-credentials.path}";
+    };
+  };
+
   environment.systemPackages = [pkgs.cifs-utils];
   fileSystems.${config.services.atticd.settings.storage.path} = {
     device = "//u412961-sub3.your-storagebox.de/u412961-sub3";
@@ -52,9 +61,7 @@ in {
   };
 
   sops.secrets = {
-    attic-credentials = {
-      owner = config.services.atticd.user;
-    };
+    attic-credentials = {};
 
     storage-box-attic = {};
   };
