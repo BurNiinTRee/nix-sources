@@ -5,6 +5,11 @@
       server.domain = "grafana.${config.networking.fqdn}";
       server.port = 2342;
       security.admin_password = "$__file{${config.sops.secrets.grafana-initial-password.path}}";
+      smtp = {
+        enabled = true;
+        from_address = "grafana@muehml.eu";
+        skip_verify = true;
+      };
     };
   };
   services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} = {
