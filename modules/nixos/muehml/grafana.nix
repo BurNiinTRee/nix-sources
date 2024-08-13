@@ -60,8 +60,8 @@
         chunk_idle_period = "1h";
         max_chunk_age = "1h";
         chunk_target_size = 1048576;
-        chunk_retention_period = "30s";
-        max_transfer_retries = 0;
+        chunk_retain_period = "30s";
+        flush_on_shutdown = true;
       };
       schema_config.configs = [
         {
@@ -88,7 +88,7 @@
         reject_old_samples = true;
         reject_old_samples_max_age = "168h";
       };
-      chunk_store_config.max_look_back_period = "0s";
+      querier.max_query_lookback = "0s";
       table_manager = {
         retention_deletes_enabled = false;
         retention_period = "0s";
