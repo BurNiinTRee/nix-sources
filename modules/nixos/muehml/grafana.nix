@@ -75,7 +75,7 @@
     enable = true;
     configuration = {
       server = {
-        ttp_listen_port = 28183;
+        http_listen_port = 28183;
         grpc_listen_port = 0;
       };
       positions.filename = "/tmp/positions.yaml";
@@ -90,7 +90,7 @@
               host = "muehml";
             };
           };
-          relable_configs = [
+          relabel_configs = [
             {
               source_labels = ["__journal__systmd_unit"];
               target_label = "unit";
