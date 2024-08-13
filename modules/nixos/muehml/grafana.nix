@@ -58,7 +58,7 @@
       };
       schema_config.configs = [
         {
-          from = "2024-08-13";
+          from = "2022-08-13";
           store = "tsdb";
           object_store = "filesystem";
           schema = "v13";
