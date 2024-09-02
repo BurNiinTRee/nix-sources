@@ -39,9 +39,7 @@
           # https://github.com/cachix/devenv/issues/528
           containers = lib.mkForce {};
           languages.rust.enable = true;
-          packages = [
-            pkgs.fenix.stable.toolchain
-          ];
+          packages = [];
         };
       };
     });
