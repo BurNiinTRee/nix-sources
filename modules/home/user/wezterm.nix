@@ -23,6 +23,10 @@
 
       config.xcursor_theme = xcursor_theme
       config.xcursor_size = xcursor_size
+
+      -- https://github.com/NixOS/nixpkgs/issues/336069#issuecomment-2299008280
+      config.front_end = 'WebGpu'
+
       return config
     '';
   };
