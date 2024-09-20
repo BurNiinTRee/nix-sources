@@ -47,6 +47,7 @@
     alejandra
     bottles
     denaro
+    diskonaut
     distrobox
     fd
     fira-code
