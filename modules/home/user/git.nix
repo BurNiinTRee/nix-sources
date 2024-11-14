@@ -24,5 +24,6 @@
   home.packages = [
     flakeInputs.git-branchless.packages.x86_64-linux.git-branchless
     pkgs.jujutsu
+    pkgs.meld
   ];
 }
