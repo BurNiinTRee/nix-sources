@@ -1,4 +1,8 @@
-{flakeInputs, ...}: {
+{
+  pkgs,
+  flakeInputs,
+  ...
+}: {
   programs.git = {
     enable = true;
     delta.enable = true;
@@ -19,5 +23,6 @@
 
   home.packages = [
     flakeInputs.git-branchless.packages.x86_64-linux.git-branchless
+    pkgs.jujutsu
   ];
 }
