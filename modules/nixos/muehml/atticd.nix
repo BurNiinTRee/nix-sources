@@ -56,7 +56,7 @@ in {
     forceSSL = true;
     locations."/" = {
       proxyPass = "http://${toString config.services.atticd.settings.listen}";
-      extraConfig = "client_max_body_size 512M;";
+      extraConfig = "client_max_body_size 1G;";
     };
   };
 
