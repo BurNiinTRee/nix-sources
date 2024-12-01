@@ -3,7 +3,7 @@
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05-small";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11-small";
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv";
@@ -28,7 +28,6 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     disko.url = "github:nix-community/disko/v1.3.0";
-    attic.url = "github:zhaofengli/attic";
     nixos-wsl.url = "github:nix-community/nixos-wsl?ref=main";
     comin.url = "github:nlewo/comin";
     git-branchless.url = "github:arxanas/git-branchless";
