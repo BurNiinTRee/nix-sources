@@ -7,7 +7,6 @@
     (inputs)
     self
     sops-nix
-    attic
     disko
     home-manager
     impermanence
@@ -77,7 +76,6 @@ in {
         ./muehml
         setup-inputs
         sops-nix.nixosModules.sops
-        attic.nixosModules.atticd
         comin.nixosModules.comin
         impermanence.nixosModules.impermanence
         simple-nixos-mailserver.nixosModules.mailserver

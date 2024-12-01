@@ -7,7 +7,7 @@
 in {
   services.atticd = {
     enable = true;
-    credentialsFile = config.sops.secrets.attic-credentials.path;
+    environmentFile = config.sops.secrets.attic-credentials.path;
     settings = {
       listen = "[::]:43234";
       allowed-hosts = ["${subdomain}.${config.networking.fqdn}"];
