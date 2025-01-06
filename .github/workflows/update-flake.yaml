@@ -20,5 +20,4 @@ jobs:
             dependencies
             automated
           pr-assignees: BurNiinTRee
-          inputs: nixpkgs nixpkgs-stable
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
