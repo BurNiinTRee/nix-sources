@@ -4,7 +4,8 @@
   lib,
   flakeInputs,
   ...
-}: {
+}:
+{
   # Realtime stuff
   security.rtkit.enable = true;
 
@@ -42,6 +43,12 @@
 
     pulse.enable = true;
   };
-  networking.firewall.allowedTCPPorts = [9875 9876];
-  networking.firewall.allowedUDPPorts = [9875 9876];
+  networking.firewall.allowedTCPPorts = [
+    9875
+    9876
+  ];
+  networking.firewall.allowedUDPPorts = [
+    9875
+    9876
+  ];
 }

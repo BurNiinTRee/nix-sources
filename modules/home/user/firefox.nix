@@ -1,6 +1,7 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = [
-    (pkgs.runCommand "sharkfox" {} ''
+    (pkgs.runCommand "sharkfox" { } ''
       install -Dm444 ${./watershark.png} $out/share/icons/hicolor/256x256/apps/watershark.png
     '')
   ];

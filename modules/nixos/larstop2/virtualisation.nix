@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -14,5 +15,5 @@
     pkgs.virt-manager
     pkgs.virt-viewer
   ];
-  home-manager.users.user.persist.directories = [".local/share/containers/storage"];
+  home-manager.users.user.persist.directories = [ ".local/share/containers/storage" ];
 }

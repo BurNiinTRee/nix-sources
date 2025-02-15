@@ -1,10 +1,11 @@
-{...}: {
+{ ... }:
+{
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
 
-  persist.directories = [".local/share/direnv/allow"];
+  persist.directories = [ ".local/share/direnv/allow" ];
 
   # We move the direnv cache to the ~/.cache directory
   # This predominantly helps with .envrc:s in rclone mounts, as these

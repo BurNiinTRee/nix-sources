@@ -3,7 +3,8 @@
   lib,
   selfLocation,
   ...
-}: {
+}:
+{
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -13,21 +14,33 @@
 
   time.timeZone = "Europe/Stockholm";
 
-  environment.systemPackages = with pkgs; [file helix wget];
+  environment.systemPackages = with pkgs; [
+    file
+    helix
+    wget
+  ];
   environment.variables.EDITOR = "hx";
 
   sops.defaultSopsFile = ../../secrets/muehml.eu.yaml;
   # This will automatically import SSH keys as age keys
-  sops.age.sshKeyPaths = ["/home/user/.ssh/id_ed25519"];
+  sops.age.sshKeyPaths = [ "/home/user/.ssh/id_ed25519" ];
 
   users.users.user = {
     description = "Lars Mühmel";
     isNormalUser = true;
     initialHashedPassword = "$y$j9T$uybR5rKgVQ5.l/vWvpwYr/$7KxxPR/4ygU2nnKbsEEoH0wh/laRcOgic/yesW2p3P/";
-    extraGroups = ["audio" "libvirtd" "kvm" "networkmanager" "video" "wheel" "plugdev"];
+    extraGroups = [
+      "audio"
+      "libvirtd"
+      "kvm"
+      "networkmanager"
+      "video"
+      "wheel"
+      "plugdev"
+    ];
   };
 
-  system.fsPackages = [pkgs.rclone];
+  system.fsPackages = [ pkgs.rclone ];
 
   # hardware.tuxedo-rs = {
   #   enable = true;

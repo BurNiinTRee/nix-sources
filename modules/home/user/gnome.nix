@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   persist.files = [
     ".config/monitors.xml"
     ".config/gnome-initial-setup-done"
@@ -15,10 +16,16 @@
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
       sources = [
-        (lib.hm.gvariant.mkTuple ["xkb" "eu"])
-        (lib.hm.gvariant.mkTuple ["xkb" "us+engram"])
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "eu"
+        ])
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "us+engram"
+        ])
       ];
-      xkb-options = ["caps:escape"];
+      xkb-options = [ "caps:escape" ];
     };
     "org/gnome/shell" = {
       favorite-apps = [
@@ -34,7 +41,9 @@
       name = "Launch Terminal";
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
     };
     "org/gnome/mutter" = {
       attach-modal-dialogs = false;
@@ -57,7 +66,11 @@
     };
     "org/gnome/Console" = {
       theme = "auto";
-      shell = ["zellij" "-l" "welcome"];
+      shell = [
+        "zellij"
+        "-l"
+        "welcome"
+      ];
     };
     "org/gnome/desktop/calendar" = {
       show-weekdate = true;

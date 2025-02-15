@@ -2,22 +2,22 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   home.packages = [
-    (pkgs.writeShellScriptBin "zellij-attach"
-      ''
-        export PATH="${lib.makeBinPath [pkgs.skim]}:$PATH"
+    (pkgs.writeShellScriptBin "zellij-attach" ''
+      export PATH="${lib.makeBinPath [ pkgs.skim ]}:$PATH"
 
-        ZJ_SESSIONS=$(zellij list-sessions)
-        NO_SESSIONS=$(echo "''${ZJ_SESSIONS}" | wc -l)
+      ZJ_SESSIONS=$(zellij list-sessions)
+      NO_SESSIONS=$(echo "''${ZJ_SESSIONS}" | wc -l)
 
-        if [ "''${NO_SESSIONS}" -ge 2 ]; then
-            exec zellij attach \
-            "$(echo "''${ZJ_SESSIONS}" | sk)"
-        else
-           exec zellij attach -c
-        fi
-      '')
+      if [ "''${NO_SESSIONS}" -ge 2 ]; then
+          exec zellij attach \
+          "$(echo "''${ZJ_SESSIONS}" | sk)"
+      else
+         exec zellij attach -c
+      fi
+    '')
   ];
   programs.zellij = {
     enable = true;
@@ -28,17 +28,17 @@
       simplified_ui = true;
       keybinds = {
         normal = {
-          unbind._args = ["Ctrl g"];
+          unbind._args = [ "Ctrl g" ];
           bind = {
-            _args = ["Alt g"];
-            SwitchToMode._args = ["locked"];
+            _args = [ "Alt g" ];
+            SwitchToMode._args = [ "locked" ];
           };
         };
         locked = {
-          unbind._args = ["Ctrl g"];
+          unbind._args = [ "Ctrl g" ];
           bind = {
-            _args = ["Alt g"];
-            SwitchToMode._args = ["normal"];
+            _args = [ "Alt g" ];
+            SwitchToMode._args = [ "normal" ];
           };
         };
       };

@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   programs.steam = {
     enable = true;
     gamescopeSession = {
@@ -12,8 +13,8 @@
       ];
     };
     package = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
+      extraPkgs =
+        pkgs: with pkgs; [
           config.programs.gamescope.package
           mangohud
         ];

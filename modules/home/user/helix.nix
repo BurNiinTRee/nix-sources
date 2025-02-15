@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.helix = {
     enable = true;
     languages = {
@@ -9,15 +10,15 @@
         }
         {
           name = "blueprint";
-          file-types = ["blp"];
+          file-types = [ "blp" ];
           indent = {
             tab-width = 2;
             unit = " ";
           };
           scope = "text.blp";
-          roots = ["meson.build"];
+          roots = [ "meson.build" ];
           comment-token = "//";
-          language-servers = ["blueprint-compiler"];
+          language-servers = [ "blueprint-compiler" ];
         }
       ];
       language-server = {
@@ -26,7 +27,7 @@
         };
         blueprint-compiler = {
           command = "blueprint-compiler";
-          args = ["lsp"];
+          args = [ "lsp" ];
         };
       };
     };
@@ -40,11 +41,17 @@
           "A-/" = "repeat_last_motion";
 
           "A-x" = "extend_to_line_bounds";
-          "X" = ["extend_line_up" "extend_to_line_bounds"];
+          "X" = [
+            "extend_line_up"
+            "extend_to_line_bounds"
+          ];
         };
         select = {
           "A-x" = "extend_to_line_bounds";
-          "X" = ["extend_line_up" "extend_to_line_bounds"];
+          "X" = [
+            "extend_line_up"
+            "extend_to_line_bounds"
+          ];
         };
       };
       editor = {

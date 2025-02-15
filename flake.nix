@@ -6,7 +6,6 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11-small";
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    devenv.url = "github:cachix/devenv";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +32,5 @@
     git-branchless.url = "github:arxanas/git-branchless";
   };
 
-  outputs = {flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} ./modules;
+  outputs = { flake-parts, ... }@inputs: flake-parts.lib.mkFlake { inherit inputs; } ./modules;
 }
