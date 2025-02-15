@@ -32,6 +32,5 @@
     git-branchless.url = "github:arxanas/git-branchless";
   };
 
-  outputs = {flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} ./modules;
+  outputs = { flake-parts, ... }@inputs: flake-parts.lib.mkFlake { inherit inputs; } ./modules;
 }

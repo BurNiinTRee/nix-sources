@@ -1,7 +1,8 @@
 {
   # modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     ./compat.nix
     ./configuration.nix

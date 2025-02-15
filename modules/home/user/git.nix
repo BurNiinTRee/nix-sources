@@ -2,7 +2,8 @@
   pkgs,
   flakeInputs,
   ...
-}: {
+}:
+{
   programs.git = {
     enable = true;
     delta.enable = true;

@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   powerManagement.cpuFreqGovernor = "powersave";
 
   programs.gamemode = {

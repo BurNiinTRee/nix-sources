@@ -1,2 +1,1 @@
-{stdenv}:
-stdenv.mkDerivation (final: {})
+{ stdenv }: stdenv.mkDerivation (final: { })

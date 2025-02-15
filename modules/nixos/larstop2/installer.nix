@@ -4,8 +4,9 @@
   lib,
   self,
   ...
-}: {
-  imports = [./disko.nix];
+}:
+{
+  imports = [ ./disko.nix ];
   disko.enableConfig = false;
 
   isoImage = {
@@ -15,12 +16,14 @@
 
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "install-nixos" ''
-      export PATH=${lib.makeBinPath [
-        "/run/current-system/sw"
-        config.system.build.nixos-install
-        pkgs.systemd
-        pkgs.btrfs-progs
-      ]}
+      export PATH=${
+        lib.makeBinPath [
+          "/run/current-system/sw"
+          config.system.build.nixos-install
+          pkgs.systemd
+          pkgs.btrfs-progs
+        ]
+      }
       set -eux
 
       # wipefs --all /dev/vda
@@ -33,13 +36,7 @@
       chmod 777 /mnt/persist/home/user
       cp -r ${self} /mnt/persist/home/user/bntr
 
-      nixos-install --system ${self
-        .nixosConfigurations
-        .larstop2
-        .config
-        .system
-        .build
-        .toplevel} \
+      nixos-install --system ${self.nixosConfigurations.larstop2.config.system.build.toplevel} \
         --root /mnt \
         --no-root-passwd
 

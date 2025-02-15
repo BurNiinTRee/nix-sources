@@ -2,10 +2,12 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   subdomain = "paperless";
-in {
-  impermanence.directories = [config.services.paperless.dataDir];
+in
+{
+  impermanence.directories = [ config.services.paperless.dataDir ];
 
   services.paperless = {
     ## Temporarily disabled due to build failure
@@ -17,19 +19,21 @@ in {
     };
   };
 
-  environment.systemPackages = [pkgs.cifs-utils];
+  environment.systemPackages = [ pkgs.cifs-utils ];
   fileSystems.${config.services.paperless.mediaDir} = {
     device = "//u412961-sub2.your-storagebox.de/u412961-sub2";
     fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,seal,rw,uid=paperless,gid=paperless,dir_mode=0770";
-    in ["${automount_opts},credentials=${config.sops.secrets.storage-box-paperless.path}"];
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,seal,rw,uid=paperless,gid=paperless,dir_mode=0770";
+      in
+      [ "${automount_opts},credentials=${config.sops.secrets.storage-box-paperless.path}" ];
   };
 
   services.postgresql = {
     enable = true;
-    ensureDatabases = ["paperless"];
+    ensureDatabases = [ "paperless" ];
     ensureUsers = [
       {
         name = "paperless";
@@ -46,5 +50,5 @@ in {
     };
   };
 
-  sops.secrets.storage-box-paperless = {};
+  sops.secrets.storage-box-paperless = { };
 }

@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   security.rtkit.enable = true;
 
   services.spotifyd = {

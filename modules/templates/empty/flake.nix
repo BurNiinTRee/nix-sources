@@ -10,35 +10,45 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = inputs @ {
-    flake-parts,
-    bntr,
-    devenv,
-    devenv-root,
-    nixpkgs,
-    ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
-      systems = ["x86_64-linux"];
+  outputs =
+    inputs@{
+      flake-parts,
+      bntr,
+      devenv,
+      devenv-root,
+      nixpkgs,
+      ...
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }:
+      {
+        systems = [ "x86_64-linux" ];
 
-      imports = [bntr.flakeModules.nixpkgs devenv.flakeModule];
+        imports = [
+          bntr.flakeModules.nixpkgs
+          devenv.flakeModule
+        ];
 
-      perSystem = {
-        devenv.shells.default = {
-          lib,
-          pkgs,
-          ...
-        }: {
-          devenv.root = let
-            devenvRootFileContent = builtins.readFile devenv-root.outPath;
-          in
-            pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
+        perSystem = {
+          devenv.shells.default =
+            {
+              lib,
+              pkgs,
+              ...
+            }:
+            {
+              devenv.root =
+                let
+                  devenvRootFileContent = builtins.readFile devenv-root.outPath;
+                in
+                pkgs.lib.mkIf (devenvRootFileContent != "") devenvRootFileContent;
 
-          # https://github.com/cachix/devenv/issues/528
-          containers = lib.mkForce {};
-          packages = [
-          ];
+              # https://github.com/cachix/devenv/issues/528
+              containers = lib.mkForce { };
+              packages = [
+              ];
+            };
         };
-      };
-    });
+      }
+    );
 }

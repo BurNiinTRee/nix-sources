@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = [
     pkgs.rclone
   ];
@@ -7,7 +8,7 @@
     Unit = {
       Description = "mount nextcloud";
     };
-    Install.WantedBy = ["default.target"];
+    Install.WantedBy = [ "default.target" ];
     Mount = {
       What = "cloud.muehml.eu:";
       Where = "/home/user/nextcloud";
