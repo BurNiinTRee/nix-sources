@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.grafana = {
     enable = true;
     settings = {
@@ -28,7 +29,7 @@
     port = 9001;
     exporters.node = {
       enable = true;
-      enabledCollectors = ["systemd"];
+      enabledCollectors = [ "systemd" ];
       port = 9002;
     };
     scrapeConfigs = [
@@ -36,7 +37,7 @@
         job_name = "muehml";
         static_configs = [
           {
-            targets = ["127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];
+            targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
           }
         ];
       }
@@ -79,7 +80,7 @@
         grpc_listen_port = 0;
       };
       positions.filename = "/tmp/positions.yaml";
-      clients = [{url = "http://127.0.0.1:3100/loki/api/v1/push";}];
+      clients = [ { url = "http://127.0.0.1:3100/loki/api/v1/push"; } ];
       scrape_configs = [
         {
           job_name = "journal";
@@ -92,7 +93,7 @@
           };
           relabel_configs = [
             {
-              source_labels = ["__journal__systmd_unit"];
+              source_labels = [ "__journal__systmd_unit" ];
               target_label = "unit";
             }
           ];

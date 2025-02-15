@@ -5,7 +5,8 @@
   flakeInputs,
   selfLocation,
   ...
-}: {
+}:
+{
   imports = [
     ./bitwarden.nix
     ./direnv.nix
@@ -108,24 +109,31 @@
       };
     };
 
-    settings = let
-      emptyFlakeRegistry = pkgs.writeText "flake-registry.json" (builtins.toJSON {
-        flakes = [];
-        version = 2;
-      });
-    in {
-      experimental-features = ["nix-command" "flakes"];
-      sandbox = true;
-      connect-timeout = 5;
-      log-lines = 25;
-      min-free = 54534824;
-      fallback = true;
-      warn-dirty = false;
-      auto-optimise-store = true;
-      max-jobs = 6;
-      flake-registry = emptyFlakeRegistry;
-      netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
-    };
+    settings =
+      let
+        emptyFlakeRegistry = pkgs.writeText "flake-registry.json" (
+          builtins.toJSON {
+            flakes = [ ];
+            version = 2;
+          }
+        );
+      in
+      {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        sandbox = true;
+        connect-timeout = 5;
+        log-lines = 25;
+        min-free = 54534824;
+        fallback = true;
+        warn-dirty = false;
+        auto-optimise-store = true;
+        max-jobs = 6;
+        flake-registry = emptyFlakeRegistry;
+        netrc-file = "${config.home.homeDirectory}/.config/nix/netrc";
+      };
   };
   persist.files = [
     ".config/nix/netrc"

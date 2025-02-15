@@ -3,15 +3,16 @@
   config,
   options,
   ...
-}: {
+}:
+{
   options.persist = {
     directories = lib.mkOption {
-      type = (options.environment.persistence.type.getSubOptions []).directories.type;
-      default = [];
+      type = (options.environment.persistence.type.getSubOptions [ ]).directories.type;
+      default = [ ];
     };
     files = lib.mkOption {
-      type = (options.environment.persistence.type.getSubOptions []).files.type;
-      default = [];
+      type = (options.environment.persistence.type.getSubOptions [ ]).files.type;
+      default = [ ];
     };
   };
   config = {

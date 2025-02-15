@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   disko.devices = {
     disk = {
       nvme0n1 = {
@@ -37,7 +38,10 @@
                       mountpoint = "/";
                     };
                     "/nix" = {
-                      mountOptions = ["compress=zstd" "noatime"];
+                      mountOptions = [
+                        "compress=zstd"
+                        "noatime"
+                      ];
                       mountpoint = "/nix";
                     };
                   };

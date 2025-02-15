@@ -4,7 +4,8 @@
   lib,
   flakeInputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./atticd.nix
@@ -19,12 +20,12 @@
   services.journald.extraConfig = "SystemMaxUse=50M";
 
   sops.defaultSopsFile = ../../secrets/muehml.eu.yaml;
-  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
-  sops.secrets.netrc-muehml = {};
+  sops.secrets.netrc-muehml = { };
   nix.settings.netrc-file = config.sops.secrets.netrc-muehml.path;
-  nix.settings.substituters = ["https://attic.muehml.eu/ci"];
-  nix.settings.trusted-public-keys = ["ci:pGN5GUIYtBiawlMyFIapGrGbUT8N1misYuS6iW90neU="];
+  nix.settings.substituters = [ "https://attic.muehml.eu/ci" ];
+  nix.settings.trusted-public-keys = [ "ci:pGN5GUIYtBiawlMyFIapGrGbUT8N1misYuS6iW90neU=" ];
 
   nix = {
     gc = {
@@ -34,9 +35,9 @@
     };
     optimise = {
       automatic = true;
-      dates = ["03:30"];
+      dates = [ "03:30" ];
     };
-    nixPath = ["nixpkgs=/etc/nixpkgs"];
+    nixPath = [ "nixpkgs=/etc/nixpkgs" ];
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -49,7 +50,8 @@
     flake = flakeInputs.nixpkgs-stable;
   };
   environment.etc."nixpkgs".source = flakeInputs.nixpkgs-stable;
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "corefonts"
     ];
@@ -93,23 +95,28 @@
   services.openssh.settings.PasswordAuthentication = false;
   programs.mosh.enable = true;
 
-  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5s+IKT2XS2IpsKLXhhBydhBXVbfY3k2Ep8yhPqtB2z user@larstop2" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII3TXnbunXKZWodjSQPyaS5rFrhLdgMbJBBaBgfVIOIP u0_a71@localhost"];
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5s+IKT2XS2IpsKLXhhBydhBXVbfY3k2Ep8yhPqtB2z user@larstop2"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII3TXnbunXKZWodjSQPyaS5rFrhLdgMbJBBaBgfVIOIP u0_a71@localhost"
+  ];
 
   users.users.deploy = {
     isSystemUser = true;
     group = "deploy";
     shell = pkgs.bashInteractive;
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVa60eaPM/JIHMbIIZ5xzY/CJ8GuWzHsndgKp8nzlaf github"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVa60eaPM/JIHMbIIZ5xzY/CJ8GuWzHsndgKp8nzlaf github"
+    ];
   };
-  users.groups.deploy = {};
-  nix.settings.trusted-users = ["deploy"];
+  users.groups.deploy = { };
+  nix.settings.trusted-users = [ "deploy" ];
   security.sudo.extraRules = [
     {
-      users = ["deploy"];
+      users = [ "deploy" ];
       commands = [
         {
           command = "ALL";
-          options = ["NOPASSWD"];
+          options = [ "NOPASSWD" ];
         }
       ];
     }
@@ -118,7 +125,11 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
-  environment.systemPackages = [pkgs.htop pkgs.nix-du pkgs.attic-client];
+  environment.systemPackages = [
+    pkgs.htop
+    pkgs.nix-du
+    pkgs.attic-client
+  ];
 
   security.acme = {
     defaults.email = "lars@muehml.eu";
@@ -131,7 +142,10 @@
     recommendedTlsSettings = true;
     recommendedProxySettings = true;
   };
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   # https://nixos.wiki/wiki/Install_NixOS_on_Hetzner_Online
   networking = {

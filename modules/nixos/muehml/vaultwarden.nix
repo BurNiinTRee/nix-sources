@@ -1,6 +1,8 @@
-{config, ...}: let
+{ config, ... }:
+let
   subdomain = "vault";
-in {
+in
+{
   services.vaultwarden = {
     enable = true;
     dbBackend = "postgresql";
@@ -26,7 +28,7 @@ in {
   };
   services.postgresql = {
     enable = true;
-    ensureDatabases = ["vaultwarden"];
+    ensureDatabases = [ "vaultwarden" ];
     ensureUsers = [
       {
         name = "vaultwarden";

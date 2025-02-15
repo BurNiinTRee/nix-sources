@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.ssh = {
     enable = true;
     matchBlocks.muehml = {
@@ -6,5 +7,5 @@
       user = "root";
     };
   };
-  persist.directories = [".ssh"];
+  persist.directories = [ ".ssh" ];
 }

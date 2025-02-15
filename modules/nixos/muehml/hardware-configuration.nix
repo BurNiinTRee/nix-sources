@@ -6,8 +6,13 @@
   lib,
   pkgs,
   ...
-}: {
-  boot.initrd.kernelModules = ["virtio_balloon" "virtio_console" "virtio_rng"];
+}:
+{
+  boot.initrd.kernelModules = [
+    "virtio_balloon"
+    "virtio_console"
+    "virtio_rng"
+  ];
 
   boot.initrd.postDeviceCommands = ''
     # Set the system time from the hardware clock to work around a
@@ -29,15 +34,15 @@
     "virtio_scsi"
     "xhci_pci"
   ];
-  boot.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/99f5d718-9926-4ffc-92cd-b6546db5409a";
     fsType = "ext4";
   };
 
-  swapDevices = [{device = "/dev/disk/by-uuid/f35e7baf-c943-49fc-a615-83f8c98fc484";}];
+  swapDevices = [ { device = "/dev/disk/by-uuid/f35e7baf-c943-49fc-a615-83f8c98fc484"; } ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 

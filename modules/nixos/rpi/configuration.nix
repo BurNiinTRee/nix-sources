@@ -6,7 +6,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -24,7 +25,7 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
-    allowInterfaces = ["enu1u1"];
+    allowInterfaces = [ "enu1u1" ];
     publish = {
       enable = true;
       addresses = true;

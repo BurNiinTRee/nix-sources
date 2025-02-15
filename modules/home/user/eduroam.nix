@@ -1,3 +1,4 @@
-{...}: {
-  persist.directories = [".config/cat_installer"];
+{ ... }:
+{
+  persist.directories = [ ".config/cat_installer" ];
 }
