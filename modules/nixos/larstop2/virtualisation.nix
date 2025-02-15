@@ -2,7 +2,10 @@
   virtualisation = {
     libvirtd = {
       enable = true;
-      qemu.ovmf.enable = true;
+      qemu.ovmf = {
+        enable = true;
+        packages = [pkgs.OVMFFull.fd];
+      };
     };
     spiceUSBRedirection.enable = true;
     podman = {
@@ -10,8 +13,9 @@
     };
   };
 
+  programs.virt-manager.enable = true;
+
   environment.systemPackages = [
-    pkgs.virt-manager
     pkgs.virt-viewer
   ];
   home-manager.users.user.persist.directories = [".local/share/containers/storage"];
