@@ -22,11 +22,6 @@
 
   services.libinput.enable = true;
 
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = "user";
-  };
-
   services.gnome = {
     # gnome-initial-setup.enable = lib.mkForce false;
     # gnome-keyring.enable = lib.mkForce false;
