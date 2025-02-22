@@ -1,6 +1,6 @@
-{ ... }:
+{ config, lib, ... }:
 {
-  programs.thunderbird = {
+  programs.thunderbird = lib.mkIf config.muehml.guiApps {
     enable = true;
     profiles.user.isDefault = true;
   };

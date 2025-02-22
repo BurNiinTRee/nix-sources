@@ -15,6 +15,7 @@ in
 
   imports = [
     ./flake/nixpkgs.nix
+    ./home
     ./nixos
     ./templates
     treefmt-nix.flakeModule
@@ -43,6 +44,7 @@ in
       checks = {
         muehml = self.nixosConfigurations.muehml.config.system.build.toplevel;
         # larstop2 = self.nixosConfigurations.larstop2.config.system.build.toplevel;
+        homeManager = self.homeConfigurations.user.config.home.activationPackage;
       };
 
       treefmt = {

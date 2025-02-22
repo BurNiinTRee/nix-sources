@@ -6,7 +6,7 @@
 }:
 {
   options.muehml.reaper.enable = lib.mkEnableOption "Reaper" // {
-    default = true;
+    default = config.muehml.guiApps;
   };
 
   config = lib.mkIf config.muehml.reaper.enable {
