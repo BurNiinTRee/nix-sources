@@ -122,7 +122,7 @@ in
           repo = "flake-parts";
         };
       };
-
+      package = lib.mkIf (!ni) pkgs.nix;
       settings =
         let
           emptyFlakeRegistry = pkgs.writeText "flake-registry.json" (
