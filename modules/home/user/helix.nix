@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.helix = {
     enable = true;
@@ -6,7 +6,7 @@
       language = [
         {
           name = "nix";
-          formatter.command = "alejandra";
+          formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
         }
         {
           name = "blueprint";
