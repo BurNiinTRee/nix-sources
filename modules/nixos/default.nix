@@ -48,6 +48,8 @@ in
               ];
               _module.args.flakeInputs = inputs;
               _module.args.selfLocation = selfLocation;
+              muehml.nixosIntegration = true;
+              muehml.guiApps = true;
             };
           }
         ];

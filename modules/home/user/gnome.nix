@@ -80,11 +80,11 @@
       clock-show-weekday = true;
       monospace-font-name = "Fira Code 10";
     };
-    "org/gnome/desktop/background" = {
+    "org/gnome/desktop/background" = lib.mkIf config.muehml.nixosIntegration {
       picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/glass-chip-l.jxl";
       picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/glass-chip-d.jxl";
     };
-    "org/gnome/desktop/screensaver" = {
+    "org/gnome/desktop/screensaver" = lib.mkIf config.muehml.nixosIntegration {
       picture-uri = config.dconf.settings."org/gnome/desktop/background".picture-uri;
     };
   };

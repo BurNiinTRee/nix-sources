@@ -1,11 +1,16 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   home.packages = [
     (pkgs.runCommand "sharkfox" { } ''
       install -Dm444 ${./watershark.png} $out/share/icons/hicolor/256x256/apps/watershark.png
     '')
   ];
-  programs.firefox = {
+  programs.firefox = lib.mkIf config.muehml.guiApps {
     enable = true;
     package = pkgs.firefox.override {
       cfg.speechSynthesisSupport = true;
