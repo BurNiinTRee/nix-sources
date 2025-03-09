@@ -13,6 +13,9 @@
     home.packages = with pkgs; [
       reaper
       # setbfree
+      x42-plugins
+      x42-gmsynth
+      x42-avldrums
     ];
     persist.directories = [ ".config/REAPER" ];
   };
