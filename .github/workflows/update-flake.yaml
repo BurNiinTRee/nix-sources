@@ -13,6 +13,7 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v16
       - name: Update flake.lock
+        id: update
         uses: DeterminateSystems/update-flake-lock@v24
         with:
           pr-title: "Update flake.lock" # Title of PR to be created
@@ -22,5 +23,7 @@ jobs:
           pr-assignees: BurNiinTRee
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
       - name: Auto-Merge PR
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr merge --auto ${{ steps.update.outputs.pull-request-number }}
+          gh pr merge --merge --auto ${{ steps.update.outputs.pull-request-number }}
