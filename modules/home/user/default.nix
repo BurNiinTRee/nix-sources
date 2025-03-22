@@ -67,7 +67,6 @@ in
         wl-clipboard
       ]
       ++ lib.optionals gui [
-        bottles
         denaro
         distrobox
         guitarix
