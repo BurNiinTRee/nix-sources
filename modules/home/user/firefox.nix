@@ -5,16 +5,10 @@
   ...
 }:
 {
-  home.packages = [
-    (pkgs.runCommand "sharkfox" { } ''
-      install -Dm444 ${./watershark.png} $out/share/icons/hicolor/256x256/apps/watershark.png
-    '')
-  ];
   programs.firefox = lib.mkIf config.muehml.guiApps {
     enable = true;
-    package = pkgs.firefox.override {
+    package = pkgs.librewolf.override {
       cfg.speechSynthesisSupport = true;
-      icon = "watershark";
     };
   };
   home.file.".mozilla/firefox/profiles.ini".text = ''
