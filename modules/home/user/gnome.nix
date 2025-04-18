@@ -29,15 +29,15 @@
     };
     "org/gnome/shell" = {
       favorite-apps = [
-        "firefox.desktop"
+        "librewolf.desktop"
         "thunderbird.desktop"
         "org.gnome.Nautilus.desktop"
-        "org.gnome.Console.desktop"
+        "com.mitchellh.ghostty.desktop"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "wezterm";
+      command = "ghostty";
       name = "Launch Terminal";
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
@@ -60,6 +60,9 @@
     };
     "org/gnome/desktop/session" = {
       idle-delay = lib.hm.gvariant.mkUint32 0;
+    };
+    "org/gnome/desktop/default-applications/terminal" = {
+      exec = "ghostty";
     };
     "org/gnome/settings-daemon/plugins/power" = {
       sleep-inactive-ac-type = "nothing";
