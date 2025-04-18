@@ -19,6 +19,7 @@ in
     ./eduroam.nix
     ./email.nix
     ./firefox.nix
+    ./ghostty.nix
     ./git.nix
     ./gnome.nix
     ./gpg.nix
