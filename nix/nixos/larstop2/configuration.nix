@@ -55,8 +55,12 @@
     enable = true;
     remotes = [
       {
-        name = "origin";
+        name = "old";
         url = "https://github.com/BurNiinTRee/nix-sources.git";
+      }
+      {
+        name = "github";
+        url = "https://github.com/BurNiinTRee/bntr.git";
       }
       {
         name = "local";
