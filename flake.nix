@@ -30,6 +30,13 @@
     nixos-wsl.url = "github:nix-community/nixos-wsl?ref=main";
     comin.url = "github:nlewo/comin";
     git-branchless.url = "github:arxanas/git-branchless";
+
+    devenv.url = "github:cachix/devenv";
+    devenv-root = {
+      url = "file+file:///dev/null";
+      flake = false;
+    };
+    fenix.url = "github:nix-community/fenix";
   };
 
   outputs = { flake-parts, ... }@inputs: flake-parts.lib.mkFlake { inherit inputs; } ./nix;

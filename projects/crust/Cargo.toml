@@ -1,0 +1,15 @@
+[workspace]
+members = ["crates/*"]
+resolver = "3"
+
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+opt-level = "s"
+codegen-units = 1
+incremental = false
+strip = true
+lto = true

@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  selfLocation,
   ...
 }:
 let
@@ -15,6 +14,7 @@ in
 
   imports = [
     ./flake/nixpkgs.nix
+    ./devenv
     ./home
     ./nixos
     ./templates
@@ -34,13 +34,6 @@ in
       ...
     }:
     {
-      devShells.default = pkgs.mkShell {
-        packages = [
-          pkgs.nixos-rebuild
-          pkgs.sops
-        ];
-      };
-
       checks = {
         muehml = self.nixosConfigurations.muehml.config.system.build.toplevel;
         # larstop2 = self.nixosConfigurations.larstop2.config.system.build.toplevel;
@@ -49,7 +42,12 @@ in
 
       treefmt = {
         projectRootFile = "flake.nix";
-        programs.nixfmt.enable = true;
+        programs = {
+          nixfmt.enable = true;
+          rustfmt.enable = true;
+          asmfmt.enable = true;
+          shellcheck.enable = true;
+        };
       };
     };
 }
