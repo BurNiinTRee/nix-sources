@@ -42,7 +42,12 @@ in
 
       treefmt = {
         projectRootFile = "flake.nix";
-        programs.nixfmt.enable = true;
+        programs = {
+          nixfmt.enable = true;
+          rustfmt.enable = true;
+          asmfmt.enable = true;
+          shellcheck.enable = true;
+        };
       };
     };
 }
